@@ -12,6 +12,7 @@
     "player.js",
     "room.js",
     "stellarr.json",
-    "styles.css"
+    "styles.css",
+    "assets/watch-party.webp"
   ]
 }

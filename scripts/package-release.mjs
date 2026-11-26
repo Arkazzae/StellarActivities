@@ -16,6 +16,17 @@ async function archive(id, files, outputDir) {
   const directory = join(root, id);
   const manifest = JSON.parse(await readFile(join(directory, "stellarr.json"), "utf8"));
   if (manifest.id !== id || manifest.protocol !== 1) throw new Error("Unexpected manifest in " + id);
+  if (typeof manifest.name !== "string" || !manifest.name.trim() || typeof manifest.description !== "string" || !manifest.description.trim())
+    throw new Error("Provide a name and description for " + id);
+  if (!manifest.icon) throw new Error("Add an icon to " + id + " before publishing.");
+  for (const role of ["icon", "cover"]) {
+    const path = manifest[role];
+    if (path === undefined) continue;
+    if (typeof path !== "string" || !files.includes(path) || !/\.(png|jpe?g|webp)$/i.test(path))
+      throw new Error(id + ": include " + role + " as a PNG, JPEG or WebP in the catalog.");
+    const limit = role === "icon" ? 512 * 1024 : 2 * 1024 * 1024;
+    if ((await lstat(join(directory, path))).size > limit) throw new Error(id + ": " + role + " exceeds its size limit.");
+  }
   const stage = await mkdtemp(join(tmpdir(), "activity-release-"));
   try {
     for (const file of files) {
