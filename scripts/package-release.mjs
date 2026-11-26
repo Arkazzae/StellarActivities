@@ -7,11 +7,15 @@ import { fileURLToPath } from "node:url";
 
 const root = await realpath(fileURLToPath(new URL("..", import.meta.url)));
 const catalog = JSON.parse(await readFile(join(root, "catalog.json"), "utf8"));
-const output = resolve(process.argv[2] ?? join(root, "dist"));
+const id = process.argv[2];
+if (!id || !/^[a-z0-9-]{1,100}$/.test(id) || !Object.hasOwn(catalog, id)) {
+  throw new Error("Choose one activity ID from catalog.json: " + Object.keys(catalog).join(", "));
+}
+const output = resolve(process.argv[3] ?? join(root, "dist", id));
 const timestamp = new Date("2000-01-01T00:00:00Z");
 
 async function archive(id, files, outputDir) {
-  if (!/^[a-z0-9-]+$/.test(id) || !Array.isArray(files) || !files.includes("stellarr.json") || !files.includes("index.html"))
+  if (!Array.isArray(files) || !files.includes("stellarr.json") || !files.includes("index.html"))
     throw new Error("Incomplete catalog entry: " + id);
   const directory = join(root, id);
   const manifest = JSON.parse(await readFile(join(directory, "stellarr.json"), "utf8"));
@@ -55,12 +59,10 @@ async function archive(id, files, outputDir) {
 await mkdir(output, { recursive: true });
 const temporary = await mkdtemp(join(output, ".release-"));
 try {
-  const activities = [];
-  for (const [id, files] of Object.entries(catalog)) activities.push(await archive(id, files, temporary));
-  if (!activities.length) throw new Error("The catalog is empty.");
+  const activity = await archive(id, catalog[id], temporary);
   const index = "stellarr-release.json";
-  await writeFile(join(temporary, index), JSON.stringify({ protocol: 1, activities }, null, 2) + "\n");
-  for (const { asset } of activities) await rename(join(temporary, asset), join(output, asset));
+  await writeFile(join(temporary, index), JSON.stringify({ protocol: 1, activities: [activity] }, null, 2) + "\n");
+  await rename(join(temporary, activity.asset), join(output, activity.asset));
   await rename(join(temporary, index), join(output, index));
-  console.log("Packaged " + activities.map(item => item.asset).join(", "));
+  console.log("Packaged " + activity.asset + " " + activity.version);
 } finally { await rm(temporary, { recursive: true, force: true }); }

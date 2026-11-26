@@ -1,8 +1,8 @@
-name: Release activities
+name: Release activity
 on:
   push:
     tags:
-      - 'v*'
+      - '*/v*'
 permissions:
   contents: write
 jobs:
@@ -10,22 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
-      - name: Test activities
+      - name: Check the tag and read this activity's changelog
+        run: node scripts/release-notes.mjs "$GITHUB_REF_NAME" > "$RUNNER_TEMP/notes.md"
+      - name: Test and package the selected activity
         run: |
-          node --test */test/*.test.mjs
-      - name: Build the installable release
-        run: node scripts/package-release.mjs
-      - name: Verify archives
-        run: |
-          for archive in dist/*.zip; do unzip -t "$archive"; done
-      - name: Publish the archive and release index
+          id=${GITHUB_REF_NAME%%/*}
+          node --test "$id"/test/*.test.mjs
+          node scripts/package-release.mjs "$id"
+          unzip -t "dist/$id/$id.zip"
+      - name: Publish this activity
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          node scripts/release-notes.mjs > "$RUNNER_TEMP/release-notes.md"
-          gh release create "$GITHUB_REF_NAME" dist/*.zip dist/stellarr-release.json --verify-tag --notes-file "$RUNNER_TEMP/release-notes.md"
+          id=${GITHUB_REF_NAME%%/*}
+          index="dist/$id/stellarr-release.json"
+          title=$(jq -r '.activities[0] | "\(.name) \(.version)"' "$index")
+          version=$(jq -r '.activities[0].version' "$index")
+          options=()
+          if [[ "${version%%+*}" == *-* ]]; then options+=(--prerelease); fi
+          gh release create "$GITHUB_REF_NAME" "dist/$id/$id.zip" "$index" \
+            --verify-tag --title "$title" --notes-file "$RUNNER_TEMP/notes.md" "${options[@]}"

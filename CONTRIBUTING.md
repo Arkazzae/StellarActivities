@@ -10,4 +10,4 @@ Enable the local check after cloning:
 git config core.hooksPath .githooks
 ```
 
-The contribution workflow checks pushed commits, pull request commits, and edited PR titles. Before opening a PR, run `node --test */test/*.test.mjs` and `node scripts/package-release.mjs`.
+The contribution workflow checks pushed commits, pull request commits, and edited PR titles. For a SyncTube change, run `node --test synctube/test/*.test.mjs` and `node scripts/package-release.mjs synctube`. Use the corresponding activity ID for another project. Changes to shared packaging or workflows check all catalog entries. Run `node --test scripts/test/*.test.mjs` to check the release tooling.
