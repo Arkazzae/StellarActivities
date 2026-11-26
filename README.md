@@ -1,10 +1,18 @@
 # Stellarr Activities
 
-Each activity lives in its own folder. An instance owner installs an activity by pasting this repository’s URL into **Cockpit → Activities** and choosing a release.
+This repository publishes Stellarr activities. Each activity has its own folder, version and installable ZIP.
 
 | Activity | What people can do |
 | --- | --- |
 | [SyncTube](synctube/) | Build a shared YouTube queue, watch in sync and hand playback control to another host. |
+
+## Install one activity from this repository
+
+1. In **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`. Cockpit reads the list of activities in the latest published release. A release URL selects a particular release.
+2. When the release includes several activities, select the one you want. Cockpit shows that activity’s version, download size, permissions and external hosts before you approve.
+3. Choose **Install and enable**. That activity gets its own library entry. To add a second activity from the same repository, paste the same URL again and choose another entry.
+
+Enable, disable, update or uninstall each activity independently in the library. A new folder appears in the installer once its ZIP and entry are included in a published release. The catalog currently contains SyncTube.
 
 ## Develop an activity
 

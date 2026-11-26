@@ -2,17 +2,16 @@
   "synctube": [
     "LICENSE",
     "app.js",
-    "assets/ARTWORK.txt",
     "assets/Outfit-LICENSE.txt",
     "assets/cinema.webp",
     "assets/icon.png",
     "assets/outfit.woff2",
     "assets/sample.mp4",
+    "assets/watch-party.webp",
     "index.html",
     "player.js",
     "room.js",
     "stellarr.json",
-    "styles.css",
-    "assets/watch-party.webp"
+    "styles.css"
   ]
 }
