@@ -18,6 +18,9 @@ async function archive(id, files, outputDir) {
   if (manifest.id !== id || manifest.protocol !== 1) throw new Error("Unexpected manifest in " + id);
   if (typeof manifest.name !== "string" || !manifest.name.trim() || typeof manifest.description !== "string" || !manifest.description.trim())
     throw new Error("Provide a name and description for " + id);
+  const modes = manifest.launchModes ?? ["voice"];
+  if (!Array.isArray(modes) || !modes.length || modes.some(mode => !["voice", "personal"].includes(mode)) || new Set(modes).size !== modes.length)
+    throw new Error("Invalid launchModes for " + id);
   if (!manifest.icon) throw new Error("Add an icon to " + id + " before publishing.");
   for (const role of ["icon", "cover"]) {
     const path = manifest[role];
