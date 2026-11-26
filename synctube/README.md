@@ -4,7 +4,9 @@ SyncTube is a no-build Stellarr v1 activity. Everyone in the room can add, reord
 
 ## Install on a Stellarr instance
 
-On a Stellarr instance with activity hosting enabled, open **Cockpit → Activities**, paste this repository URL and select SyncTube. Review the version, archive size and YouTube hosts, then choose **Install and enable**. Users can open SyncTube from their voice channel. [Repository](https://github.com/Arkazzae/StellarrActivities) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases)
+On a Stellarr instance with activity hosting enabled, open **Cockpit → Activities**, paste this repository URL and select SyncTube. Review the version, archive size and YouTube hosts, then choose **Install and enable**. In a voice channel, users open a shared queue. For a private queue, open **Friends → Activities → SyncTube → Launch for myself**. Each account gets its own personal session even when another user is watching in the same channel. [Repository](https://github.com/Arkazzae/StellarrActivities) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases)
+
+[SyncTube changelog](CHANGELOG.md)
 
 ## Run the activity
 
