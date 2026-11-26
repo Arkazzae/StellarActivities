@@ -1,41 +1,46 @@
 # SyncTube
 
-SyncTube is a no-build Stellarr v1 activity for watching YouTube together. Paste a link in the panel next to the player. The first video starts the room, and later ones wait in the queue. YouTube watch, short, mobile, Music, embed and live links are accepted, including start timestamps.
+![SyncTube: shared YouTube watch party for Stellarr](../docs/synctube/hero.webp)
 
-The panel has four tabs:
+SyncTube turns a Stellarr voice channel into a shared screening room. Paste a YouTube link in the side panel: the first video starts the room, and later links line up in the queue.
 
-- **Queue**: add videos, play one now, move it, or remove it.
-- **History**: queue watched and skipped videos again.
-- **People**: see who is watching, the host and the person who started the room. The host can hand over control here.
-- **Settings**: language, your own volume, who controls playback, autoplay and repeat.
+![SyncTube live demo: queuing a timestamped link, voting to skip, and switching to cinema mode](../docs/synctube/demo.webp)
 
-Anyone in the room can vote to skip. A video is skipped when more than half of the people online vote. The host, the person who started the room and the instance owner can skip without a vote. The instance owner needs a Stellarr version that marks owners in the participant list.
+## Queue links from anywhere on YouTube
 
-## Install on a Stellarr instance
+Paste `youtube.com/watch`, `youtu.be`, Shorts, YouTube Music, mobile, embed or live links, or drop in an 11-character video ID. SyncTube previews the thumbnail, title and start timestamp (`?t=1m15s` or `?start=42`) before you add it. You can also rename the entry on the spot.
 
-Open **Cockpit → Activities**, paste this repository URL and select SyncTube. Review the version, archive size and YouTube hosts, then choose **Install and enable**. In a voice channel, users open a shared queue. For a private queue, open **Friends → Activities → SyncTube → Launch for myself**. Each account gets its own personal session even when another user is watching in the same channel. [Repository](https://github.com/Arkazzae/StellarrActivities) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases)
+A room holds up to 50 upcoming videos. **History** keeps the last 100 played or skipped items so one click queues any of them again.
 
-[SyncTube changelog](CHANGELOG.md)
+![SyncTube watch room with four viewers, active skip vote pips, link preview and upcoming queue](../docs/synctube/watch-room.webp)
 
-## Language and saved progress
+## Everyone watches the same second
 
-SyncTube follows Stellarr’s interface language and switches between Polish and English when that setting changes. **Settings → Language** overrides it for your account. On hosts with the SDK `progress` capability, SyncTube saves your spot in each YouTube video and your language choice to your account. Empty rooms offer to start from where you left off. Older hosts skip both without errors. The shared queue and playback stay in the room state.
+Play, pause, jump five seconds with the arrow keys, or scrub the timeline, and everyone in the room follows. Late joiners start at the current playback position automatically. When watching through YouTube's embedded player or the bundled offline sample clip, the room also shares playback speed from `0.5×` to `2×`.
 
-## Run the activity
+If the current host disconnects, SyncTube pauses at the last five-second checkpoint so the next host can resume cleanly.
 
-Use Node.js 22 or newer and a Stellarr checkout with SDK 0.3.0. From this directory:
+## Skip votes, host hand-off and saved spots
 
-```sh
-node /path/to/Stellarr/sdk/cli.js dev --dir .
-node --test test/*.test.mjs
-```
+![SyncTube side panels: personal resume card, People list with host transfer, and device/room settings](../docs/synctube/panels.webp)
 
-Open the printed preview and choose **New player** to watch as a second participant. **Try the sample clip** plays the bundled video without contacting YouTube. Add another video to check automatic advance, vote from both tabs to check skipping, use **Make host** to check transfer while playing, and move Stellarr’s **Game audio** slider to check the listener’s volume. Late joiners start at the current room position. A successor host recovers the last confirmed playback checkpoint, paused. The host records a checkpoint roughly every five seconds during playback.
+- **Vote to skip:** anyone in a voice room can cast a skip vote. Once more than half of the connected viewers vote, SyncTube advances to the next queued video. The host, the person who started the room and the instance owner can skip immediately without waiting for votes.
+- **Pass the remote:** open **People** to see who is watching and who voted, or click **Make host** to hand over playback control.
+- **Pick up where you left off:** on Stellarr hosts with account progress enabled, SyncTube privately saves your spot in up to 40 unfinished videos. Open an empty room and a **Where you left off** card offers to start from that exact timestamp.
+- **Your device, your volume:** mute locally (`M`) or adjust your own volume on top of Stellarr's Game audio slider. Interface text switches between English and Polish automatically or in **Settings**.
 
-Keyboard shortcuts: Space plays or pauses for everyone, ← and → jump five seconds, M mutes this device, T toggles cinema mode and Esc leaves it.
+## Keyboard shortcuts
 
-For release packaging, see the [repository release instructions](../README.md#release).
+| Key | Action |
+| --- | --- |
+| `Space` | Play or pause for everyone |
+| `←` / `→` | Jump 5 seconds backward or forward |
+| `M` | Mute or unmute on this device |
+| `T` | Toggle wide cinema mode |
+| `Esc` | Leave cinema mode or close an open menu |
 
-## YouTube playback
+## Install in Stellarr
 
-On the instance hostname the room uses Stellarr’s YouTube player. Dedicated activity hosts and local previews use YouTube’s IFrame API with the privacy-enhanced embedding domain. Shared playback speed is available with the IFrame API and the sample clip. Stellarr’s player does not change speed, so the control is hidden there. Lookups and previews use the hosts listed in the manifest. Video IDs work even when the title lookup is unavailable. If autoplay is blocked, select **Play on this device**. A video that is unavailable for embedded playback can be retried or skipped. Availability, live-edge positions and ads are determined by the provider. [YouTube IFrame API](https://developers.google.com/youtube/iframe_api_reference)
+Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **SyncTube**, and click **Install and enable**. Start it from a voice channel for a shared room, or open **Friends → Activities → SyncTube → Launch for myself** for a private queue.
+
+[All activities](../README.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases) · [Artwork and font credits](ARTWORK.md)
