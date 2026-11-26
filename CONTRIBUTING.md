@@ -10,4 +10,4 @@ Enable the local check after cloning:
 git config core.hooksPath .githooks
 ```
 
-The contribution workflow checks pushed commits, pull request commits, and edited PR titles. Before opening a PR, run `node --test test/*.test.mjs` and `node scripts/package-release.mjs`.
+The contribution workflow checks pushed commits, pull request commits, and edited PR titles. Before opening a PR, run `node --test */test/*.test.mjs` and `node scripts/package-release.mjs`.
