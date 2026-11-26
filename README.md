@@ -5,6 +5,7 @@ This repository contains the source for Stellarr activities. Each activity has i
 | Activity | What people can do |
 | --- | --- |
 | [SyncTube](synctube/) | Build a shared YouTube queue, watch in sync and hand playback control to another host. |
+| [Whiteboard](whiteboard/) | Sketch together on an endless board with hand-drawn shapes, arrows that stick to boxes, freehand ink, text and images, and see everyone's cursor live. |
 
 ## Install one activity from this repository
 
@@ -12,7 +13,7 @@ This repository contains the source for Stellarr activities. Each activity has i
 2. When the repository publishes several activities, select the one you want. Cockpit shows that activity’s version, download size, permissions and external hosts before you approve.
 3. Choose **Install and enable**. That activity gets its own library entry. To add a second activity from the same repository, paste the same URL again and choose another entry.
 
-Enable, disable, update or uninstall each activity independently in the library. A new folder appears in the installer once its first release is published. The catalog currently contains SyncTube.
+Enable, disable, update or uninstall each activity independently in the library. A new folder appears in the installer once its first release is published. The catalog currently contains SyncTube and Whiteboard.
 
 ## Develop an activity
 
