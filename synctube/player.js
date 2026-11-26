@@ -41,7 +41,16 @@ function youtubeError(code) {
   return "YouTube couldn’t play this video. You can retry or skip it.";
 }
 
-function mountYouTube(item, mount, events) {
+function mountYouTube(item, mount, events, hosted) {
+  if (hosted) return hosted.mount(item.videoId, mount, {
+    ready: events.ready,
+    blocked: events.blocked,
+    error: code => events.error(youtubeError(code)),
+    stateChange(state) {
+      if (state === 1) events.playing();
+      if (state === 0) events.ended();
+    },
+  });
   let player;
   let disposed = false;
   const deadline = setTimeout(() => events.error("The YouTube player didn’t start. You can retry or skip it."), 16_000);
@@ -209,7 +218,7 @@ export function createPlayer(item, mount, view) {
   };
 
   view.status("loading", item.source === "sample" ? "Loading the sample…" : "Connecting to YouTube…");
-  const provider = item.source === "sample" ? mountSample(mount, events) : mountYouTube(item, mount, events);
+  const provider = item.source === "sample" ? mountSample(mount, events) : mountYouTube(item, mount, events, view.youtube);
 
   function sync() {
     if (!ready || !target || failed) return;
@@ -255,6 +264,7 @@ export function createPlayer(item, mount, view) {
       target = next;
       sync();
     },
+    fullscreen: provider.fullscreen,
     getDuration: () => ready && !failed ? provider.duration() : 0,
     setVolume(value) {
       volume = value;
