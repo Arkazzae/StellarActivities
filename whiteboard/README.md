@@ -1,48 +1,46 @@
 # Whiteboard
 
-Whiteboard is a no-build Stellarr v1 activity for sketching together. Everyone in a voice channel draws on the same endless board and sees the others' cursors, selections and laser pointer live. It runs on its own engine: hand-drawn shapes, hatching, pressure-sensitive ink and the interface are written from scratch, with no drawing library and no dependencies.
+![Whiteboard: collaborative sketch board for Stellarr](../docs/whiteboard/hero.webp)
 
-## What people can do
+Whiteboard gives everyone in a Stellarr voice channel one endless sheet of paper to sketch on together. Every participant can draw at once, and the entire activity runs on its own rough-ink engine written from scratch with zero dependencies.
 
-- **Draw:** rectangles, diamonds, ellipses, arrows, lines (dragged or clicked point by point), freehand ink, text, images, eraser and a laser pointer.
-- **Style:** the hand-drawn look is seeded per shape, so every participant sees identical strokes. Choose sloppiness, hatching, cross-hatching or solid fills, dashed or dotted lines, arrowheads, rounded corners and three fonts with Polish characters.
-- **Connect shapes:** an arrow that ends on a shape attaches to it and follows when the shape moves, resizes or rotates. Double-click a shape to write a label inside it; the shape grows to fit.
-- **Edit:** move, resize (Shift keeps proportions, Alt scales from the center), rotate (Shift snaps to 15°), edit line points, group, lock, reorder, align and distribute, duplicate, copy and paste, and snap to a grid.
-- **Work together:** watch others drag and draw before they let go. Undo only reverts your own changes, and never anything someone else edited since.
-- **Look around:** pan, zoom and pinch, and use light or dark mode. The board follows Stellarr's theme and language (English or Polish) unless you pick a theme yourself.
+![Whiteboard live demo: sketching rough shapes, attaching arrows, live collaborator cursors, laser pointer and dark mode](../docs/whiteboard/demo.webp)
 
-Press `?` for every shortcut.
+## Hand-drawn diagrams that stay connected
 
-## Install on a Stellarr instance
+Draw rectangles (`R`), diamonds (`D`), ellipses (`O`), polygons and lines (`L`), arrows (`A`), pressure-sensitive ink (`P`), text (`T`) and images (`9`). Each shape carries its own random seed, so wobbly strokes and hatched fills look identical for everyone in the room.
 
-Open **Cockpit → Activities**, paste this repository URL and select Whiteboard. In a voice channel everyone opens the same board. **Friends → Activities → Whiteboard → Launch for myself** opens a private board.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../docs/whiteboard/board-dark.webp">
+  <source media="(prefers-color-scheme: light)" srcset="../docs/whiteboard/board-light.webp">
+  <img alt="Whiteboard diagram showing hatched shapes, sticky arrows, live cursors, laser trail and the style inspector" src="../docs/whiteboard/board-light.webp">
+</picture>
 
-[Whiteboard changelog](CHANGELOG.md)
+- **Sticky arrows:** end an arrow on any shape, text block or image and it attaches to the outline. Move, resize or rotate the box and every connected arrow re-routes on the fly.
+- **Auto-growing shape labels:** double-click a rectangle, diamond or ellipse to type inside it, and the shape expands to fit your lines.
+- **Print-inspired styling:** choose stroke and pastel fill colors, hachure, cross-hatch or solid fills, dashed or dotted lines, and three sloppiness levels. Three bundled fonts (`Shantell Sans`, `Bricolage Grotesque` and `JetBrains Mono`) include full Polish characters.
+- **Full layout controls:** group (`Ctrl+G` / `Cmd+G`), lock, align, distribute, reorder layers, and snap to a 20 px grid (`G`). Hold `Shift` while resizing or rotating for locked proportions and 15° angle steps.
 
-## Run the activity
+## Built for five cursors moving at once
 
-Use Node.js 22 or newer and a Stellarr checkout. From this directory:
+Other people's named cursors, selections and drags update live (~9 times per second) before they let go of the pointer. Hold `K` (or pick the **Laser pointer** tool) to draw a bright temporary trail when pointing something out during a call.
 
-```sh
-node /path/to/Stellarr/sdk/cli.js dev --dir .
-node --test test/*.test.mjs
-```
+When two people edit the same board, `Ctrl+Z` / `Cmd+Z` only reverts your own changes and leaves anything a teammate touched afterward intact. Dropped images stream directly from participant to participant, including to late joiners.
 
-Open the printed preview and use **New player** to join as another person in a second tab.
+## Light paper, dark charcoal, and instant export
 
-## How the board is stored
+| Warm paper (Light mode) | Charcoal ink (Dark mode) |
+| --- | --- |
+| ![Whiteboard in light mode](../docs/whiteboard/board-light.webp) | ![Whiteboard in dark mode](../docs/whiteboard/board-dark.webp) |
 
-| What | Where | Limit |
-| --- | --- | --- |
-| Shapes, text, arrows and the board name | Room state, one compact key per element | 256 KiB per room |
-| Cursors, selections, laser trails and in-progress drags | `session.send`, best effort | 64 KiB per message |
-| Images | Sent from person to person in chunks; latecomers ask for the images they are missing | 1.4 MB per image |
-| Your preferences and a compressed copy of your last board | Your account's `progress` save | 64 KiB |
+Whiteboard follows Stellarr's light or dark theme (or your manual pick). It remaps strokes and pastel hatches for dark paper without altering imported photos.
 
-Each element is encoded with short field names and delta-packed points, so a plain shape takes about 60 bytes and a freehand stroke a few hundred. The status area shows how full the board is from 60% on. New elements are refused once the room is nearly full.
+![Whiteboard PNG and SVG export dialog alongside the keyboard shortcuts reference](../docs/whiteboard/export-and-shortcuts.webp)
 
-Stellarr clears a room 120 seconds after the last person leaves. When you open an empty board, Whiteboard offers to restore the last board saved to your account. Images are not part of that copy and remain available only while someone in the room still has them. To keep a board with its images, use **Copy the whole board** and paste it back later, or save the copied text as a `.whiteboard` file and open it.
+Export any board or selection to a `1×`, `2×` or `3×` PNG (on paper or transparent) or copy SVG vectors. Your preferences and a compressed copy of your last board save to your Stellarr account automatically. Use **Copy the whole board** to paste or save `.whiteboard` files with images, and press `?` for all shortcuts.
 
-Stellarr's activity frame cannot start downloads or use the asynchronous clipboard. Export shows the finished PNG to save from the browser's image menu and copies SVG through the clipboard.
+## Install in Stellarr
 
-For release packaging, see the [repository release instructions](../README.md#release). Artwork credits are in [ARTWORK.md](ARTWORK.md).
+Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **Whiteboard**, and click **Install and enable**. Launch it in a voice channel so everyone shares the board, or open **Friends → Activities → Whiteboard → Launch for myself** for a private scratchpad.
+
+[All activities](../README.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases) · [Artwork and font credits](ARTWORK.md)
