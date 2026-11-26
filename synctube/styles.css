@@ -146,6 +146,11 @@ a { color: inherit; }
   display: flex;
   flex-direction: column;
   gap: 10px;
+  /* Only a frame too short for the tabs and the link field scrolls the whole panel. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
 
 /* Player */
@@ -327,18 +332,35 @@ input[type="range"]::-moz-range-thumb { width: 13px; height: 13px; border: 0; bo
 .actions { display: flex; flex: 0 1 auto; gap: 8px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .actions .pill { flex-shrink: 0; }
 .vote-icon { display: none; }
-/* Narrow rooms turn the secondary actions into icons first, then the vote and skip pills. */
-@container info (max-width: 719px) {
+/* Narrow rooms turn the secondary actions into icons first, then the vote and skip pills.
+   "Skip now" makes the row longer, so it moves both steps up. */
+@container info (max-width: 759px) {
   #copy-link, #open-youtube { width: 44px; padding: 0; }
   #copy-link span, #open-youtube span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
-@container info (max-width: 539px) {
+@container info (min-width: 760px) and (max-width: 899px) {
+  .info:has(#skip-now:not([hidden])) :is(#copy-link, #open-youtube) { width: 44px; padding: 0; }
+  .info:has(#skip-now:not([hidden])) :is(#copy-link, #open-youtube) span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+@container info (max-width: 559px) {
   .actions { gap: 6px; }
+  .channel { min-width: 0; }
+  .meta-row .avatar, #vote-pips { display: none; }
   #skip-now { width: 44px; padding: 0; }
   #vote { gap: 6px; padding: 0 14px; }
   #vote .vote-icon { display: block; }
   #vote-text, #skip-now span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .meta-row .avatar { display: none; }
+}
+@container info (min-width: 560px) and (max-width: 659px) {
+  .info:has(#skip-now:not([hidden])) :is(.meta-row .avatar, #vote-pips) { display: none; }
+  .info:has(#skip-now:not([hidden])) #skip-now { width: 44px; padding: 0; }
+  .info:has(#skip-now:not([hidden])) #vote { gap: 6px; padding: 0 14px; }
+  .info:has(#skip-now:not([hidden])) #vote .vote-icon { display: block; }
+  .info:has(#skip-now:not([hidden])) :is(#vote-text, #skip-now span) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+/* The tiniest players keep the vote and one more action. */
+@container info (max-width: 239px) {
+  #open-youtube, .info:has(#skip-now:not([hidden])) #copy-link { display: none; }
 }
 .pips { display: inline-flex; gap: 4px; }
 .pips span { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--faint); }
@@ -421,7 +443,7 @@ input[type="range"]::-moz-range-thumb { width: 13px; height: 13px; border: 0; bo
   font-size: 14px;
 }
 
-.panel { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.panel { flex: 1 1 0; min-height: 96px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
 .panel:focus-visible { outline-offset: -2px; }
 .panel h2 { font-size: 16px; font-weight: 600; }
 .panel h2.section { margin-top: 20px; }
@@ -574,13 +596,19 @@ kbd { padding: 2px 6px; border-radius: 5px; background: var(--raised); font-fami
 }
 
 /* Small players keep the controls on one row: labels and secondary controls go first. */
-@container stage (max-width: 659px) {
+@container stage (max-width: 699px) {
   #sync { width: 44px; padding: 0; justify-content: center; }
   #sync-label { display: none; }
 }
-@container stage (max-width: 499px) { .volume:not(.wide), #rate { display: none; } }
+@container stage (max-width: 559px) { .volume:not(.wide), #rate { display: none; } }
 @container stage (max-width: 379px) { .time { display: none; } }
-@container stage (max-width: 299px) { #cinema { display: none; } }
+@container stage (max-width: 299px) {
+  #cinema { display: none; }
+  .controls { padding-right: 4px; padding-left: 4px; }
+  .bar { gap: 0; }
+  .ctl, #sync { width: 36px; height: 36px; }
+}
+@container stage (max-width: 199px) { #sync { display: none; } }
 @container stage (max-height: 299px) {
   .controls { padding-top: 24px; }
   .overlay { gap: 6px; padding: 12px; }
@@ -594,6 +622,11 @@ kbd { padding: 2px 6px; border-radius: 5px; background: var(--raised); font-fami
   .notice .pill { min-height: 36px; padding: 0 12px; font-size: 13px; }
   .notice a { min-height: 28px; font-size: 12px; }
 }
+@container stage (max-height: 139px) {
+  .controls { padding-top: 6px; }
+  .controls .seek { height: 24px; }
+  .bar { min-height: 40px; }
+}
 @container stage (max-height: 179px) {
   .notice span { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
   .notice a { display: none; }
@@ -603,9 +636,50 @@ kbd { padding: 2px 6px; border-radius: 5px; background: var(--raised); font-fami
    so nothing in this frame can sit on top of it. Controls and notices move below,
    and the screen gives up height to a notice. */
 .stage.hosted { display: flex; flex-direction: column; overflow: visible; background: transparent; }
-.stage.hosted .screen { position: relative; inset: auto; flex: 1 1 0; width: 100%; height: auto; min-height: 0; border-radius: var(--radius); }
+.stage.hosted .screen { position: relative; inset: auto; flex: 1 1 0; width: 100%; height: auto; min-height: 40%; border-radius: var(--radius); }
 .stage.hosted .veil, .stage.hosted .big-play, .stage.hosted .note-card { display: none !important; }
-.stage.hosted .notice { position: relative; inset: auto; flex: none; margin-top: 8px; padding: 12px 16px; border-radius: var(--radius); background: var(--surface); }
+/* The notice shares the stage height with the screen: text beside the buttons, scrolling if it must.
+   Its YouTube link repeats Open on YouTube under the player, so it is left out here. */
+.stage.hosted .notice {
+  position: relative;
+  inset: auto;
+  flex: 0 1 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  justify-items: start;
+  gap: 2px 12px;
+  min-height: 0;
+  overflow-y: auto;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: left;
+}
+.stage.hosted .notice > .row { grid-column: 2; grid-row: 1 / span 2; flex-wrap: nowrap; }
+.stage.hosted .notice > a { display: none; }
+@container stage (max-width: 539px) {
+  .stage.hosted .notice { grid-template-columns: minmax(0, 1fr); padding: 8px 12px; }
+  .stage.hosted .notice > span { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 13px; }
+  .stage.hosted .notice > .row { grid-column: 1; grid-row: auto; justify-self: stretch; flex-wrap: wrap; margin-top: 6px; }
+  .stage.hosted .notice .pill { flex: 1 1 auto; min-height: 36px; padding: 0 12px; font-size: 13px; }
+}
+/* A short stage gives a notice the whole screen area: playback is stopped while one shows,
+   and Stellarr would otherwise draw YouTube as a thin strip. */
+@container stage (max-height: 299px) {
+  .stage.hosted .screen { min-height: 0; }
+  .stage.hosted:has(.notice:not([hidden])) .screen { flex: 0 0 0; }
+  .stage.hosted .notice { flex: 1 1 auto; align-content: center; margin-top: 0; }
+}
+@container stage (max-width: 299px) {
+  .stage.hosted .notice .pill { white-space: normal; padding: 4px 10px; line-height: 1.15; text-align: center; }
+}
+@container stage (max-height: 199px) {
+  .stage.hosted .notice { padding: 6px 10px; }
+  .stage.hosted .notice > span { display: none; }
+  .stage.hosted .notice > .row { margin-top: 4px; }
+}
 .stage.hosted .controls { position: relative; flex: none; height: var(--chrome-h); padding: 4px 0 0; background: none; color: var(--text); }
 .stage.hosted .seek { height: 28px; }
 .stage.hosted .bar { min-height: 44px; }
@@ -636,27 +710,41 @@ body.cinema .side { display: none; }
   .empty { padding: 16px 12px; }
 }
 
-/* Narrow or upright frames: one column. The player stays at the top, the info follows,
-   and the side panel's tabs fill the rest of the height and scroll inside. */
-@media (max-width: 599px), (max-aspect-ratio: 1/1) {
+/* Upright or very narrow frames: one column. The player stays at the top, the info follows,
+   and the side panel's tabs fill the rest of the height and scroll inside. The player leaves
+   264px for the tabs, the link field and about two queue rows. */
+@media (max-aspect-ratio: 1/1), (max-width: 479px) {
   body:not(.cinema) .layout { display: flex; flex-direction: column; gap: 12px; }
-  body:not(.cinema) .watch { --player-w: min(100cqw, 42dvh * 16 / 9); container-type: inline-size; flex: none; }
+  body:not(.cinema) .watch {
+    --player-w: min(100cqw, max(160px, (100dvh - var(--mast-h) - var(--info-h) - var(--chrome-h) - var(--pad) - 264px) * 16 / 9));
+    container-type: inline-size;
+    flex: none;
+  }
   body:not(.cinema) .info { width: 100%; }
   body:not(.cinema) .side { flex: 1 1 0; }
+}
+/* A tiny single-column frame scrolls the tabs, the link field and the list together
+   rather than nesting a short list inside a scrolling panel. */
+@media (max-width: 479px) and (max-height: 499px), (max-aspect-ratio: 1/1) and (max-height: 499px) {
+  body:not(.cinema) .panel { flex: none; min-height: 0; overflow: visible; }
 }
 
 @media (max-width: 599px) {
   .app { --pad: 12px; --mast-h: 52px; }
   .brand { font-size: 18px; }
   .masthead .pill { min-height: 40px; }
-  .layout { padding: 0 0 var(--pad); }
-  .stage, .stage.hosted .screen { border-radius: 0; }
-  .stage.hosted .controls { padding: 4px 4px 0; }
-  .info, .side { padding: 0 var(--pad); }
   .masthead:has(.room-error:not([hidden])) .brand span { display: none; }
   .tab { font-size: 13px; }
   .field input { font-size: 16px; }
   .toast { left: 12px; right: 12px; bottom: 12px; max-width: none; }
+}
+
+/* Phones held upright: the player runs edge to edge. */
+@media (max-width: 599px) and (max-aspect-ratio: 1/1), (max-width: 479px) {
+  .layout { padding: 0 0 var(--pad); }
+  .stage, .stage.hosted .screen { border-radius: 0; }
+  .stage.hosted .controls { padding: 4px 4px 0; }
+  .info, .side { padding: 0 var(--pad); }
 }
 
 @media (prefers-reduced-motion: reduce) {

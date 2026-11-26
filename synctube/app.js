@@ -756,6 +756,9 @@ function renderSettings() {
 }
 
 function render() {
+  // Cinema mode hides the side panel and its button lives in the player controls,
+  // so it ends when nothing is playing.
+  if (!state.current) cinema = false;
   document.body.classList.toggle("cinema", cinema);
   renderHeader();
   renderStage();
@@ -863,7 +866,7 @@ function seekBy(delta) {
 }
 
 function toggleCinema() {
-  cinema = !cinema;
+  cinema = !cinema && Boolean(state.current);
   render();
 }
 
