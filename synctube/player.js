@@ -17,7 +17,7 @@ function loadYouTube() {
       script.remove();
       window.onYouTubeIframeAPIReady = undefined;
       youtubeReady = undefined;
-      reject(new Error("YouTube didn’t respond. Check your connection or content blocker."));
+      reject(new Error("errYouTubeApi"));
     }
     script.addEventListener("error", fail, { once: true });
     window.onYouTubeIframeAPIReady = () => {
@@ -34,11 +34,12 @@ function loadYouTube() {
   return youtubeReady;
 }
 
+// Status messages are translation keys; app.js turns them into text.
 function youtubeError(code) {
-  if (code === 2 || code === 100) return "This video is unavailable on YouTube.";
-  if (code === 101 || code === 150) return "The uploader disabled embedded playback for this video. You can skip it.";
-  if (code === 153) return "YouTube couldn’t identify this embed. Check the activity’s origin and referrer policy.";
-  return "YouTube couldn’t play this video. You can retry or skip it.";
+  if (code === 2 || code === 100) return "errUnavailable";
+  if (code === 101 || code === 150) return "errEmbedDisabled";
+  if (code === 153) return "errEmbedIdentity";
+  return "errGeneric";
 }
 
 function mountYouTube(item, mount, events, hosted) {
@@ -53,7 +54,7 @@ function mountYouTube(item, mount, events, hosted) {
   });
   let player;
   let disposed = false;
-  const deadline = setTimeout(() => events.error("The YouTube player didn’t start. You can retry or skip it."), 16_000);
+  const deadline = setTimeout(() => events.error("errTimeout"), 16_000);
   loadYouTube().then(api => {
     if (disposed) return;
     const frame = document.createElement("iframe");
@@ -100,7 +101,7 @@ function mountYouTube(item, mount, events, hosted) {
   }).catch(error => {
     if (disposed) return;
     clearTimeout(deadline);
-    events.error(error.message);
+    events.error(error.message === "errYouTubeApi" ? "errYouTubeApi" : "errGeneric");
   });
 
   return {
@@ -113,6 +114,7 @@ function mountYouTube(item, mount, events, hosted) {
     duration: () => player?.getDuration?.() || 0,
     running: () => [1, 3].includes(player.getPlayerState()),
     seek: position => player.seekTo(position, true),
+    rate: value => player?.setPlaybackRate?.(value),
     play: () => player.playVideo(),
     pause: () => player.pauseVideo(),
     volume(value) {
@@ -137,14 +139,14 @@ function mountSample(mount, events) {
   video.addEventListener("loadedmetadata", events.ready, { once: true });
   video.addEventListener("playing", events.playing);
   video.addEventListener("ended", events.ended);
-  video.addEventListener("error", () => events.error("The bundled clip couldn’t load. You can retry or skip it."));
+  video.addEventListener("error", () => events.error("errSample"));
   video.src = new URL("./assets/sample.mp4", import.meta.url);
   mount.replaceChildren(video);
 
   function play() {
     video.play().catch(error => {
       if (error.name === "NotAllowedError") events.blocked();
-      else if (error.name !== "AbortError") events.error("This browser couldn’t play the bundled sample.");
+      else if (error.name !== "AbortError") events.error("errSampleBrowser");
     });
   }
   return {
@@ -156,6 +158,7 @@ function mountSample(mount, events) {
     duration: () => Number.isFinite(video.duration) ? video.duration : 0,
     running: () => !video.paused && !video.ended,
     seek: position => { video.currentTime = position; },
+    rate: value => { video.playbackRate = value; },
     play,
     pause: () => video.pause(),
     volume(value) {
@@ -183,6 +186,8 @@ export function createPlayer(item, mount, view) {
   let lastSerial;
   let lastChange = 0;
   let volume = 1;
+  let rate = 1;
+  let drift = null;
 
   const events = {
     ready() {
@@ -205,7 +210,7 @@ export function createPlayer(item, mount, view) {
     blocked() {
       if (disposed || failed || !target?.playing) return;
       blocked = true;
-      view.status("blocked", "Your browser paused playback on this device.");
+      view.status("blocked");
     },
     ended() {
       if (disposed || failed || !target?.playing) return;
@@ -217,7 +222,7 @@ export function createPlayer(item, mount, view) {
     },
   };
 
-  view.status("loading", item.source === "sample" ? "Loading the sample…" : "Connecting to YouTube…");
+  view.status("loading", item.source === "sample" ? "loadingSample" : "loadingYouTube");
   const provider = item.source === "sample" ? mountSample(mount, events) : mountYouTube(item, mount, events, view.youtube);
 
   function sync() {
@@ -226,6 +231,10 @@ export function createPlayer(item, mount, view) {
     const position = duration > 0 ? Math.min(target.position, Math.max(0, duration - 0.1)) : target.position;
     const playing = target.playing;
     const now = performance.now();
+    if (provider.rate && (target.rate || 1) !== rate) {
+      rate = target.rate || 1;
+      provider.rate(rate);
+    }
     if (!prepared) {
       prepared = true;
       lastSerial = target.serial;
@@ -240,9 +249,10 @@ export function createPlayer(item, mount, view) {
       view.ended(endedAt);
       return;
     }
-    const drift = Math.abs(provider.time() - position);
-    if (newAnchor || (drift > RESYNC_SECONDS && now - lastChange > 1800 && !blocked)) {
-      if (drift > (newAnchor ? 0.2 : RESYNC_SECONDS)) provider.seek(position);
+    const gap = Math.abs(provider.time() - position);
+    drift = playing ? gap : 0;
+    if (newAnchor || (gap > RESYNC_SECONDS && now - lastChange > 1800 && !blocked)) {
+      if (gap > (newAnchor ? 0.2 : RESYNC_SECONDS)) provider.seek(position);
       lastChange = now;
     }
     lastSerial = target.serial;
@@ -265,7 +275,16 @@ export function createPlayer(item, mount, view) {
       sync();
     },
     fullscreen: provider.fullscreen,
+    canRate: Boolean(provider.rate),
     getDuration: () => ready && !failed ? provider.duration() : 0,
+    // Seconds between this device and the room clock, or null before the first sync.
+    drift: () => ready && !failed && prepared ? drift : null,
+    resync() {
+      if (!ready || failed || !target) return;
+      provider.seek(target.position);
+      if (target.playing) provider.play();
+      lastChange = performance.now();
+    },
     setVolume(value) {
       volume = value;
       if (ready && !failed) provider.volume(value);

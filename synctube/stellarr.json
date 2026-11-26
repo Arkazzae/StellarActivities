@@ -3,7 +3,7 @@
   "id": "synctube",
   "name": "SyncTube",
   "description": "Build a shared YouTube queue and watch together in sync.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "authority": "host",
   "icon": "assets/icon.png",
   "cover": "assets/watch-party.webp",

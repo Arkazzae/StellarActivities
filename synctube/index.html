@@ -4,97 +4,286 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="origin">
-  <meta name="theme-color" content="#171412">
+  <meta name="theme-color" content="#121214">
   <title>SyncTube</title>
   <link rel="icon" href="./assets/icon.png">
   <link rel="stylesheet" href="./styles.css">
   <script type="module" src="./app.js"></script>
 </head>
 <body>
-  <div class="room">
+  <div class="app">
     <header class="masthead">
-      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>SyncTube</span></div>
-      <details id="people" class="people">
-        <summary><span id="people-icon" class="people-icon" aria-hidden="true"></span><span id="people-label">Connecting…</span></summary>
-        <div class="people-panel">
-          <h2>In the room</h2>
-          <ul id="watchers" class="watchers"></ul>
-        </div>
-      </details>
+      <div class="brand">
+        <svg viewBox="0 0 34 26" width="32" height="24" aria-hidden="true">
+          <rect x="1" y="2" width="24" height="17" rx="4" fill="#e3241b" transform="rotate(-6 13 10)"/>
+          <rect x="7" y="6" width="26" height="19" rx="5" fill="#f4f4f5"/>
+          <path d="M17 11v9l8-4.5z" fill="#e3241b"/>
+        </svg>
+        <span>SyncTube</span>
+      </div>
+      <button id="people-button" class="pill people-pill" type="button" hidden>
+        <span id="people-stack" class="stack" aria-hidden="true"></span>
+        <span id="people-label"></span>
+      </button>
+      <span id="private-label" class="pill static" hidden>
+        <svg class="icon small" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <span data-i18n="privateSession"></span>
+      </span>
     </header>
 
     <main class="layout">
-      <section class="watch" aria-label="Shared player">
-        <div id="stage" class="stage">
+      <section class="watch" aria-labelledby="current-title">
+        <div id="stage" class="stage is-empty">
           <div id="screen" class="screen" hidden></div>
-          <div id="welcome" class="welcome">
-            <img src="./assets/watch-party.webp" alt="">
-            <div class="welcome-copy">
-              <h1>Watch together.</h1>
-              <p>Add a YouTube video to start the room.</p>
+          <div id="veil" class="veil" hidden></div>
+
+          <div id="welcome" class="overlay">
+            <h2 data-i18n="welcomeTitle"></h2>
+            <p id="welcome-text"></p>
+            <button id="sample" class="pill light" type="button" data-i18n="trySample" disabled></button>
+            <small data-i18n="sampleNote"></small>
+          </div>
+
+          <div id="ran-out" class="overlay" hidden>
+            <h2 data-i18n="queueRanOut"></h2>
+            <p data-i18n="queueRanOutSub"></p>
+          </div>
+
+          <button id="big-play" class="big-play" type="button" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l12-7z"/></svg>
+          </button>
+
+          <div id="paused-note" class="note-card" hidden>
+            <strong data-i18n="paused"></strong>
+            <span id="paused-text"></span>
+          </div>
+
+          <div id="notice" class="overlay notice" hidden>
+            <strong id="notice-title"></strong>
+            <span id="notice-text"></span>
+            <div class="row">
+              <button id="notice-secondary" class="pill" type="button" hidden></button>
+              <button id="notice-primary" class="pill light" type="button" hidden></button>
+            </div>
+            <a id="notice-link" target="_blank" rel="noopener noreferrer" data-i18n="openYt" hidden></a>
+          </div>
+
+          <div id="controls" class="controls" hidden>
+            <input id="seek" class="seek" type="range" min="0" max="1" value="0" step="0.1" disabled>
+            <div class="bar">
+              <button id="play" class="ctl" type="button" disabled>
+                <svg class="when-paused" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l12-7z"/></svg>
+                <svg class="when-playing" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+              </button>
+              <button id="skip" class="ctl" type="button" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5v13l10-6.5z"/><path class="stroke" d="M18.5 6v12"/></svg>
+              </button>
+              <button id="mute" class="ctl" type="button" aria-pressed="false">
+                <svg class="when-sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3l5-4v13l-5-4H4z"/><path class="stroke" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+                <svg class="when-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3l5-4v13l-5-4H4z"/><path class="stroke" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+              </button>
+              <input id="volume" class="volume" type="range" min="0" max="100" value="100">
+              <output id="time" class="time">0:00 / –:––</output>
+              <span class="spacer"></span>
+              <button id="sync" class="ctl wide" type="button">
+                <svg class="sync-ok" viewBox="0 0 24 24" aria-hidden="true"><circle class="stroke" cx="12" cy="12" r="9"/><path class="stroke" d="M8 12.5l2.8 2.8L16 9.5"/></svg>
+                <svg class="sync-late" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M20 12a8 8 0 1 1-3-6.2M20 4v4h-4M12 8v4l2.5 2"/></svg>
+                <svg class="sync-busy" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M12 3a9 9 0 1 0 9 9"/></svg>
+                <svg class="sync-off" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M10 14a4 4 0 0 0 5.7 0l1.5-1.5M14 10a4 4 0 0 0-5.7 0l-1.5 1.5M4 4l16 16"/></svg>
+                <svg class="sync-bad" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M12 3l9.5 17h-19zM12 10v4M12 17.2v.1"/></svg>
+                <span id="sync-label"></span>
+              </button>
+              <select id="rate" class="rate" hidden></select>
+              <button id="cinema" class="ctl" type="button" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="stroke cinema-box" x="2.5" y="7.5" width="19" height="9" rx="2"/></svg>
+              </button>
+              <button id="fullscreen" class="ctl" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+              </button>
             </div>
           </div>
         </div>
 
-        <div class="transport">
-          <div class="current">
-            <div class="current-info">
-              <h2 id="current-title">Nothing playing</h2>
-              <p id="current-by" hidden></p>
+        <h1 id="current-title" class="title"></h1>
+        <div class="meta-row">
+          <div class="channel">
+            <span id="channel-avatar" class="avatar" aria-hidden="true"></span>
+            <div class="channel-text">
+              <div id="channel-name" class="channel-name"></div>
+              <div id="added-line" class="small muted"></div>
             </div>
-            <p id="status" class="status" role="status">Joining the room…</p>
           </div>
-
-          <div id="provider-notice" class="notice" hidden>
-            <p id="provider-text" role="status"></p>
-            <button type="button" id="provider-action" class="subtle" hidden></button>
-          </div>
-
-          <div class="timeline">
-            <output id="elapsed">0:00</output>
-            <input id="seek" type="range" min="0" max="1" value="0" step="0.1" aria-label="Playback position" disabled>
-            <output id="duration">–:––</output>
-          </div>
-
-          <div class="control-row">
-            <div class="control-group">
-              <button id="play" class="control play" type="button" aria-label="Play for everyone" title="Play for everyone" disabled><span aria-hidden="true"></span></button>
-              <button id="skip" class="control skip" type="button" aria-label="Skip video" title="Skip video" disabled><span aria-hidden="true"></span></button>
-            </div>
-            <div class="control-group audio">
-              <button id="mute" class="control mute" type="button" aria-label="Mute for me" title="Mute for me" aria-pressed="false"><span aria-hidden="true"></span></button>
-              <input id="volume" type="range" min="0" max="100" value="100" aria-label="My player volume">
-              <button id="fullscreen" class="control fullscreen" type="button" aria-label="Full screen" title="Full screen"><span aria-hidden="true"></span></button>
-            </div>
+          <div id="actions" class="actions" hidden>
+            <button id="vote" class="pill" type="button" aria-pressed="false" hidden>
+              <span id="vote-text"></span>
+              <span id="vote-pips" class="pips" aria-hidden="true"></span>
+              <span id="vote-count" class="tabular"></span>
+            </button>
+            <button id="skip-now" class="pill" type="button" hidden>
+              <svg class="icon small accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path class="fill" d="M10 9v6l5-3z"/></svg>
+              <span data-i18n="skipNow"></span>
+            </button>
+            <button id="copy-link" class="pill" type="button">
+              <svg class="icon small" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+              <span id="copy-text"></span>
+            </button>
+            <a id="open-youtube" class="pill" target="_blank" rel="noopener noreferrer">
+              <svg class="icon small" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>
+              <span data-i18n="openYt"></span>
+            </a>
           </div>
         </div>
-
+        <div class="room-box">
+          <div id="room-line" class="room-line"></div>
+          <div id="room-sub" class="muted"></div>
+        </div>
         <p id="room-error" class="room-error" role="alert" hidden></p>
       </section>
 
-      <aside class="queue" aria-labelledby="queue-title">
-        <div class="queue-head">
-          <div class="queue-heading"><h2 id="queue-title">Queue</h2><output id="queue-count">0 queued</output></div>
-          <form id="add">
-            <label for="link">YouTube link</label>
-            <div class="add-fields">
-              <input id="link" type="text" inputmode="url" placeholder="Paste a video link" autocomplete="off" spellcheck="false" maxlength="2048" required disabled>
-              <button id="add-button" type="submit" disabled>Add</button>
+      <aside class="side" data-i18n-label="roomPanel">
+        <div id="tabs" class="tabs" role="tablist" data-i18n-label="roomPanel">
+          <button id="tab-queue" class="tab" type="button" role="tab" data-tab="queue" aria-controls="panel-queue">
+            <span data-i18n="tabQueue"></span><span id="queue-badge" class="badge"></span>
+          </button>
+          <button id="tab-history" class="tab" type="button" role="tab" data-tab="history" aria-controls="panel-history">
+            <span data-i18n="tabHistory"></span>
+          </button>
+          <button id="tab-people" class="tab" type="button" role="tab" data-tab="people" aria-controls="panel-people">
+            <span data-i18n="tabPeople"></span><span id="people-badge" class="badge"></span>
+          </button>
+          <button id="tab-settings" class="tab" type="button" role="tab" data-tab="settings" aria-controls="panel-settings">
+            <span data-i18n="tabSettings"></span>
+          </button>
+        </div>
+
+        <form id="add" class="add" novalidate>
+          <label for="link" class="sr-only" data-i18n="pasteLabel"></label>
+          <div id="field" class="field">
+            <svg class="icon small muted-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+            <input id="link" type="text" inputmode="url" autocomplete="off" spellcheck="false" maxlength="2048" data-i18n-placeholder="pastePlaceholder" disabled>
+            <button id="add-button" class="pill light" type="submit" data-i18n="add" disabled></button>
+          </div>
+          <p id="add-error" class="form-error" role="alert" hidden></p>
+          <div id="preview" class="preview" hidden>
+            <img id="preview-thumb" class="preview-thumb" alt="">
+            <div class="preview-body">
+              <label for="preview-title" class="small muted" data-i18n="title"></label>
+              <input id="preview-title" type="text" maxlength="180">
+              <span id="preview-note" class="small muted"></span>
             </div>
-            <p id="add-error" class="form-error" role="alert" hidden></p>
-          </form>
+          </div>
+        </form>
+
+        <div id="panel-queue" class="panel" role="tabpanel" aria-labelledby="tab-queue" tabindex="0">
+          <div class="panel-head">
+            <div>
+              <h2 data-i18n="upNext"></h2>
+              <output id="queue-count" class="small muted tabular"></output>
+            </div>
+            <div class="switch-row">
+              <span id="autoplay-label" class="small muted" data-i18n="autoplay"></span>
+              <button id="autoplay-quick" class="switch" type="button" role="switch" aria-labelledby="autoplay-label" aria-checked="true"><span></span></button>
+            </div>
+          </div>
+          <p id="lock-note" class="lock-note" hidden></p>
+          <div id="resume" class="resume" hidden>
+            <div class="resume-head">
+              <h2 data-i18n="resumeTitle"></h2>
+              <span class="small muted with-icon">
+                <svg class="icon tiny" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                <span data-i18n="resumeOnlyYou"></span>
+              </span>
+            </div>
+            <div class="row-item">
+              <span class="thumb"><img id="resume-thumb" alt=""><span id="resume-bar" class="watched"></span></span>
+              <div class="row-text">
+                <div id="resume-title" class="row-title"></div>
+                <div id="resume-meta" class="small muted"></div>
+              </div>
+            </div>
+            <div class="resume-actions">
+              <button id="resume-start" class="pill light grow" type="button"></button>
+              <button id="resume-forget" class="pill" type="button" data-i18n="forget"></button>
+            </div>
+          </div>
+          <ol id="items" class="list"></ol>
+          <div id="queue-empty" class="empty">
+            <h3 data-i18n="nothingNext"></h3>
+            <p data-i18n="nothingNextSub"></p>
+          </div>
         </div>
-        <div id="queue-empty" class="queue-empty">
-          <div class="queue-icon" aria-hidden="true"><span></span><span></span><span></span></div>
-          <h3>The queue is empty</h3>
-          <p>Videos you add while watching will play next.</p>
+
+        <div id="panel-history" class="panel" role="tabpanel" aria-labelledby="tab-history" tabindex="0" hidden>
+          <div class="panel-head">
+            <h2 data-i18n="playedSession"></h2>
+            <button id="clear-history" class="pill" type="button" data-i18n="clear" hidden></button>
+          </div>
+          <ol id="history" class="list"></ol>
+          <div id="history-empty" class="empty">
+            <h3 data-i18n="nothingPlayed"></h3>
+            <p data-i18n="nothingPlayedSub"></p>
+          </div>
         </div>
-        <ol id="items" class="items" hidden></ol>
-        <div class="queue-foot">
-          <button id="sample" class="text-button" type="button" disabled>Try the sample clip</button>
+
+        <div id="panel-people" class="panel" role="tabpanel" aria-labelledby="tab-people" tabindex="0" hidden>
+          <h2 data-i18n="inRoom"></h2>
+          <ul id="watchers" class="people"></ul>
+          <p class="small muted" data-i18n="peopleFoot"></p>
+        </div>
+
+        <div id="panel-settings" class="panel" role="tabpanel" aria-labelledby="tab-settings" tabindex="0" hidden>
+          <h2 data-i18n="thisDevice"></h2>
+          <div class="setting stacked">
+            <div>
+              <div id="language-label" data-i18n="language"></div>
+              <div id="language-sub" class="small muted"></div>
+            </div>
+            <div id="language" class="segments" role="group" aria-labelledby="language-label">
+              <button type="button" class="segment" data-language="auto" data-i18n="langAuto"></button>
+              <button type="button" class="segment" data-language="pl" lang="pl">Polski</button>
+              <button type="button" class="segment" data-language="en" lang="en">English</button>
+            </div>
+          </div>
+          <div class="setting">
+            <div>
+              <div data-i18n="myVolume"></div>
+              <div class="small muted" data-i18n="volumeSub"></div>
+            </div>
+            <input id="volume-settings" class="volume wide" type="range" min="0" max="100" value="100" data-i18n-label="myVolume">
+          </div>
+
+          <h2 class="section" data-i18n="theRoom"></h2>
+          <p id="room-note" class="small muted"></p>
+          <div id="control-setting" class="setting stacked">
+            <div id="control-label" data-i18n="whoControls"></div>
+            <div id="control-mode" class="segments" role="group" aria-labelledby="control-label">
+              <button type="button" class="segment" data-control="everyone" data-i18n="everyone"></button>
+              <button type="button" class="segment" data-control="host" data-i18n="hostOnly"></button>
+            </div>
+          </div>
+          <div class="setting">
+            <div id="autoplay-setting-label" data-i18n="autoplayNext"></div>
+            <button id="autoplay-setting" class="switch" type="button" role="switch" aria-labelledby="autoplay-setting-label" aria-checked="true"><span></span></button>
+          </div>
+          <div class="setting">
+            <div id="repeat-label" data-i18n="repeat"></div>
+            <button id="repeat-setting" class="switch" type="button" role="switch" aria-labelledby="repeat-label" aria-checked="false"><span></span></button>
+          </div>
+
+          <details class="shortcuts">
+            <summary data-i18n="shortcuts"></summary>
+            <dl>
+              <dt><kbd data-i18n="space"></kbd></dt><dd data-i18n="kPlay"></dd>
+              <dt><kbd>← →</kbd></dt><dd data-i18n="kJump"></dd>
+              <dt><kbd>M</kbd></dt><dd data-i18n="kMute"></dd>
+              <dt><kbd>T</kbd></dt><dd data-i18n="kCinema"></dd>
+              <dt><kbd>Esc</kbd></dt><dd data-i18n="kEsc"></dd>
+            </dl>
+          </details>
         </div>
       </aside>
     </main>
   </div>
+  <div id="toast" class="toast" role="status" hidden></div>
 </body>
 </html>

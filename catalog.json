@@ -8,8 +8,10 @@
     "assets/outfit.woff2",
     "assets/sample.mp4",
     "assets/watch-party.webp",
+    "i18n.js",
     "index.html",
     "player.js",
+    "progress.js",
     "room.js",
     "stellarr.json",
     "styles.css"
