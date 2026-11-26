@@ -190,6 +190,7 @@ function mount(force = false) {
   ui.welcome.hidden = Boolean(item);
   if (!item) return;
   player = createPlayer(item, ui.screen, {
+    youtube: session.media.youtube,
     status: providerStatus,
     ended(duration) {
       const current = playback();
@@ -345,7 +346,8 @@ ui.mute.onclick = () => {
 };
 ui.fullscreen.onclick = async () => {
   try {
-    await ui.stage.requestFullscreen();
+    if (player?.fullscreen) player.fullscreen();
+    else await ui.stage.requestFullscreen();
   } catch {
     message(ui["room-error"], "Full screen is unavailable in this preview.");
   }
