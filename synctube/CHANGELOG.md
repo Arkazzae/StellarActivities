@@ -11,6 +11,7 @@
 - Polish and English. SyncTube follows Stellarr’s language, and **Settings → Language** overrides it.
 - Your spot in each video and your language choice are saved to your account. Empty rooms offer to start where you left off.
 - Avatars and usernames from Stellarr appear in the People tab.
+- The room fits the activity panel at every size, from a phone to full screen. The player stays the largest 16:9 picture that fits, the tabs sit beside it or under it, and only the lists scroll. Room details moved to **Settings → The room**, and errors show at the top.
 
 ## 0.1.1
 
