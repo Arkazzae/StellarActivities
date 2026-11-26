@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="origin">
+  <meta name="theme-color" content="#171412">
+  <title>SyncTube</title>
+  <link rel="icon" href="./assets/icon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="room">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>SyncTube</span></div>
+      <details id="people" class="people">
+        <summary><span id="people-icon" class="people-icon" aria-hidden="true"></span><span id="people-label">Connecting…</span></summary>
+        <div class="people-panel">
+          <h2>In the room</h2>
+          <ul id="watchers" class="watchers"></ul>
+        </div>
+      </details>
+    </header>
+
+    <main class="layout">
+      <section class="watch" aria-label="Shared player">
+        <div id="stage" class="stage">
+          <div id="screen" class="screen" hidden></div>
+          <div id="welcome" class="welcome">
+            <img src="./assets/cinema.webp" alt="">
+            <div class="welcome-copy">
+              <h1>Watch together.</h1>
+              <p>Add a YouTube video to start the room.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="transport">
+          <div class="current">
+            <div class="current-info">
+              <h2 id="current-title">Nothing playing</h2>
+              <p id="current-by" hidden></p>
+            </div>
+            <p id="status" class="status" role="status">Joining the room…</p>
+          </div>
+
+          <div id="provider-notice" class="notice" hidden>
+            <p id="provider-text" role="status"></p>
+            <button type="button" id="provider-action" class="subtle" hidden></button>
+          </div>
+
+          <div class="timeline">
+            <output id="elapsed">0:00</output>
+            <input id="seek" type="range" min="0" max="1" value="0" step="0.1" aria-label="Playback position" disabled>
+            <output id="duration">–:––</output>
+          </div>
+
+          <div class="control-row">
+            <div class="control-group">
+              <button id="play" class="control play" type="button" aria-label="Play for everyone" title="Play for everyone" disabled><span aria-hidden="true"></span></button>
+              <button id="skip" class="control skip" type="button" aria-label="Skip video" title="Skip video" disabled><span aria-hidden="true"></span></button>
+            </div>
+            <div class="control-group audio">
+              <button id="mute" class="control mute" type="button" aria-label="Mute for me" title="Mute for me" aria-pressed="false"><span aria-hidden="true"></span></button>
+              <input id="volume" type="range" min="0" max="100" value="100" aria-label="My player volume">
+              <button id="fullscreen" class="control fullscreen" type="button" aria-label="Full screen" title="Full screen"><span aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <p id="room-error" class="room-error" role="alert" hidden></p>
+      </section>
+
+      <aside class="queue" aria-labelledby="queue-title">
+        <div class="queue-head">
+          <div class="queue-heading"><h2 id="queue-title">Queue</h2><output id="queue-count">0 queued</output></div>
+          <form id="add">
+            <label for="link">YouTube link</label>
+            <div class="add-fields">
+              <input id="link" type="text" inputmode="url" placeholder="Paste a video link" autocomplete="off" spellcheck="false" maxlength="2048" required disabled>
+              <button id="add-button" type="submit" disabled>Add</button>
+            </div>
+            <p id="add-error" class="form-error" role="alert" hidden></p>
+          </form>
+        </div>
+        <div id="queue-empty" class="queue-empty">
+          <div class="queue-icon" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h3>The queue is empty</h3>
+          <p>Videos you add while watching will play next.</p>
+        </div>
+        <ol id="items" class="items" hidden></ol>
+        <div class="queue-foot">
+          <button id="sample" class="text-button" type="button" disabled>Try the sample clip</button>
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

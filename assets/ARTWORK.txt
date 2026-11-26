@@ -1,0 +1,13 @@
+Cinema cover (cinema.webp)
+Generated for SyncTube with OpenAI ImageGen from this text prompt. No source image was supplied.
+
+“Use case: photorealistic-natural. Asset type: original 16:9 empty-state cover for an indie synchronized video watch party. Create only the photograph, no interface, no text, no logo. Wide-angle still photo from the rear of a small late-night repertory cinema with three friends seen only as anonymous backlit silhouettes in velvet theater seats, looking toward a wide projection screen. On the screen a simple non-branded abstract pale amber and ivory horizon of sunlight refracting through film scratches, with no content resemblance to any movie. A very subtle projector beam from the upper right catches fine dust. Deep espresso shadows, dark burgundy seating, terracotta wall accents, soft warm ivory highlights. Deliberate calm spatial composition, the screen in the upper-middle, people grouped toward lower middle and right, lower left dark and uncluttered for HTML overlay text. Architectural detail along the sides, cinema upholstery, an organic editorial 35mm photographic quality, realistic depth, very restrained tones, strong photographic contrast. Landscape 16:9 wide crop. No captions, text, logos, insignias, watermarks, play symbols, or recognizable faces.”
+
+Activity icon (icon.png)
+Drawn from basic geometric shapes for the v1 activity.
+
+Sample clip (sample.mp4)
+Uses the cinema cover with a slow zoom and newly synthesized audio. The audio is a mix of 110 Hz and 164.81 Hz sine waves created with FFmpeg.
+
+Outfit (outfit.woff2)
+© 2021 The Outfit Project Authors. Distributed under the SIL Open Font License 1.1 included in Outfit-LICENSE.txt.

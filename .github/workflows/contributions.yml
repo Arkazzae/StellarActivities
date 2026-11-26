@@ -1,0 +1,44 @@
+name: Contribution checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, edited, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  commits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check commits and pull request title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -eu
+          msg=$(mktemp)
+          if [ -n "$TITLE" ]; then
+            printf '%s\n' "$TITLE" > "$msg"
+            .githooks/commit-msg "$msg"
+          fi
+          range="$HEAD"
+          if [ -n "$BASE" ] && [ "$BASE" != "0000000000000000000000000000000000000000" ]; then
+            range="$BASE..$HEAD"
+          fi
+          git rev-list "$range" > "$msg.commits"
+          while read -r commit; do
+            git show -s --format='%B%n%an <%ae>%n%cn <%ce>' "$commit" > "$msg"
+            .githooks/commit-msg "$msg"
+          done < "$msg.commits"
+      - name: Test SyncTube and its release archive
+        run: |
+          node --test test/*.test.mjs
+          node scripts/package-release.mjs
+          unzip -t dist/synctube.zip

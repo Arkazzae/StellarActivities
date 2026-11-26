@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+message=$(sed '/^#/d' "$1")
+subject=$(printf '%s\n' "$message" | head -n 1)
+if printf '%s\n' "$message" | grep -Eiq '(^|[^[:alnum:]])(AI|A\.I\.|artificial intelligence|sztuczn[aąej]+ inteligencj[a-ząćęłńóśźż]*|chatgpt|openai|claude|anthropic|copilot|codex|gemini|cursor[ -]?(agent|bot)|dependabot-ai)([^[:alnum:]]|$)'; then
+  echo 'Remove assistant names, signatures and attribution from the commit or pull request title.' >&2
+  exit 1
+fi
+case "$subject" in "Merge "*) exit 0 ;; esac
+pattern='^(feat|fix|refactor|test|docs|build|ci|chore|perf)(\([a-z0-9][a-z0-9-]*\))?: [a-z0-9](.*[^.[:space:]])?$'
+if ! printf '%s\n' "$subject" | grep -Eq "$pattern" || [ "${#subject}" -gt 72 ]; then
+  echo "Use type(scope): subject, up to 72 characters, starting in lowercase without a final period." >&2
+  exit 1
+fi

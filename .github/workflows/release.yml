@@ -1,0 +1,28 @@
+name: Release SyncTube
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: Test SyncTube
+        run: |
+          node --test test/*.test.mjs
+      - name: Build the installable release
+        run: node scripts/package-release.mjs
+      - name: Verify the tag and archive
+        run: |
+          node --input-type=module -e 'import fs from "node:fs"; const [activity] = JSON.parse(fs.readFileSync("dist/stellarr-release.json")).activities; if (process.env.GITHUB_REF_NAME !== "v" + activity.version) throw Error("The release tag must match the manifest version.")'
+          unzip -t dist/synctube.zip
+      - name: Publish the archive and release index
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/synctube.zip dist/stellarr-release.json --verify-tag --generate-notes

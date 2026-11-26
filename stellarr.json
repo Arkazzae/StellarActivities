@@ -1,0 +1,24 @@
+{
+  "protocol": 1,
+  "id": "synctube",
+  "name": "SyncTube",
+  "description": "Build a shared YouTube queue and watch together in sync.",
+  "version": "1.0.0",
+  "authority": "host",
+  "icon": "assets/icon.png",
+  "cover": "assets/cinema.webp",
+  "connects": [
+    {
+      "host": "www.youtube.com",
+      "why": "Load the YouTube IFrame API and look up titles for videos added to the queue."
+    },
+    {
+      "host": "www.youtube-nocookie.com",
+      "why": "Play videos in YouTube's privacy-enhanced embedded player."
+    },
+    {
+      "host": "i.ytimg.com",
+      "why": "Show thumbnails for videos in the room's queue."
+    }
+  ]
+}
