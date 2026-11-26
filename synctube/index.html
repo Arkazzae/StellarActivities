@@ -21,6 +21,7 @@
         </svg>
         <span>SyncTube</span>
       </div>
+      <p id="room-error" class="room-error" role="alert" hidden></p>
       <button id="people-button" class="pill people-pill" type="button" hidden>
         <span id="people-stack" class="stack" aria-hidden="true"></span>
         <span id="people-label"></span>
@@ -104,40 +105,38 @@
           </div>
         </div>
 
-        <h1 id="current-title" class="title"></h1>
-        <div class="meta-row">
-          <div class="channel">
-            <span id="channel-avatar" class="avatar" aria-hidden="true"></span>
-            <div class="channel-text">
-              <div id="channel-name" class="channel-name"></div>
-              <div id="added-line" class="small muted"></div>
+        <div class="info">
+          <h1 id="current-title" class="title"></h1>
+          <div class="meta-row">
+            <div class="channel">
+              <span id="channel-avatar" class="avatar" aria-hidden="true"></span>
+              <div class="channel-text">
+                <div id="channel-name" class="channel-name"></div>
+                <div id="added-line" class="small muted"></div>
+              </div>
+            </div>
+            <div id="actions" class="actions" hidden>
+              <button id="vote" class="pill" type="button" aria-pressed="false" hidden>
+                <svg class="icon small vote-icon" viewBox="0 0 24 24" aria-hidden="true"><path class="fill" d="M5 5.5v13l10-6.5z"/><path d="M18.5 6v12"/></svg>
+                <span id="vote-text"></span>
+                <span id="vote-pips" class="pips" aria-hidden="true"></span>
+                <span id="vote-count" class="tabular"></span>
+              </button>
+              <button id="skip-now" class="pill" type="button" hidden>
+                <svg class="icon small accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path class="fill" d="M10 9v6l5-3z"/></svg>
+                <span data-i18n="skipNow"></span>
+              </button>
+              <button id="copy-link" class="pill" type="button">
+                <svg class="icon small" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+                <span id="copy-text"></span>
+              </button>
+              <a id="open-youtube" class="pill" target="_blank" rel="noopener noreferrer">
+                <svg class="icon small" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>
+                <span data-i18n="openYt"></span>
+              </a>
             </div>
           </div>
-          <div id="actions" class="actions" hidden>
-            <button id="vote" class="pill" type="button" aria-pressed="false" hidden>
-              <span id="vote-text"></span>
-              <span id="vote-pips" class="pips" aria-hidden="true"></span>
-              <span id="vote-count" class="tabular"></span>
-            </button>
-            <button id="skip-now" class="pill" type="button" hidden>
-              <svg class="icon small accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path class="fill" d="M10 9v6l5-3z"/></svg>
-              <span data-i18n="skipNow"></span>
-            </button>
-            <button id="copy-link" class="pill" type="button">
-              <svg class="icon small" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
-              <span id="copy-text"></span>
-            </button>
-            <a id="open-youtube" class="pill" target="_blank" rel="noopener noreferrer">
-              <svg class="icon small" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>
-              <span data-i18n="openYt"></span>
-            </a>
-          </div>
         </div>
-        <div class="room-box">
-          <div id="room-line" class="room-line"></div>
-          <div id="room-sub" class="muted"></div>
-        </div>
-        <p id="room-error" class="room-error" role="alert" hidden></p>
       </section>
 
       <aside class="side" data-i18n-label="roomPanel">
@@ -153,6 +152,7 @@
           </button>
           <button id="tab-settings" class="tab" type="button" role="tab" data-tab="settings" aria-controls="panel-settings">
             <span data-i18n="tabSettings"></span>
+            <svg class="icon tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>
           </button>
         </div>
 
@@ -253,6 +253,10 @@
           </div>
 
           <h2 class="section" data-i18n="theRoom"></h2>
+          <div class="room-box">
+            <div id="room-line" class="room-line"></div>
+            <div id="room-sub" class="small muted"></div>
+          </div>
           <p id="room-note" class="small muted"></p>
           <div id="control-setting" class="setting stacked">
             <div id="control-label" data-i18n="whoControls"></div>

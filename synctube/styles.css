@@ -28,6 +28,7 @@
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
+html, body { height: 100%; overflow: hidden; }
 body { margin: 0; background: var(--bg); }
 h1, h2, h3, p { margin: 0; }
 button, input, output, select { font: inherit; color: inherit; }
@@ -49,17 +50,32 @@ a { color: inherit; }
 .icon.accent { color: var(--red-text); }
 .muted-icon { color: var(--muted); }
 
-.app { min-height: 100dvh; display: flex; flex-direction: column; }
+/* The room fills the frame Stellarr gives it and never scrolls as a whole; only the lists in the side panel scroll.
+   Fixed heights below let the player be the largest 16:9 box that fits next to the side panel. */
+.app {
+  --pad: 16px;
+  --gap: 16px;
+  --mast-h: 60px;
+  --info-h: 84px;
+  --chrome-h: 0px;
+  --side-min: clamp(300px, 25vw, 360px);
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
 
 .masthead {
   display: flex;
+  flex: none;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 72px;
-  padding: 12px 24px 8px;
+  height: var(--mast-h);
+  padding: 0 var(--pad);
 }
-.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; letter-spacing: -.04em; }
+.brand { display: flex; flex-shrink: 0; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; letter-spacing: -.04em; }
+.masthead .pill { flex-shrink: 0; }
 
 .pill {
   display: inline-flex;
@@ -99,37 +115,53 @@ a { color: inherit; }
 }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
+/* Two columns: the player with its title, and the side panel. The side panel takes the width the player cannot
+   use at this frame height, between --side-min and 360px. */
 .layout {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 24px;
-  padding: 16px 24px 24px;
+  --fit-w: calc((100dvh - var(--mast-h) - var(--pad) - var(--info-h) - var(--chrome-h)) * 16 / 9);
+  --side-w: clamp(var(--side-min), 100vw - 2 * var(--pad) - var(--gap) - var(--fit-w), 360px);
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--side-w);
+  grid-template-rows: minmax(0, 1fr);
+  gap: var(--gap);
+  padding: 0 var(--pad) var(--pad);
 }
-.watch { flex: 999 1 640px; min-width: 0; }
-.side {
-  flex: 1 1 360px;
+.layout:has(.stage.hosted) { --chrome-h: 76px; }
+.watch {
+  /* The player and the info under it share one width: the column, or less when the height runs out. */
+  --player-w: max(160px, min(100cqw, (100cqh - var(--info-h) - var(--chrome-h)) * 16 / 9));
+  container-type: size;
   min-width: 0;
-  height: calc(100dvh - 112px);
-  min-height: 420px;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+}
+.side {
+  container: side / inline-size;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Player */
 .stage {
+  container: stage / size;
   position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  flex: none;
+  width: var(--player-w);
+  height: calc(var(--player-w) * 9 / 16 + var(--chrome-h));
   overflow: hidden;
   isolation: isolate;
   border-radius: var(--radius);
   background: #000000;
 }
 .stage.is-empty { background: var(--bg); box-shadow: inset 0 0 0 1px var(--raised); }
-.stage:fullscreen { border-radius: 0; aspect-ratio: auto; }
+.stage:fullscreen { border-radius: 0; }
 .screen, .screen iframe, .screen video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000000; }
 .screen video { object-fit: contain; }
 .veil { position: absolute; inset: 0; z-index: 1; }
@@ -145,8 +177,8 @@ a { color: inherit; }
   padding: 24px;
   text-align: center;
 }
-.overlay h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 600; letter-spacing: -.03em; }
-.overlay p { max-width: 440px; font-size: 15px; color: #d4d4da; }
+.overlay h2 { font-size: clamp(17px, min(4.6cqw, 8cqh), 34px); font-weight: 600; letter-spacing: -.03em; }
+.overlay p { max-width: 440px; font-size: clamp(13px, min(2.2cqw, 4.4cqh), 15px); color: #d4d4da; }
 .overlay small { font-size: 12px; color: var(--muted); }
 .overlay .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .notice { background: rgba(0, 0, 0, .78); }
@@ -195,8 +227,8 @@ a { color: inherit; }
   color: #ffffff;
   transition: opacity 200ms ease;
 }
-.stage.idle .controls:not(:focus-within) { opacity: 0; pointer-events: none; }
-.stage.idle { cursor: none; }
+.stage.idle:not(.hosted) .controls:not(:focus-within) { opacity: 0; pointer-events: none; }
+.stage.idle:not(.hosted) { cursor: none; }
 .bar { display: flex; align-items: center; gap: 2px; min-height: 50px; }
 .spacer { flex: 1 1 0; }
 .time { margin-left: 4px; font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -275,33 +307,71 @@ input[type="range"]::-moz-range-thumb { width: 13px; height: 13px; border: 0; bo
 .volume { --fill: #ffffff; --rest: rgba(255, 255, 255, .3); width: 72px; margin-right: 6px; }
 .volume.wide { --fill: var(--text); --rest: var(--line); width: 120px; flex-shrink: 0; margin: 0; }
 
-/* Under the player */
-.title { margin-top: 12px; font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; overflow-wrap: anywhere; }
-.meta-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
-.channel { display: flex; align-items: center; gap: 12px; min-width: 0; }
+/* Under the player: one title line and one row of actions, so the block keeps the height in --info-h. */
+.info { container: info / inline-size; flex: none; width: var(--player-w); height: var(--info-h); }
+.title {
+  margin-top: 10px;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.meta-row { display: flex; align-items: center; gap: 12px; height: 44px; margin-top: 6px; }
+.channel { display: flex; flex: 1 1 0; align-items: center; gap: 12px; min-width: 40px; }
 .channel-text { min-width: 0; }
+.channel-text > div { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .channel-name { font-size: 15px; font-weight: 600; }
-.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.actions { display: flex; flex: 0 1 auto; gap: 8px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.actions .pill { flex-shrink: 0; }
+.vote-icon { display: none; }
+/* Narrow rooms turn the secondary actions into icons first, then the vote and skip pills. */
+@container info (max-width: 719px) {
+  #copy-link, #open-youtube { width: 44px; padding: 0; }
+  #copy-link span, #open-youtube span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+@container info (max-width: 539px) {
+  .actions { gap: 6px; }
+  #skip-now { width: 44px; padding: 0; }
+  #vote { gap: 6px; padding: 0 14px; }
+  #vote .vote-icon { display: block; }
+  #vote-text, #skip-now span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .meta-row .avatar { display: none; }
+}
 .pips { display: inline-flex; gap: 4px; }
 .pips span { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--faint); }
 .pips span.on { border-color: var(--red); background: var(--red); }
 .pill[aria-pressed="true"] .pips span:not(.on) { border-color: #52525b; }
-.room-box { margin-top: 12px; padding: 12px 14px; border-radius: var(--radius); background: var(--surface); }
+.room-box { margin-top: 10px; padding: 12px 14px; border-radius: var(--radius); background: var(--surface); }
 .room-line { font-weight: 600; }
 .room-box .muted { margin-top: 4px; }
-.room-error { margin-top: 10px; color: var(--red-text); }
-
-/* Side panel */
-.tabs { display: flex; gap: 6px; flex-shrink: 0; }
-.tab {
+.room-box + .small { margin-top: 10px; }
+/* Errors sit in the masthead, which stays on screen in every layout. */
+.room-error {
+  display: -webkit-box;
   flex: 1 1 0;
   min-width: 0;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: var(--red-text);
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Side panel */
+.tabs { display: flex; gap: 6px; flex-shrink: 0; overflow-x: auto; scrollbar-width: none; }
+.tab {
+  flex: 1 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   height: 44px;
-  padding: 0 6px;
+  padding: 0 10px;
   border: 0;
   border-radius: 22px;
   background: var(--raised);
@@ -311,6 +381,14 @@ input[type="range"]::-moz-range-thumb { width: 13px; height: 13px; border: 0; bo
   white-space: nowrap;
 }
 .tab:hover { background: var(--hover); }
+.tab-icon { display: none; }
+/* A narrow side panel shows Settings as an icon so the four tabs fit. */
+@container side (max-width: 339px) {
+  .tab { padding: 0 8px; font-size: 13px; }
+  #tab-settings { flex-grow: 0; width: 44px; }
+  #tab-settings span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #tab-settings .tab-icon { display: block; }
+}
 .tab[aria-selected="true"] { background: var(--text); color: var(--bg); }
 .badge { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .tab[aria-selected="true"] .badge { color: #3f3f46; }
@@ -343,7 +421,7 @@ input[type="range"]::-moz-range-thumb { width: 13px; height: 13px; border: 0; bo
   font-size: 14px;
 }
 
-.panel { flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.panel { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
 .panel:focus-visible { outline-offset: -2px; }
 .panel h2 { font-size: 16px; font-weight: 600; }
 .panel h2.section { margin-top: 20px; }
@@ -370,8 +448,9 @@ input[type="range"]::-moz-range-thumb { width: 13px; height: 13px; border: 0; bo
 .thumb {
   position: relative;
   flex-shrink: 0;
-  width: 160px;
-  height: 90px;
+  --thumb-w: clamp(112px, 40cqw, 160px);
+  width: var(--thumb-w);
+  height: calc(var(--thumb-w) * 9 / 16);
   padding: 0;
   overflow: hidden;
   border: 0;
@@ -494,44 +573,89 @@ kbd { padding: 2px 6px; border-radius: 5px; background: var(--raised); font-fami
   box-shadow: 0 12px 32px rgba(0, 0, 0, .5);
 }
 
+/* Small players keep the controls on one row: labels and secondary controls go first. */
+@container stage (max-width: 659px) {
+  #sync { width: 44px; padding: 0; justify-content: center; }
+  #sync-label { display: none; }
+}
+@container stage (max-width: 499px) { .volume:not(.wide), #rate { display: none; } }
+@container stage (max-width: 379px) { .time { display: none; } }
+@container stage (max-width: 299px) { #cinema { display: none; } }
+@container stage (max-height: 299px) {
+  .controls { padding-top: 24px; }
+  .overlay { gap: 6px; padding: 12px; }
+  .overlay small { display: none; }
+  .big-play { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+  /* A notice needs the whole of a small player, so it covers the controls and scrolls if it must. */
+  .stage:not(.hosted) .notice { z-index: 4; justify-content: safe center; overflow-y: auto; padding: 10px 12px; }
+  .notice > * { flex-shrink: 0; }
+  .notice strong { font-size: 14px; }
+  .notice span { font-size: 12px; }
+  .notice .pill { min-height: 36px; padding: 0 12px; font-size: 13px; }
+  .notice a { min-height: 28px; font-size: 12px; }
+}
+@container stage (max-height: 179px) {
+  .notice span { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .notice a { display: none; }
+}
+
 /* On the instance hostname Stellarr draws YouTube over #screen from the parent page,
-   so nothing in this frame can sit on top of it. Controls and notices move below. */
-.stage.hosted { aspect-ratio: auto; display: flex; flex-direction: column; overflow: visible; background: transparent; }
-.stage.hosted .screen { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); }
+   so nothing in this frame can sit on top of it. Controls and notices move below,
+   and the screen gives up height to a notice. */
+.stage.hosted { display: flex; flex-direction: column; overflow: visible; background: transparent; }
+.stage.hosted .screen { position: relative; inset: auto; flex: 1 1 0; width: 100%; height: auto; min-height: 0; border-radius: var(--radius); }
 .stage.hosted .veil, .stage.hosted .big-play, .stage.hosted .note-card { display: none !important; }
-.stage.hosted .notice { position: relative; inset: auto; margin-top: 8px; padding: 16px; border-radius: var(--radius); background: var(--surface); }
-.stage.hosted .controls { position: relative; padding: 4px 0 0; background: none; color: var(--text); opacity: 1; pointer-events: auto; }
+.stage.hosted .notice { position: relative; inset: auto; flex: none; margin-top: 8px; padding: 12px 16px; border-radius: var(--radius); background: var(--surface); }
+.stage.hosted .controls { position: relative; flex: none; height: var(--chrome-h); padding: 4px 0 0; background: none; color: var(--text); }
+.stage.hosted .seek { height: 28px; }
+.stage.hosted .bar { min-height: 44px; }
 .stage.hosted .ctl, .stage.hosted .rate { color: var(--text); }
 .stage.hosted .ctl:not(:disabled):hover { background: var(--raised); }
 .stage.hosted .seek { --rest: var(--line); }
 .stage.hosted .volume:not(.wide) { --fill: var(--text); --rest: var(--line); }
-.stage.hosted.idle { cursor: auto; }
 
-/* Cinema mode: the player takes the full width and the panel moves below. */
-body.cinema .watch { flex-basis: 100%; }
-body.cinema .stage { aspect-ratio: auto; height: calc(100dvh - 220px); }
-body.cinema .stage.hosted { height: auto; }
-body.cinema .stage.hosted .screen { aspect-ratio: auto; height: calc(100dvh - 290px); }
-body.cinema .side { height: auto; }
-body.cinema .panel { max-height: 60dvh; }
+/* Cinema mode: the side panel steps aside and the player takes the whole width. */
+body.cinema .layout { grid-template-columns: minmax(0, 1fr); }
+body.cinema .watch { justify-content: center; }
+body.cinema .side { display: none; }
 
-@media (max-width: 1071px) {
-  .side { height: auto; min-height: 0; }
-  .panel { flex: none; max-height: none; overflow: visible; }
+/* Wide frames get more air. */
+@media (min-width: 1280px) and (min-height: 720px) {
+  .app { --pad: 24px; --gap: 24px; --mast-h: 68px; }
+}
+
+/* Short frames: a compact masthead and title line. */
+@media (max-height: 559px) {
+  .app { --pad: 12px; --gap: 12px; --mast-h: 48px; --info-h: 76px; }
+  .brand { font-size: 18px; }
+  .masthead .pill { min-height: 40px; }
+  .title { margin-top: 8px; font-size: 16px; line-height: 20px; }
+  .meta-row { margin-top: 4px; }
+  .meta-row .avatar { width: 36px; height: 36px; font-size: 14px; }
+  .panel h2 { font-size: 15px; }
+  .empty { padding: 16px 12px; }
+}
+
+/* Narrow or upright frames: one column. The player stays at the top, the info follows,
+   and the side panel's tabs fill the rest of the height and scroll inside. */
+@media (max-width: 599px), (max-aspect-ratio: 1/1) {
+  body:not(.cinema) .layout { display: flex; flex-direction: column; gap: 12px; }
+  body:not(.cinema) .watch { --player-w: min(100cqw, 42dvh * 16 / 9); container-type: inline-size; flex: none; }
+  body:not(.cinema) .info { width: 100%; }
+  body:not(.cinema) .side { flex: 1 1 0; }
 }
 
 @media (max-width: 599px) {
-  .masthead { min-height: 56px; padding: 4px 12px 0 16px; }
+  .app { --pad: 12px; --mast-h: 52px; }
   .brand { font-size: 18px; }
-  .layout { padding: 0 0 24px; gap: 16px; }
-  .stage { border-radius: 0; }
-  .title, .meta-row, .room-box, .room-error { margin-left: 16px; margin-right: 16px; }
-  .actions { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-  .side { padding: 0 12px; }
+  .masthead .pill { min-height: 40px; }
+  .layout { padding: 0 0 var(--pad); }
+  .stage, .stage.hosted .screen { border-radius: 0; }
+  .stage.hosted .controls { padding: 4px 4px 0; }
+  .info, .side { padding: 0 var(--pad); }
+  .masthead:has(.room-error:not([hidden])) .brand span { display: none; }
   .tab { font-size: 13px; }
   .field input { font-size: 16px; }
-  .thumb { width: 144px; height: 81px; }
-  .volume:not(.wide), #rate, .time { display: none; }
   .toast { left: 12px; right: 12px; bottom: 12px; max-width: none; }
 }
 

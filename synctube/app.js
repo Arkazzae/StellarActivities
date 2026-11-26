@@ -375,8 +375,10 @@ function syncPlayer() {
   ui.seek.disabled = !item || !control() || !duration;
   renderSync();
   if (item?.source === "youtube") {
-    ui["copy-text"].textContent = t("copyAt", formatTime(position));
+    // Narrow rooms show these two as icons, so the label doubles as a tooltip.
+    ui["copy-text"].textContent = ui["copy-link"].title = t("copyAt", formatTime(position));
     ui["open-youtube"].href = watchUrl(item.videoId, position);
+    ui["open-youtube"].title = t("openYt");
   }
   if (item) {
     lastSpot = { item, position, duration };
@@ -497,7 +499,7 @@ function renderInfo() {
   ui.vote.hidden = personal || !item;
   ui.vote.disabled = !hostOnline();
   ui.vote.setAttribute("aria-pressed", String(voted));
-  ui["vote-text"].textContent = t(voted ? "voted" : "vote");
+  ui["vote-text"].textContent = ui.vote.title = t(voted ? "voted" : "vote");
   ui["vote-count"].textContent = t("ofMax", votes.length, threshold);
   ui["vote-pips"].replaceChildren(...Array.from({ length: threshold }, (_, index) =>
     el("span", { class: index < votes.length ? "on" : "" })));
@@ -539,6 +541,7 @@ function renderTabs() {
     button.tabIndex = selected ? 0 : -1;
     ui[`panel-${id}`].hidden = !selected;
   }
+  ui["tab-settings"].title = t("tabSettings");
   ui["queue-badge"].textContent = state.queue.length ? String(state.queue.length) : "";
   ui["people-badge"].textContent = ready ? String(connected().length) : "";
   ui.add.hidden = tab !== "queue";
@@ -1000,7 +1003,9 @@ ui.seek.onchange = async () => {
 };
 ui.seek.onpointercancel = () => { dragging = false; };
 ui["people-button"].onclick = () => {
+  // Cinema mode hides the side panel, so showing the People tab leaves it.
   tab = "people";
+  cinema = false;
   render();
   ui["tab-people"].focus();
 };

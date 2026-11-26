@@ -89,13 +89,13 @@ const en = {
   kEsc: "Leave cinema mode or close a menu",
 
   welcomeTitle: "Watch together",
-  welcomeText: "Paste a YouTube link in the panel on the right. The first video starts the room for everyone here.",
-  welcomePersonal: "Paste a YouTube link in the panel on the right to start your private queue.",
+  welcomeText: "Paste a YouTube link in the Queue tab. The first video starts the room for everyone here.",
+  welcomePersonal: "Paste a YouTube link in the Queue tab to start your private queue.",
   trySample: "Try the sample clip",
   sampleNote: "The sample is bundled with SyncTube and plays without YouTube.",
   sampleTitle: "SyncTube cinema sample",
   queueRanOut: "The queue ran out",
-  queueRanOutSub: "Paste a link in the panel on the right, or queue something again from History.",
+  queueRanOutSub: "Paste a link in the Queue tab, or queue something again from History.",
   paused: "Paused",
 
   ctrlEveryone: "Everyone controls playback",
@@ -294,13 +294,13 @@ const pl = {
   kEsc: "Wyjdź z trybu kinowego lub zamknij menu",
 
   welcomeTitle: "Oglądajcie razem",
-  welcomeText: "Wklej link z YouTube w panelu po prawej. Pierwszy film uruchamia pokój dla wszystkich.",
-  welcomePersonal: "Wklej link z YouTube w panelu po prawej, aby zacząć prywatną kolejkę.",
+  welcomeText: "Wklej link z YouTube w zakładce Kolejka. Pierwszy film uruchamia pokój dla wszystkich.",
+  welcomePersonal: "Wklej link z YouTube w zakładce Kolejka, aby zacząć prywatną kolejkę.",
   trySample: "Wypróbuj przykładowy klip",
   sampleNote: "Przykład jest dołączony do SyncTube i działa bez YouTube.",
   sampleTitle: "Przykładowy klip SyncTube",
   queueRanOut: "Kolejka się skończyła",
-  queueRanOutSub: "Wklej link w panelu po prawej albo dodaj coś ponownie z Historii.",
+  queueRanOutSub: "Wklej link w zakładce Kolejka albo dodaj coś ponownie z Historii.",
   paused: "Wstrzymano",
 
   ctrlEveryone: "Sterujecie wspólnie",
