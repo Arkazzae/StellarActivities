@@ -17,7 +17,8 @@ async function project(t) {
   const manifest = { id: "first", protocol: 1, name: "First", version: "2.0.0", description: "A test activity.", icon: "icon.png" };
   await writeFile(join(dir, "stellarr.json"), JSON.stringify(manifest));
   await writeFile(join(dir, "index.html"), "<title>First</title>");
-  await cp(new URL("../../synctube/assets/icon.png", import.meta.url), join(dir, "icon.png"));
+  const icon = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aWa0AAAAASUVORK5CYII=", "base64");
+  await writeFile(join(dir, "icon.png"), icon);
   await writeFile(join(dir, "CHANGELOG.md"), "## Unreleased\n\nFuture.\n\n## 2.0.0\n\nCurrent notes.\n\n## 1.0.0\n\nHistorical.\n");
   const run = (cmd, args) => execFileSync(cmd, args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
   return { cwd, catalog, node: (file, ...args) => run(process.execPath, ["scripts/" + file + ".mjs", ...args]), git: (...args) => run("git", args) };
