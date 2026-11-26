@@ -12,7 +12,7 @@ This repository publishes Stellarr activities. Each activity has its own folder,
 2. When the release includes several activities, select the one you want. Cockpit shows that activity’s version, download size, permissions and external hosts before you approve.
 3. Choose **Install and enable**. That activity gets its own library entry. To add a second activity from the same repository, paste the same URL again and choose another entry.
 
-Enable, disable, update or uninstall each activity independently in the library. A new folder appears in the installer once its ZIP and entry are included in a published release. Release 1.0.0 contains SyncTube.
+Enable, disable, update or uninstall each activity independently in the library. A new folder appears in the installer once its ZIP and entry are included in a published release. The catalog currently contains SyncTube.
 
 ## Develop an activity
 

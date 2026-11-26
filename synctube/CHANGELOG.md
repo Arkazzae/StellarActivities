@@ -1,5 +1,9 @@
 # SyncTube changelog
 
+## Unreleased
+
+- Reduced the installable archive to player assets and their licenses. Artwork production notes are available in the source repository.
+
 ## 1.1.0
 
 - Open a private queue from **Friends → Activities → Launch for myself**, including when you are outside a voice call.

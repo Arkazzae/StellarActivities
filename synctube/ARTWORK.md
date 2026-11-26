@@ -1,4 +1,4 @@
-SyncTube artwork
+# SyncTube artwork
 
 The watch-party cover and playback icon were created for this project using the built-in OpenAI ImageGen tool.
 
