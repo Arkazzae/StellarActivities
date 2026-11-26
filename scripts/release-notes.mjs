@@ -1,21 +1,24 @@
-import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 
+const tag = process.argv[2] ?? "";
+const [id, versionTag, ...rest] = tag.split("/");
+const version = versionTag?.slice(1);
+const validVersion = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/;
+const match = validVersion.exec(version ?? "");
+if (!/^[a-z0-9-]{1,100}$/.test(id) || rest.length || !versionTag?.startsWith("v") ||
+    !match || match[4]?.split(".").some(part => /^0\d+$/.test(part))) {
+  throw new Error("Use an activity tag in the form <activity-id>/v<SemVer>.");
+}
+
 const catalog = JSON.parse(await readFile("catalog.json", "utf8"));
-function git(...args) {
-  try { return execFileSync("git", args, { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim(); }
-  catch { return ""; }
+if (!Object.hasOwn(catalog, id)) throw new Error("Unknown activity: " + id);
+const manifest = JSON.parse(await readFile(id + "/stellarr.json", "utf8"));
+if (manifest.id !== id || manifest.version !== version) {
+  throw new Error("Tag must match the activity ID and version in " + id + "/stellarr.json.");
 }
-const previous = git("describe", "--tags", "--match", "v*", "--abbrev=0", "HEAD^");
-const notes = [];
-for (const id of Object.keys(catalog)) {
-  const manifest = JSON.parse(await readFile(id + "/stellarr.json", "utf8"));
-  const before = previous && git("show", previous + ":" + id + "/stellarr.json");
-  if (before && JSON.parse(before).version === manifest.version) continue;
-  const changelog = await readFile(id + "/CHANGELOG.md", "utf8");
-  const entries = changelog.split(/^## /m).slice(1);
-  const entry = entries.find(text => text.split("\n", 1)[0].trim() === manifest.version);
-  if (!entry || !entry.slice(entry.indexOf("\n") + 1).trim()) throw new Error("Add release notes for " + id + " " + manifest.version);
-  notes.push("## " + manifest.name + " " + manifest.version + "\n\n" + entry.slice(entry.indexOf("\n") + 1).trim());
-}
-console.log(notes.length ? notes.join("\n\n") : "This catalog release carries the previously published activity versions.");
+
+const changelog = await readFile(id + "/CHANGELOG.md", "utf8");
+const entry = changelog.split(/^## /m).slice(1).find(section => section.split("\n", 1)[0].trim() === version);
+const notes = entry?.split("\n").slice(1).join("\n").trim();
+if (!notes) throw new Error("Add release notes for " + id + " " + version + ".");
+console.log(notes);

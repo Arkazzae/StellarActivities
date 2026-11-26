@@ -37,8 +37,15 @@ jobs:
             git show -s --format='%B%n%an <%ae>%n%cn <%ce>' "$commit" > "$msg"
             .githooks/commit-msg "$msg"
           done < "$msg.commits"
-      - name: Test the activities and their release archives
+      - name: Check release tooling
+        run: node --test scripts/test/*.test.mjs
+      - name: Test and package affected activities
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
-          node --test */test/*.test.mjs
-          node scripts/package-release.mjs
-          for archive in dist/*.zip; do unzip -t "$archive"; done
+          node scripts/changed-activities.mjs "$BASE" > "$RUNNER_TEMP/activities"
+          while read -r id; do
+            node --test "$id"/test/*.test.mjs
+            node scripts/package-release.mjs "$id"
+            unzip -t "dist/$id/$id.zip"
+          done < "$RUNNER_TEMP/activities"
