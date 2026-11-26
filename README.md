@@ -1,24 +1,21 @@
-# SyncTube
+# Stellarr Activities
 
-SyncTube is a no-build Stellarr v1 activity. Everyone in the room can add, reorder and remove queued videos, start or pause playback, seek, and skip. YouTube watch, short, mobile, Music, embed and live links are accepted, including start timestamps.
+Each activity lives in its own folder. An instance owner installs an activity by pasting this repository’s URL into **Cockpit → Activities** and choosing a release.
 
-## Install on a Stellarr instance
+| Activity | What people can do |
+| --- | --- |
+| [SyncTube](synctube/) | Build a shared YouTube queue, watch in sync and hand playback control to another host. |
 
-On a Stellarr instance with activity hosting enabled, open **Cockpit → Activities**, paste this repository URL and select SyncTube. Review the version, archive size and YouTube hosts, then choose **Install and enable**. Users can open SyncTube from their voice channel. [Repository](https://github.com/Arkazzae/StellarrActivities) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases)
+## Develop an activity
 
-## Run the activity
-
-Use Node.js 22 or newer. Install the SDK from a Stellarr checkout containing the activity runtime. From this directory:
+Open its directory for the manifest, source, assets, tests and setup instructions. From this repository’s root, start SyncTube with a Stellarr checkout:
 
 ```sh
-node /path/to/Stellarr/sdk/cli.js dev --dir .
-node --test test/*.test.mjs
+node /path/to/Stellarr/sdk/cli.js dev --dir synctube
 ```
 
-Open the printed preview in two tabs to watch as separate participants. **Try the sample clip** plays the bundled video without contacting YouTube. Add another copy to check automatic advance, use **Make host** in the watcher list to check transfer while playing, and move Stellarr’s **Game audio** slider to check the listener’s volume. Late joiners start at the current room position. A successor host recovers the last confirmed playback checkpoint, paused. The host records a checkpoint roughly every five seconds during playback.
+## Release
 
-To build the installable archive locally, run `node scripts/package-release.mjs` with Node.js and the `zip` command installed. A tag matching the manifest version (for example, `v1.0.0`) runs the tests and publishes `synctube.zip` and `stellarr-release.json`. The index records the archive size and SHA-256 digest.
+Run `node scripts/package-release.mjs` from the root with Node.js 22+ and `zip` installed. It builds an independent ZIP for each entry in `catalog.json` and writes a shared `dist/stellarr-release.json` index. Each archive has its own manifest and version. A repository tag such as `v1.1.0` publishes the catalog snapshot.
 
-## YouTube playback
-
-The room uses YouTube’s IFrame API with the privacy-enhanced embedding domain. Lookups and previews use the hosts listed in the manifest. Video IDs work even when the title lookup is unavailable. If autoplay is blocked, select **Play on this device**. A video that is unavailable for embedded playback can be retried or skipped. Availability, live-edge positions and ads are determined by the provider. [YouTube IFrame API](https://developers.google.com/youtube/iframe_api_reference)
+To add an activity, create a sibling of `synctube/` named after its manifest ID and list its distributable files in `catalog.json`. Keep its tests and README alongside the source. [Published releases](https://github.com/Arkazzae/StellarrActivities/releases) · [Contribution rules](CONTRIBUTING.md)

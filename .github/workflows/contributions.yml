@@ -37,8 +37,8 @@ jobs:
             git show -s --format='%B%n%an <%ae>%n%cn <%ce>' "$commit" > "$msg"
             .githooks/commit-msg "$msg"
           done < "$msg.commits"
-      - name: Test SyncTube and its release archive
+      - name: Test the activities and their release archives
         run: |
-          node --test test/*.test.mjs
+          node --test */test/*.test.mjs
           node scripts/package-release.mjs
-          unzip -t dist/synctube.zip
+          for archive in dist/*.zip; do unzip -t "$archive"; done

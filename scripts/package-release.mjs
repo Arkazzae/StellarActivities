@@ -1,83 +1,52 @@
-// Run from a SyncTube checkout, or from the parent of its published folder.
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import {
-  copyFile,
-  lstat,
-  mkdir,
-  mkdtemp,
-  readFile,
-  rename,
-  rm,
-  utimes,
-  writeFile,
-} from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { copyFile, lstat, mkdir, mkdtemp, readFile, realpath, rename, rm, utimes, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = resolve(
-  process.argv[2] ?? ((await lstat("stellarr.json").catch(() => null)) ? "." : "synctube"),
-);
-const destination = resolve(process.argv[3] ?? "dist");
-const manifest = JSON.parse(await readFile(join(root, "stellarr.json"), "utf8"));
-if (manifest.id !== "synctube" || manifest.protocol !== 1)
-  throw Error("Expected the SyncTube protocol 1 manifest.");
-const files = ["LICENSE", "app.js", "index.html", "player.js", "room.js", "stellarr.json", "styles.css"];
-const assets = [
-  "assets/ARTWORK.txt",
-  "assets/cinema.webp",
-  "assets/icon.png",
-  "assets/outfit.woff2",
-  "assets/Outfit-LICENSE.txt",
-  "assets/sample.mp4",
-];
-const folderLicense = join(root, "LICENSE");
-const license = (await lstat(folderLicense).catch(() => null))
-  ? folderLicense
-  : join(dirname(root), "LICENSE");
+const root = await realpath(fileURLToPath(new URL("..", import.meta.url)));
+const catalog = JSON.parse(await readFile(join(root, "catalog.json"), "utf8"));
+const output = resolve(process.argv[2] ?? join(root, "dist"));
+const timestamp = new Date("2000-01-01T00:00:00Z");
 
-const staging = await mkdtemp(join(tmpdir(), "synctube-release-"));
-try {
-  const timestamp = new Date("2000-01-01T00:00:00Z");
-  for (const file of [...files, ...assets]) {
-    const source = file === "LICENSE" ? license : join(root, file),
-      target = join(staging, file);
-    if (!(await lstat(source)).isFile()) throw Error("Expected a regular file: " + file);
-    await mkdir(dirname(target), { recursive: true });
-    await copyFile(source, target);
-    await utimes(target, timestamp, timestamp);
-  }
-  const asset = manifest.id + ".zip";
-  const stagedZip = join(staging, asset);
-  execFileSync("zip", ["-X", "-q", "-9", stagedZip, ...[...assets, ...files].sort()], {
-    cwd: staging,
-    env: { ...process.env, TZ: "UTC" },
-  });
-  const bytes = await readFile(stagedZip);
-  const index = {
-    protocol: 1,
-    activities: [
-      {
-        id: manifest.id,
-        name: manifest.name,
-        version: manifest.version,
-        asset,
-        sha256: createHash("sha256").update(bytes).digest("hex"),
-        bytes: bytes.length,
-      },
-    ],
-  };
-  await mkdir(destination, { recursive: true });
-  const temporary = await mkdtemp(join(destination, ".release-"));
+async function archive(id, files, outputDir) {
+  if (!/^[a-z0-9-]+$/.test(id) || !Array.isArray(files) || !files.includes("stellarr.json") || !files.includes("index.html"))
+    throw new Error("Incomplete catalog entry: " + id);
+  const directory = join(root, id);
+  const manifest = JSON.parse(await readFile(join(directory, "stellarr.json"), "utf8"));
+  if (manifest.id !== id || manifest.protocol !== 1) throw new Error("Unexpected manifest in " + id);
+  const stage = await mkdtemp(join(tmpdir(), "activity-release-"));
   try {
-    await writeFile(join(temporary, asset), bytes);
-    await writeFile(join(temporary, "stellarr-release.json"), JSON.stringify(index, null, 2) + "\n");
-    await rename(join(temporary, asset), join(destination, asset));
-    await rename(join(temporary, "stellarr-release.json"), join(destination, "stellarr-release.json"));
-  } finally {
-    await rm(temporary, { recursive: true, force: true });
-  }
-  process.stdout.write("Packaged " + asset + " and stellarr-release.json\n");
-} finally {
-  await rm(staging, { recursive: true, force: true });
+    for (const file of files) {
+      if (file.includes("\\") || file.split("/").some(part => !part || part.startsWith(".") || part.startsWith("-")))
+        throw new Error("Invalid distribution path in " + id);
+      let source = join(directory, file);
+      if (file === "LICENSE" && !(await lstat(source).catch(() => null))) source = join(root, file);
+      if (await realpath(source) !== source || !(await lstat(source)).isFile()) throw new Error("Expected a regular file: " + source);
+      const target = join(stage, file);
+      await mkdir(dirname(target), { recursive: true });
+      await copyFile(source, target);
+      await utimes(target, timestamp, timestamp);
+    }
+    const asset = id + ".zip";
+    const path = join(outputDir, asset);
+    execFileSync("zip", ["-X", "-q", "-9", path, ...[...files].sort()], { cwd: stage, env: { ...process.env, TZ: "UTC" } });
+    const bytes = await readFile(path);
+    return { id, name: manifest.name, version: manifest.version, asset,
+      sha256: createHash("sha256").update(bytes).digest("hex"), bytes: bytes.length };
+  } finally { await rm(stage, { recursive: true, force: true }); }
 }
+
+await mkdir(output, { recursive: true });
+const temporary = await mkdtemp(join(output, ".release-"));
+try {
+  const activities = [];
+  for (const [id, files] of Object.entries(catalog)) activities.push(await archive(id, files, temporary));
+  if (!activities.length) throw new Error("The catalog is empty.");
+  const index = "stellarr-release.json";
+  await writeFile(join(temporary, index), JSON.stringify({ protocol: 1, activities }, null, 2) + "\n");
+  for (const { asset } of activities) await rename(join(temporary, asset), join(output, asset));
+  await rename(join(temporary, index), join(output, index));
+  console.log("Packaged " + activities.map(item => item.asset).join(", "));
+} finally { await rm(temporary, { recursive: true, force: true }); }
