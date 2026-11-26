@@ -1,6 +1,6 @@
 # SyncTube changelog
 
-## Unreleased
+## 0.1.0
 
 - Watch YouTube together in a voice channel. Everyone can add videos to the queue, seek and skip. Late joiners catch up to the current playback position.
 - Open a private queue from **Friends → Activities → Launch for myself**, including outside a voice call.
