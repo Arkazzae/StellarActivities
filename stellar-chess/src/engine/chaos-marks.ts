@@ -7,6 +7,7 @@
 import type { Chess } from "chess.js";
 import type { ChaosEffectId } from "./chaos";
 import type { PieceColor, PieceType, Square } from "./types";
+import { pieceUrl } from "@/board-style";
 
 export type PieceVariant = "forged" | "summoned" | "iron" | "cursed" | "reborn";
 
@@ -40,7 +41,7 @@ const same = (a: Cell, b: Cell) => (!a && !b) || (!!a && !!b && a.color === b.co
 /** The image for a piece, its Chaos variant when there is art for it. */
 export function pieceArt(color: PieceColor, type: PieceType, mark?: PieceMark): string {
   const name = mark ? `${NAMES[type]}-${mark.variant}` : "";
-  return mark && ART.has(name) ? `pieces/chaos/${color}-${name}.webp` : `pieces/${color}${type}.webp`;
+  return mark && ART.has(name) ? `pieces/chaos/${color}-${name}.webp` : pieceUrl(color, type);
 }
 
 /** Marks follow their pieces through an ordinary move; a captured or promoted piece loses its mark. */

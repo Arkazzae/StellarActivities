@@ -2,7 +2,6 @@ import { useGameStore } from "@/state/game";
 import { useUiStore } from "@/state/ui";
 import { getOpponent } from "@/ai/bots";
 import { lobbySeats } from "@/game/session";
-import { OnlineLobby } from "@/components/online/OnlineLobby";
 import { BotSelect } from "./BotSelect";
 import { GameTab } from "./GameTab";
 import { ReviewTab } from "./ReviewTab";
@@ -65,7 +64,7 @@ export function RightPanel() {
         </div>
       )}
       <div className="right-panel__body">
-        {room ? <OnlineLobby /> : phase === "lobby" ? <BotSelect /> : shown === "review" ? <ReviewTab /> : <GameTab />}
+        {phase === "lobby" ? <BotSelect /> : shown === "review" ? <ReviewTab /> : <GameTab />}
       </div>
     </aside>
   );

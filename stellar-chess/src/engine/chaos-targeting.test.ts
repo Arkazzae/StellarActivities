@@ -173,14 +173,14 @@ describe("interactive Chaos effects", () => {
   });
 });
 
-/** A Chaos game: the player has White, Kuba has Black. */
+/** A Chaos game: the player has White, Glut has Black. */
 function startChaos(timeControl: { initial: number; increment: number }) {
   useGameStore.getState().newGame({
     timeControl,
-    seats: { w: null, b: { id: "kuba" } },
+    seats: { w: null, b: { id: "glut" } },
     players: {
       w: { userId: "human", username: "Human", avatarUrl: null },
-      b: { userId: "kuba", username: "Kuba", avatarUrl: null },
+      b: { userId: "glut", username: "Glut", avatarUrl: null },
     },
     chaos: true,
   });

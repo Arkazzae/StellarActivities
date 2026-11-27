@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { usePieceUrl } from "@/board-style";
 import { BotPortrait } from "@/components/BotPortrait";
 import { useTranslation } from "@/i18n";
 import { ENGINE_MOVE_TIMES, getOpponent, OPPONENTS, type EngineConfig, type Opponent, type OpponentId } from "@/ai/bots";
@@ -16,15 +17,16 @@ const LADDER = OPPONENTS.filter((opponent) => opponent.kind === "character");
 const ENGINE = OPPONENTS.find((opponent) => opponent.kind === "engine")!;
 
 export function KingIcon({ side }: { side: SideChoice }) {
+  const pieceUrl = usePieceUrl();
   if (side === "random") {
     return (
       <span className="side-king side-king--random">
-        <img src="pieces/wk.webp" alt="" />
-        <img src="pieces/bk.webp" alt="" />
+        <img src={pieceUrl("w", "k")} alt="" />
+        <img src={pieceUrl("b", "k")} alt="" />
       </span>
     );
   }
-  return <span className="side-king"><img src={`pieces/${side}k.webp`} alt="" /></span>;
+  return <span className="side-king"><img src={pieceUrl(side, "k")} alt="" /></span>;
 }
 
 function BotCard({ opponent, selected, subtitle, beaten, onSelect }: { opponent: Opponent; selected: boolean; subtitle: string; beaten: boolean; onSelect: () => void }) {
@@ -80,6 +82,7 @@ function EngineSettings({ slot, config }: { slot: EngineSlot; config: EngineConf
  * same picker seats the opponent, or whichever side of the match is selected.
  */
 export function BotSelect() {
+  const pieceUrl = usePieceUrl();
   const mode = useUiStore((s) => s.mode);
   const opponentId = useUiStore((s) => s.opponent);
   const match = useUiStore((s) => s.match);
@@ -159,7 +162,7 @@ export function BotSelect() {
               >
                 <span className="match-seat__img" style={{ background: pair[i].tint }}><BotPortrait id={pair[i].id} /></span>
                 <span className="match-seat__name">{pair[i].name}</span>
-                <span className="match-seat__side"><img src={`pieces/${color}k.webp`} alt="" />{t(`side.${color}`)}</span>
+                <span className="match-seat__side"><img src={pieceUrl(color, "k")} alt="" />{t(`side.${color}`)}</span>
               </button>
             ))}
             <button type="button" className="match-swap" onClick={swapMatch} title={t("select.swap")} aria-label={t("select.swap")}>⇄</button>

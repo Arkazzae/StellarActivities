@@ -1,11 +1,12 @@
 /**
  * End-to-end check of the built activity (run `pnpm build` first).
  *
- * 1. In the `stellarr dev` simulator, as a voice-channel room: Ala challenges the channel, Bob
- *    accepts, they play; Ala (the host) reloads mid-game and carries on; Cyd watches and cannot move;
+ * 1. In the `stellarr dev` simulator, as a voice-channel room: Ala hosts a table, Bob joins it,
+ *    they play; Ala (the referee) reloads mid-game and carries on; Cyd watches and cannot move;
  *    Bob offers a draw, Ala accepts. Then Cyd plays a bot on the same page: Stockfish answers.
  *    Cyd then challenges and Bob accepts, while Ala keeps reviewing her finished game. Bob plays a
- *    puzzle, Ala watches two bots, and a fourth person checks the menu and the board on a phone.
+ *    puzzle; the ladder ranks the three by Stellarr Elo with both results; Ala watches two bots,
+ *    and a fourth person checks the menu, the board and the ladder on a phone.
  * 2. Inside a sandboxed frame without `allow-same-origin`, served with the Content-Security-Policy
  *    Stellarr sends for installed activities (api/.../activities/live.rs): the app starts without
  *    browser storage, its fonts, tables and sounds load, and a bot still answers a move.
@@ -198,19 +199,19 @@ async function simulatorRun(browser) {
     const cyd = await player(context, origin, "Cyd");
     everyone.push(ala, bob, cyd);
 
-    step("Ala opens the channel board and challenges as White, 3 | 2");
+    step("Ala hosts a table in Multiplayer as White, 3 | 2");
     await ala.app.locator(".sidebar__nav").getByRole("button", { name: "Multiplayer" }).click();
     await ala.app.getByRole("radio", { name: "3 | 2" }).click();
     await ala.app.locator(".side-pick").getByRole("radio", { name: "White", exact: true }).click();
-    await ala.app.getByRole("button", { name: "Post a challenge" }).click();
-    await waitForText(ala, "Waiting for another player");
+    await ala.app.getByRole("button", { name: "Host a table" }).click();
+    await waitForText(ala, "waiting for someone to join");
 
-    step("Bob sees the challenge in the Play menu and accepts");
+    step("Bob sees the table in the Play menu and joins it");
     await bob.app.locator(".sidebar__play > button").click();
-    await waitForText(bob, "is looking for an opponent");
+    await waitForText(bob, "is hosting a table");
     await bob.page.screenshot({ path: join(reports, "flyout.png") });
     await bob.app.getByRole("menuitem", { name: /Multiplayer/ }).click();
-    await bob.app.getByRole("button", { name: "Accept and play" }).click();
+    await bob.app.locator(".mp-table").getByRole("button", { name: "Join", exact: true }).first().click();
     await ala.app.locator(".room-strip").waitFor();
     await bob.app.locator(".room-strip").waitFor();
 
@@ -227,8 +228,9 @@ async function simulatorRun(browser) {
     await move(ala.app, "g1", "f3");
     await waitForMoves(bob, "Nf3");
 
-    step("Cyd watches and cannot move a piece");
+    step("Cyd picks the game from the tables, watches, and cannot move a piece");
     await cyd.app.locator(".sidebar__nav").getByRole("button", { name: "Multiplayer" }).click();
+    await cyd.app.locator(".mp-table").getByRole("button", { name: "Watch", exact: true }).first().click();
     await cyd.app.locator(".room-strip").waitFor();
     await waitForMoves(cyd, "Nf3");
     await move(cyd.app, "b8", "c6");
@@ -244,21 +246,26 @@ async function simulatorRun(browser) {
     await waitForText(cyd, "by agreement");
     await bob.page.screenshot({ path: join(reports, "online-result.png") });
 
-    step("Cyd, a third player, challenges; Bob accepts; Cyd resigns");
+    step("Cyd hosts a table; Bob joins; Ala hosts another while they play; Cyd resigns");
     await cyd.app.locator(".sidebar__nav").getByRole("button", { name: "Multiplayer" }).click();
-    await cyd.app.getByRole("button", { name: "Post a challenge" }).click();
+    await cyd.app.getByRole("button", { name: "Host a table" }).click();
     await bob.app.locator(".sidebar__nav").getByRole("button", { name: "Multiplayer" }).click();
-    await bob.app.getByRole("button", { name: "Accept and play" }).click();
+    await bob.app.locator(".mp-table").getByRole("button", { name: "Join", exact: true }).first().click();
     await cyd.app.locator(".room-strip").waitFor();
     await bob.app.locator(".room-strip").waitFor();
     // Ala is still looking back at her finished game: it stays on her board.
     await waitForText(ala, "by agreement");
+    // Then she opens a second table: two at once, one being played and one waiting.
+    await ala.app.locator(".sidebar__nav").getByRole("button", { name: "Multiplayer" }).click();
+    await ala.app.getByRole("button", { name: "Host a table" }).click();
+    await ala.app.locator(".mp-table").nth(1).waitFor();
+    await ala.page.screenshot({ path: join(reports, "tables.png") });
     await cyd.app.getByRole("button", { name: "Resign" }).first().click();
     await waitForText(bob, "by resignation");
 
-    step("Cyd plays Kuba; Stockfish answers");
+    step("Cyd plays Glut, the level-1 slime; Stockfish answers");
     await menu(cyd.app, /Play a bot/);
-    await cyd.app.getByRole("radio", { name: /Kuba/ }).click();
+    await cyd.app.getByRole("radio", { name: /Glut/ }).click();
     await cyd.app.locator(".side-pick").getByRole("radio", { name: "White", exact: true }).click();
     await playButton(cyd.app).click();
     await move(cyd.app, "d2", "d4");
@@ -298,12 +305,43 @@ async function simulatorRun(browser) {
     await cyd.app.locator(".sidebar__nav").getByRole("button", { name: "Statistics", exact: true }).click();
     await cyd.app.locator(".stats-recent li").first().waitFor();
     await cyd.page.screenshot({ path: join(reports, "stats.png") });
+    step("The ladder ranks the session by Stellarr Elo: Bob won a game, Ala drew one, Cyd lost one");
     await cyd.app.locator(".sidebar__nav").getByRole("button", { name: "Ladder", exact: true }).click();
+    await cyd.app.locator(".elo-table").waitFor();
+    const ranking = async () => (await cyd.app.locator(".elo-table tbody tr").allInnerTexts()).map((row) => row.replace(/\s+/g, " "));
+    const rankDeadline = Date.now() + 10_000;
+    let rows = await ranking();
+    // The simulator names everyone "Player …": Bob is first on 1216 after a draw and a win, Cyd ("you") last on 1184.
+    while (!(rows.length === 3 && / 1216 \+16 2 1–1–0/.test(rows[0]) && / 1200 ±0 1 0–1–0/.test(rows[1]) && / you 1184 −16 1 0–0–1/.test(rows[2]))) {
+      if (Date.now() > rankDeadline) throw new Error(`The ranking is off: ${JSON.stringify(rows)}`);
+      await new Promise((r) => setTimeout(r, 200));
+      rows = await ranking();
+    }
+    if ((await cyd.app.locator(".elo-result").count()) !== 2) throw new Error("The session's results are missing a game.");
+    if (!/1184/.test(await cyd.app.locator(".elo-me__value").innerText())) throw new Error("Cyd's own Elo card did not move.");
+    if (!/Stellarr Elo 1216/.test(await bob.app.locator(".sidebar__me").innerText())) throw new Error("Bob's sidebar does not show his Elo.");
+    await cyd.page.screenshot({ path: join(reports, "ladder-players.png") });
+    await cyd.app.getByRole("tab", { name: "Bots" }).click();
     await cyd.app.locator(".ladder-grid").waitFor();
     await cyd.page.screenshot({ path: join(reports, "ladder.png") });
 
-    step("Cyd plays Chaos Chess: after four moves the draft stops the game");
-    await chaosGame(cyd);
+    step("Bob reloads: his Elo comes back from his Stellarr progress, counted once");
+    // Progress is saved shortly after a change; give it time to reach the simulator.
+    await new Promise((r) => setTimeout(r, 1_500));
+    await bob.page.reload();
+    await bob.app.locator(".stats").waitFor({ timeout: 20_000 });
+    await bob.app.locator(".sidebar__nav").getByRole("button", { name: "Ladder", exact: true }).click();
+    await bob.app.locator(".elo-table tr.is-me").waitFor();
+    const bobRow = (await bob.app.locator(".elo-table tr.is-me").innerText()).replace(/\s+/g, " ");
+    if (!/ you 1216 \+16 2 1–1–0/.test(bobRow)) throw new Error(`Bob's rating did not survive a reload: ${bobRow}`);
+    if (!/Stellarr Elo 1216/.test(await bob.app.locator(".sidebar__me").innerText())) throw new Error("Bob's sidebar lost his Elo after a reload.");
+
+    if (await cyd.app.locator(".sidebar__nav").getByRole("button", { name: "Chaos Chess", exact: true }).count()) {
+      step("Cyd plays Chaos Chess: after four moves the draft stops the game");
+      await chaosGame(cyd);
+    } else {
+      step("Chaos Chess is hidden: no entry in the menu");
+    }
 
     step("Ala watches two bots play each other");
     await menu(ala.app, /Bot vs bot/);
@@ -326,10 +364,23 @@ async function simulatorRun(browser) {
       await dee.page.screenshot({ path: join(reports, "phone-flyout.png") });
       await dee.app.locator(".sidebar__play > button").click();
       await dee.app.locator(".sidebar__nav").getByRole("button", { name: "Multiplayer" }).click();
-      await dee.app.locator(".online-lobby").waitFor();
+      await dee.app.locator(".mp-page").waitFor();
       await dee.page.screenshot({ path: join(reports, "phone-room.png") });
-      const overflow = await dee.app.locator("body").evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      const sideways = () => dee.app.locator("body").evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      let overflow = await sideways();
       if (overflow > 1) throw new Error(`The phone layout scrolls sideways by ${overflow}px.`);
+      await dee.app.locator(".sidebar__nav").getByRole("button", { name: /^(Ladder|Drabinka)$/ }).click();
+      await dee.app.locator(".elo-table").waitFor();
+      await dee.page.screenshot({ path: join(reports, "phone-ladder.png"), fullPage: true });
+      overflow = await sideways();
+      if (overflow > 1) throw new Error(`The phone ladder scrolls sideways by ${overflow}px.`);
+      // Dee has played nothing, yet her card reached the room as soon as she arrived.
+      await cyd.app.getByRole("tab", { name: "Players" }).click();
+      const cardDeadline = Date.now() + 10_000;
+      while ((await cyd.app.locator('.elo-table tbody tr[data-card="room"]').count()) < 4) {
+        if (Date.now() > cardDeadline) throw new Error("A newcomer's card never reached the room.");
+        await new Promise((r) => setTimeout(r, 200));
+      }
     } finally {
       await phone.close();
     }
@@ -411,7 +462,8 @@ async function opaqueRun(browser) {
     step("opaque origin: the menu loads without browser storage");
     await app.locator(".stats").waitFor({ timeout: 20_000 });
     step("opaque origin: Stockfish answers a move");
-    await app.locator(".stats-empty").getByRole("button", { name: "Graj z botem" }).click();
+    // The empty statistics page leads to the first rung of the ladder.
+    await app.locator(".first-game__actions .btn--green").click();
     await app.locator(".side-pick").getByRole("radio", { name: "Białe", exact: true }).click();
     await playButton(app).click();
     await move(app, "e2", "e4");

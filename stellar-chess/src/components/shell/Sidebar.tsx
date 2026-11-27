@@ -4,6 +4,7 @@ import { useGameStore } from "@/state/game";
 import { hasBeaten, useStatsStore } from "@/state/stats";
 import { canReview, useHistoryStore } from "@/state/history";
 import { useDrillStore } from "@/state/drill";
+import { CHAOS_ENABLED } from "@/features";
 import { leaveRoomGame, openRoom, useOnlineStore } from "@/online/sync";
 import { getOpponent, OPPONENTS } from "@/ai/bots";
 import { BotPortrait, PersonAvatar } from "@/components/BotPortrait";
@@ -17,15 +18,9 @@ const LADDER = OPPONENTS.filter((opponent) => opponent.kind === "character");
 /** The menu's own icons (generated, see ARTWORK.md). */
 const icon = (name: string) => `icons/nav/${name}.webp`;
 
+/** The app icon (a pixel-art knight on an arcade screen) as the logo mark, at 32 px so each of its 32 × 32 pixels is one screen pixel. */
 function Mark() {
-  return (
-    <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M9 27h15c0-7-1-12-4-16l3-5-5 2c-5-1-9 3-10 7l-3 4 2 2 4-2c1 0 2 1 1 2l-4 6Z" fill="#81b64c" />
-      <path d="M20 11c3 4 4 9 4 16h-4c0-6-1-10-3-13Z" fill="#5d8a37" />
-      <circle cx="16" cy="11" r="1.6" fill="#262421" />
-      <path d="M25 3l.8 2.2L28 6l-2.2.8L25 9l-.8-2.2L22 6l2.2-.8Z" fill="#ffd65a" />
-    </svg>
-  );
+  return <img className="sidebar__mark" src="icon.png" alt="" width={32} height={32} draggable={false} />;
 }
 
 /**
@@ -44,9 +39,11 @@ export function Sidebar() {
   const gamePhase = useGameStore((s) => s.phase);
   const chaosGame = useGameStore((s) => s.chaos.enabled);
   const solving = useGameStore((s) => s.solver !== null);
-  const live = useOnlineStore((s) => (!!s.shared.match && !s.shared.match.result) || !!s.shared.challenge);
-  const challenger = useOnlineStore((s) => s.participants.find((p) => p.id === s.shared.challenge?.by)?.name ?? null);
+  // Something to do in Multiplayer: a game being played, or someone else's table waiting for an opponent.
+  const live = useOnlineStore((s) => s.shared.tables.some((table) => (table.match ? !table.match.result : table.host !== s.me)));
+  const challenger = useOnlineStore((s) => s.shared.tables.find((table) => !table.match && table.host !== s.me)?.hostName ?? null);
   const bots = useStatsStore((s) => s.bots);
+  const elo = useStatsStore((s) => s.rating.elo);
   const lastGame = useHistoryStore((s) => s.games.find(canReview) ?? null);
   const { t, locale, setLocale } = useTranslation();
   const [open, setOpen] = useState(false);
@@ -112,7 +109,7 @@ export function Sidebar() {
     <nav className="sidebar" aria-label={t("nav.menu")}>
       <button type="button" className="sidebar__logo" onClick={() => go("home")} aria-label={t("nav.stats")}>
         <Mark />
-        <span className="logo__word">Stellar<b>Chess</b></span>
+        <span className="logo__word">Arcade<b>Chess</b></span>
       </button>
       <ul className="sidebar__nav">
         <li ref={playRef} className="sidebar__play" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
@@ -130,10 +127,12 @@ export function Sidebar() {
                 <img src={icon("room")} alt="" />
                 <span><strong>{t("flyout.room")}</strong><small>{challenger ? t("flyout.roomChallenge", { name: challenger }) : live ? t("flyout.roomLive") : t("flyout.roomNote")}</small></span>
               </button>
+              {CHAOS_ENABLED && (
               <button type="button" role="menuitem" className="flyout__item" onClick={() => go("chaos")}>
-                <img src={icon("chaos")} alt="" />
-                <span><strong>{t("flyout.chaos")}</strong><small>{t("flyout.chaosNote")}</small></span>
-              </button>
+                  <img src={icon("chaos")} alt="" />
+                  <span><strong>{t("flyout.chaos")}</strong><small>{t("flyout.chaosNote")}</small></span>
+                </button>
+              )}
               <button type="button" role="menuitem" className="flyout__item" onClick={() => go("play", "match")}>
                 <img src={icon("botmatch")} alt="" />
                 <span><strong>{t("flyout.match")}</strong><small>{t("flyout.matchNote")}</small></span>
@@ -157,11 +156,13 @@ export function Sidebar() {
             <img src={icon("puzzles")} alt="" /><span>{t("nav.puzzles")}</span>
           </button>
         </li>
-        <li>
+        {CHAOS_ENABLED && (
+          <li>
           <button type="button" className={item("chaos")} onClick={() => go("chaos")} title={t("nav.chaos")}>
             <img src={icon("chaos")} alt="" /><span>{t("nav.chaos")}</span>
           </button>
         </li>
+        )}
         {/* Multiplayer is always listed; outside a shared session its page explains how to play together. */}
         <li>
           <button type="button" className={item("online")} onClick={() => go("online")} title={t("nav.online")}>
@@ -183,7 +184,7 @@ export function Sidebar() {
       <div className="sidebar__bottom">
         <div className="sidebar__me">
           <PersonAvatar name={myName} url={online ? me.avatar : null} />
-          <div><strong>{myName}</strong><small>{t(online ? "sidebar.profile" : "sidebar.offline")}</small></div>
+          <div><strong>{myName}</strong><small>{online ? t("sidebar.elo", { elo }) : t("sidebar.offline")}</small></div>
         </div>
         <div className="sidebar__tools">
           <button type="button" aria-label={t("nav.language")} title={t("nav.language")} onClick={() => setLocale(locale === "en" ? "pl" : "en")}>

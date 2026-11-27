@@ -3,6 +3,7 @@
  */
 
 import { useGameStore } from "@/state/game";
+import { usePieceUrl } from "@/board-style";
 import { squareToCoords, type PieceColor } from "@/engine/types";
 
 const PROMO_PIECES = ["q", "r", "b", "n"] as const;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export function PromotionPicker({ flipped, boardSize, onConfirm }: Props) {
+  const pieceUrl = usePieceUrl();
   const promotionPending = useGameStore((s) => s.promotionPending);
   const cancelPromotion = useGameStore((s) => s.cancelPromotion);
   const myColor = useGameStore((s) => s.myColor);
@@ -63,7 +65,7 @@ export function PromotionPicker({ flipped, boardSize, onConfirm }: Props) {
             style={{ width: sqSize, height: sqSize }}
           >
             <img
-              src={`pieces/${myColor ?? color}${piece}.webp`}
+              src={pieceUrl(myColor ?? color, piece)}
               alt={piece}
               draggable={false}
             />

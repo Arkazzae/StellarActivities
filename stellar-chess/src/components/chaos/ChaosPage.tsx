@@ -7,8 +7,8 @@ import { useHistoryStore } from "@/state/history";
 import { TIME_OPTIONS, useUiStore } from "@/state/ui";
 import { startGame } from "@/game/session";
 import { resumeAudio } from "@/sounds";
-import { ChaosCard, CardArt } from "./ChaosCard";
-import { CATEGORY, RARITY, categoryIcon, effect, effectName, type ChaosCategory } from "./meta";
+import { ChaosCard, ChaosMiniCard, Sigil } from "./ChaosCard";
+import { CATEGORY, effectName, type ChaosCategory } from "./meta";
 import { t, useTranslation } from "@/i18n";
 
 const BOTS = OPPONENTS.filter((opponent) => opponent.kind === "chaos");
@@ -51,7 +51,7 @@ export function ChaosPage() {
   return (
     <div className="chaos-page">
       <header className="chaos-hero">
-        <img className="chaos-hero__art" src="cover.webp" alt="" />
+        <img className="chaos-hero__art" src="chaos/hero.webp" alt="" />
         <div className="chaos-hero__text">
           <h1>Chaos Chess</h1>
           <p>{t("chaosPage.lead")}</p>
@@ -79,10 +79,9 @@ export function ChaosPage() {
                   <span className="chaos-rival__art" style={{ background: rival.tint }}><BotPortrait id={rival.id} /></span>
                   <span className="chaos-rival__name"><strong>{rival.name}</strong><span>{rival.rating}</span></span>
                   <span className="chaos-rival__short">{rival.short}</span>
-                  <span className="chaos-rival__taste">
-                    {taste.favorite
-                      ? <><img src={categoryIcon(taste.favorite)} alt="" />{t(`chaosPage.taste.${taste.favorite}`)}</>
-                      : <><img src="icons/nav/chaos.webp" alt="" />{t("chaosPage.taste.best")}</>}
+                  <span className="chaos-rival__taste" style={taste.favorite ? { color: CATEGORY[taste.favorite].color } : undefined}>
+                    <Sigil kind={taste.favorite ?? "chaos"} />
+                    <span>{t(taste.favorite ? `chaosPage.taste.${taste.favorite}` : "chaosPage.taste.best")}</span>
                   </span>
                   {mine.n > 0 && <span className="chaos-rival__record">{t("chaosPage.vs", { w: mine.w, d: mine.d, l: mine.l })}</span>}
                 </button>
@@ -122,14 +121,9 @@ export function ChaosPage() {
 
       <section className="chaos-how" aria-labelledby="chaos-how">
         <div className="chaos-how__cards" aria-hidden="true">
-          {SAMPLE.map((id, i) => {
-            const { color, deep } = CATEGORY[effect(id).category];
-            return (
-              <span key={id} className="chaos-how__card" style={{ "--card": color, "--card-deep": deep, "--tilt": `${(i - 1) * 9}deg` } as CSSProperties}>
-                <span><CardArt id={id} className="chaos-how__art" /><strong>{effectName(id)}</strong></span>
-              </span>
-            );
-          })}
+          {SAMPLE.map((id, i) => (
+            <ChaosMiniCard key={id} id={id} className="chaos-how__card" style={{ "--tilt": `${(i - 1) * 9}deg`, "--shift": `${(i - 1) * 46}%` } as CSSProperties} />
+          ))}
         </div>
         <div>
           <h2 id="chaos-how">{t("chaosPage.howTitle")}</h2>
@@ -148,27 +142,17 @@ export function ChaosPage() {
             <button type="button" role="radio" aria-checked={filter === null} className={filter === null ? "is-selected" : ""} onClick={() => setFilter(null)}>{t("stats.all")}</button>
             {CATEGORIES.map((category) => (
               <button key={category} type="button" role="radio" aria-checked={filter === category} className={filter === category ? "is-selected" : ""} onClick={() => setFilter(category)}>
-                <img src={categoryIcon(category)} alt="" />{t(`chaos.cat.${category}`)}
+                <Sigil kind={category} />{t(`chaos.cat.${category}`)}
               </button>
             ))}
           </div>
         </div>
         <div className="chaos-deck__grid">
-          {deck.map((item) => {
-            const { color, deep } = CATEGORY[item.category];
-            const rarity = RARITY[item.rarity];
-            return (
-              <button key={item.id} type="button" className="deck-card" onClick={() => setShown(item.id)} style={{ "--card": color, "--card-deep": deep } as CSSProperties}>
-                <span className="deck-card__face">
-                  <CardArt id={item.id} className="deck-card__art" />
-                  <strong>{effectName(item.id)}</strong>
-                  <span className="deck-card__gems" aria-label={t(`chaos.rarity.${item.rarity}`)}>
-                    {Array.from({ length: rarity.gems }, (_, i) => <i key={i} style={{ background: rarity.color }} />)}
-                  </span>
-                </span>
-              </button>
-            );
-          })}
+          {deck.map((item) => (
+            <button key={item.id} type="button" className="deck-card" onClick={() => setShown(item.id)} aria-label={effectName(item.id)}>
+              <ChaosMiniCard id={item.id} tag />
+            </button>
+          ))}
         </div>
       </section>
 

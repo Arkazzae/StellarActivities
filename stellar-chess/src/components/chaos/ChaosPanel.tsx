@@ -1,11 +1,11 @@
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 import { CHAOS_DRAFT_INTERVAL, CHAOS_EFFECTS, type ActiveChaosEffect, type ChaosHistoryEntry } from "@/engine/chaos";
 import { useGameStore } from "@/state/game";
 import { getOpponent } from "@/ai/bots";
 import { BotPortrait, PersonAvatar } from "@/components/BotPortrait";
 import type { PieceColor } from "@/engine/types";
-import { CardArt } from "./ChaosCard";
-import { CATEGORY, categoryColor, effect, effectIcon, effectLeft, effectName, effectTag, effectText, turnPips } from "./meta";
+import { CardArt, Sigil, cardStyle } from "./ChaosCard";
+import { categoryColor, effect, effectIcon, effectLeft, effectName, effectTag, effectText, turnPips } from "./meta";
 import { t, tn, useTranslation } from "@/i18n";
 
 /** "12" for White's move, "12…" for Black's: the ply an entry happened on. */
@@ -68,7 +68,7 @@ export function ChaosHeader({ tab, onTab }: { tab: ChaosTab; onTab: (tab: ChaosT
   return (
     <header className="chaos-panel__head">
       <div className="chaos-panel__title">
-        <img src="icons/nav/chaos.webp" alt="" />
+        <img className="chaos-panel__deck" src="chaos/card_back.webp" alt="" />
         <h2>Chaos Chess</h2>
         <span>{tn("chaos.deck", deck)}</span>
       </div>
@@ -126,26 +126,26 @@ export function ChaosBody() {
               </div>
               <div className="chaos-side__cards">
                 {list.length ? list.map((item) => {
-                  const { color, deep } = CATEGORY[effect(item.effectId).category];
                   const pips = turnPips(item);
+                  const definition = effect(item.effectId);
                   return (
                     <button
                       key={item.instanceId}
                       type="button"
-                      className={`mini-card${detail?.instanceId === item.instanceId ? " is-selected" : ""}`}
+                      className={`mini-card is-${definition.rarity}${detail?.instanceId === item.instanceId ? " is-selected" : ""}`}
                       aria-pressed={detail?.instanceId === item.instanceId}
                       onClick={() => setPicked(item.instanceId)}
-                      style={{ "--card": color, "--card-deep": deep } as CSSProperties}
+                      style={cardStyle(item.effectId)}
                     >
-                      <span className="mini-card__face">
-                        <CardArt id={item.effectId} className="mini-card__art" />
+                      <CardArt id={item.effectId} className="mini-card__img" />
+                      <span className="mini-card__body">
+                        <Sigil kind={definition.category} />
                         <strong>{effectName(item.effectId)}</strong>
                         <span className="mini-card__foot">
                           <span className="mini-card__pips">{pips.map((on, i) => <i key={i} className={on ? "is-on" : ""} />)}</span>
-                          <b>{item.remainingTurns !== null ? `${item.remainingTurns}/${effect(item.effectId).turns ?? item.remainingTurns}` : item.charges !== null ? "1×" : "∞"}</b>
+                          <b>{item.remainingTurns !== null ? `${item.remainingTurns}/${definition.turns ?? item.remainingTurns}` : item.charges !== null ? "1×" : "∞"}</b>
                         </span>
                       </span>
-                      <img className="mini-card__icon" src={effectIcon(item.effectId)} alt="" />
                     </button>
                   );
                 }) : <p className="chaos-side__none">{t("chaos.none")}</p>}

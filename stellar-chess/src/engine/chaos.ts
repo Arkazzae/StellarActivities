@@ -86,7 +86,8 @@ const effect = (
   rarity: ChaosRarity,
   duration: ChaosEffectDefinition["duration"],
   turns?: number,
-  artId: ChaosEffectId = id,
+  // Every card has its own illustration now; the old shared-art id is kept so the list below reads unchanged.
+  _artId: ChaosEffectId = id,
 ): ChaosEffectDefinition => ({
   id,
   name: { en: enName, pl: plName },
@@ -95,7 +96,7 @@ const effect = (
   rarity,
   duration,
   turns,
-  art: `chaos/${artId}.webp`,
+  art: `chaos/${id}.webp`,
 });
 
 export const CHAOS_EFFECTS: readonly ChaosEffectDefinition[] = [

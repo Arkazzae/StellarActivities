@@ -3,7 +3,7 @@ import { CHAOS_EFFECTS, getChaosTargetCount, type ChaosEffectId } from "@/engine
 import { useGameStore } from "@/state/game";
 import { getOpponent } from "@/ai/bots";
 import { BotPortrait } from "@/components/BotPortrait";
-import { ChaosCard, ChaosMiniCard } from "./ChaosCard";
+import { ChaosCard, PlayedCard } from "./ChaosCard";
 import { effectIcon, effectName } from "./meta";
 import { t, tn, useTranslation } from "@/i18n";
 
@@ -75,7 +75,7 @@ export function DraftOverlay() {
         {seat ? (
           <span className="draft__who" style={{ background: getOpponent(seat.id).tint }}><BotPortrait id={seat.id} /></span>
         ) : (
-          <img className="draft__who" src="icons/nav/chaos.webp" alt="" />
+          <img className="draft__who draft__who--deck" src="chaos/card_back.webp" alt="" />
         )}
         <h1 id="draft-title">{seat ? t("chaos.botDrawing", { name }) : t("chaos.draw")}</h1>
       </div>
@@ -117,7 +117,7 @@ export function DraftOverlay() {
         <div className="draft__side draft__side--played">
           {theirsThisRound ? (
             <>
-              <ChaosMiniCard id={theirsThisRound} />
+              <PlayedCard id={theirsThisRound} />
               <span>{t("chaos.theyPlayed", { name: players[other]?.username ?? t(`side.${other}`) })}</span>
             </>
           ) : null}

@@ -28,13 +28,18 @@ describe("saved choices", () => {
   });
 
   it("restores the opponent, match and time controls, and saves new choices", async () => {
-    const store = await uiWith({ opponent: "wiktor", match: { w: "kuba", b: "stockfish" }, timeId: "3+2", onlineTimeId: "10+0", onlineSide: "b" });
-    expect(store.getState()).toMatchObject({ opponent: "wiktor", match: { w: "kuba", b: "stockfish" }, timeId: "3+2", onlineTimeId: "10+0", onlineSide: "b" });
+    const store = await uiWith({ opponent: "mordax", match: { w: "glut", b: "stockfish" }, timeId: "3+2", onlineTimeId: "10+0", onlineSide: "b" });
+    expect(store.getState()).toMatchObject({ opponent: "mordax", match: { w: "glut", b: "stockfish" }, timeId: "3+2", onlineTimeId: "10+0", onlineSide: "b" });
 
-    store.getState().choose("halina");
+    store.getState().choose("zenek");
     store.getState().setMode("match");
     store.getState().swapMatch();
-    expect(written.get("ui")).toMatchObject({ opponent: "halina", mode: "match", match: { w: "stockfish", b: "kuba" } });
+    expect(written.get("ui")).toMatchObject({ opponent: "zenek", mode: "match", match: { w: "stockfish", b: "glut" } });
+  });
+
+  it("moves a choice from the first ladder to the character on the same rung", async () => {
+    const store = await uiWith({ opponent: "wiktor", match: { w: "kuba", b: "hiro" } });
+    expect(store.getState()).toMatchObject({ opponent: "mordax", match: { w: "glut", b: "bogdan" } });
   });
 
   it("replaces unknown bots and time controls with the defaults", async () => {

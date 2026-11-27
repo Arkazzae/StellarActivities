@@ -9,7 +9,7 @@ import { getOpponent, seatSubtitle } from "@/ai/bots";
 import { requestHint } from "@/ai/hint";
 import { useOpeningName } from "@/hooks/useOpeningName";
 import { backToLobby, reasonText, rematch, resign } from "@/game/session";
-import { onlineAbandon, onlineDecline, onlineDraw, useOnlineStore } from "@/online/sync";
+import { matchById, onlineAbandon, onlineDecline, onlineDraw, useOnlineStore } from "@/online/sync";
 import { useTranslation } from "@/i18n";
 import { presetGoal, startLabel } from "@/engine/positions";
 import type { PieceColor } from "@/engine/types";
@@ -56,7 +56,8 @@ function RoomStrip() {
   const phase = useGameStore((s) => s.phase);
   const myColor = useGameStore((s) => s.myColor);
   const players = useGameStore((s) => s.players);
-  const match = useOnlineStore((s) => s.shared.match);
+  const shownId = useGameStore((s) => s.online?.matchId ?? null);
+  const match = useOnlineStore((s) => matchById(s.shared, shownId));
   const participants = useOnlineStore((s) => s.participants);
   const pending = useOnlineStore((s) => s.pending);
   const opponentColor: PieceColor | null = myColor ? (myColor === "w" ? "b" : "w") : null;
@@ -119,7 +120,8 @@ export function GameTab() {
   const chaos = useGameStore((s) => s.chaos.enabled);
   const verdict = useGameStore((s) => s.verdict);
   const [chaosTab, setChaosTab] = useState<ChaosTab>("chaos");
-  const match = useOnlineStore((s) => s.shared.match);
+  const shownId = useGameStore((s) => s.online?.matchId ?? null);
+  const match = useOnlineStore((s) => matchById(s.shared, shownId));
   const pending = useOnlineStore((s) => s.pending);
   const opening = useOpeningName(fen, startFen);
   const { t } = useTranslation();

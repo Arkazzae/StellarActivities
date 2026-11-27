@@ -8,7 +8,7 @@ import { create } from "zustand";
 import { Chess } from "chess.js";
 import type { GameResult, PieceColor, PieceType, Square } from "@/engine/types";
 import { STANDARD_FEN } from "@/engine/positions";
-import { isOpponentId, type OpponentId } from "@/ai/bots";
+import { currentOpponentId, getOpponent, isOpponentId, type OpponentId } from "@/ai/bots";
 import { readSaved, writeSaved } from "@/stellarr/storage";
 import { t } from "@/i18n";
 import { useGameStore } from "./game";
@@ -47,7 +47,17 @@ function isRecord(value: unknown): value is GameRecord {
 function load(): GameRecord[] {
   const saved = readSaved(KEY);
   if (!Array.isArray(saved)) return [];
-  return saved.filter(isRecord).map((r) => ({ ...r, opponentId: isOpponentId(r.opponentId) ? r.opponentId : null, startFen: typeof r.startFen === "string" ? r.startFen : STANDARD_FEN }))
+  return saved.filter(isRecord).map((r) => {
+    // A game against the first ladder shows the character who now stands on that rung.
+    const id = currentOpponentId(r.opponentId);
+    const renamed = id !== r.opponentId && isOpponentId(id);
+    return {
+      ...r,
+      opponentId: isOpponentId(id) ? id : null,
+      opponent: renamed ? getOpponent(id).name : r.opponent,
+      startFen: typeof r.startFen === "string" ? r.startFen : STANDARD_FEN,
+    };
+  })
     .sort((a, b) => b.at - a.at).slice(0, HISTORY_LIMIT);
 }
 

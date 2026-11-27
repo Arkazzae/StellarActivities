@@ -51,6 +51,6 @@ boot().catch((error) => {
   root.innerHTML = "";
   const message = document.createElement("p");
   message.className = "boot-error";
-  message.textContent = `Stellar Chess could not start: ${error instanceof Error ? error.message : String(error)}`;
+  message.textContent = `Arcade Chess could not start: ${error instanceof Error ? error.message : String(error)}`;
   root.append(message);
 });

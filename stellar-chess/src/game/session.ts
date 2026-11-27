@@ -183,7 +183,7 @@ export function gamePgn(): string {
   chess.setHeader("Event", online ? t("pgn.eventOnline")
     : isSpectating(state) ? t("pgn.eventMatch", { white, black })
     : bot ? t("pgn.eventBot", { name: getOpponent(bot.id).name }) : t("pgn.event"));
-  chess.setHeader("Site", "Stellar Chess");
+  chess.setHeader("Site", "Arcade Chess");
   chess.setHeader("Date", `${date.getFullYear()}.${pad(date.getMonth() + 1)}.${pad(date.getDate())}`);
   chess.setHeader("White", white);
   chess.setHeader("Black", black);
@@ -198,7 +198,7 @@ export function gamePgn(): string {
  * moves, so ordinary chess software cannot replay it; the record is for reading.
  */
 function chaosPgn(moves: string[], score: string, headers: Record<string, string>): string {
-  const tags = { Event: "Chaos Chess", Site: "Stellar Chess", ...headers, Result: score, Variant: "Chaos Chess" };
+  const tags = { Event: "Chaos Chess", Site: "Arcade Chess", ...headers, Result: score, Variant: "Chaos Chess" };
   const head = Object.entries(tags).map(([key, value]) => `[${key} "${value.replace(/"/g, "'")}"]`).join("\n");
   const body = moves.map((san, i) => (i % 2 === 0 ? `${i / 2 + 1}. ${san}` : san)).join(" ");
   return `${head}\n\n${body ? `${body} ` : ""}${score}\n`;

@@ -110,6 +110,6 @@ describe("Chaos bots' taste in cards", () => {
     expect(withTaste("iskra", ["hourglass", "blink", "time_thief"], "hourglass", 0.99)).toBe("hourglass");
     // Nox always takes the engine's card; a ladder bot too.
     expect(withTaste("nox", ["hourglass", "blink"], "hourglass", 0)).toBe("hourglass");
-    expect(withTaste("kuba", ["hourglass", "blink"], "hourglass", 0)).toBe("hourglass");
+    expect(withTaste("glut", ["hourglass", "blink"], "hourglass", 0)).toBe("hourglass");
   });
 });

@@ -1,5 +1,5 @@
 /**
- * Stellar Chess: a chess-site shell for Stellarr. Statistics as the start page, a ladder of bots,
+ * Arcade Chess: a chess-site shell for Stellarr. Statistics as the start page, a ladder of bots,
  * puzzles, Chaos Chess, and the voice channel's shared board for games between the people in the room.
  */
 
@@ -10,6 +10,8 @@ import { useBotMove } from "@/hooks/useBotMove";
 import { usePremove } from "@/hooks/usePremove";
 import { useGameLifecycle } from "@/hooks/useGameLifecycle";
 import { useChaosBotDraft } from "@/hooks/useChaosBotDraft";
+import { useBoardTheme } from "@/board-style";
+import { CHAOS_ENABLED } from "@/features";
 import { preloadSounds, resumeAudio, setSoundsEnabled, setVolume } from "@/sounds";
 import { Sidebar } from "@/components/shell/Sidebar";
 import { Toast } from "@/components/shell/Toast";
@@ -17,6 +19,8 @@ import { StatsPage } from "@/components/home/StatsPage";
 import { LadderPage } from "@/components/home/LadderPage";
 import { PuzzlesPage } from "@/components/home/PuzzlesPage";
 import { ChaosPage } from "@/components/chaos/ChaosPage";
+import { MultiplayerPage } from "@/components/online/MultiplayerPage";
+import { useGameStore } from "@/state/game";
 import { PlayPage } from "@/components/play/PlayPage";
 import { SettingsDialog } from "@/components/play/SettingsDialog";
 import { PgnDialog } from "@/components/play/PgnDialog";
@@ -28,6 +32,8 @@ import "@/styles/chaos.css";
 
 export function App() {
   const view = useUiStore((s) => s.view);
+  // Multiplayer is a page of tables; the board opens only for a game joined, watched or started.
+  const roomGame = useGameStore((s) => s.online !== null);
   const sound = useSettingsStore((s) => s.sound);
   const volume = useSettingsStore((s) => s.volume);
   // Re-render the whole shell when the language changes.
@@ -40,6 +46,7 @@ export function App() {
   usePremove();
   useGameLifecycle();
   useChaosBotDraft();
+  useBoardTheme();
 
   useEffect(() => setSoundsEnabled(sound), [sound]);
   useEffect(() => setVolume(volume), [volume]);
@@ -54,7 +61,7 @@ export function App() {
     <div className="app" onPointerDown={resumeAudio}>
       <Sidebar />
       <main className="app__main" ref={mainRef}>
-        {view === "home" ? <StatsPage /> : view === "ladder" ? <LadderPage /> : view === "puzzles" ? <PuzzlesPage /> : view === "chaos" ? <ChaosPage /> : <PlayPage />}
+        {view === "home" ? <StatsPage /> : view === "ladder" ? <LadderPage /> : view === "puzzles" ? <PuzzlesPage /> : view === "chaos" ? (CHAOS_ENABLED ? <ChaosPage /> : <StatsPage />) : view === "online" && !roomGame ? <MultiplayerPage /> : <PlayPage />}
       </main>
       <SettingsDialog />
       <PgnDialog />

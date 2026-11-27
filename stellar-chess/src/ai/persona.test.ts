@@ -30,22 +30,22 @@ describe("persona move choice", () => {
     expect(legal).toContain(move.uci);
   });
 
-  it("lets Tomek prefer an early queen sortie and lose interest later", () => {
-    const tomek = style("tomek");
+  it("lets Turbo prefer an early queen sortie and lose interest later", () => {
+    const turbo = style("turbo");
     const queen = new Chess(AFTER_E4_E5).moves({ verbose: true }).find((move) => move.san === "Qh5")!;
     expect(queenMoves(AFTER_E4_E5)).toContain("d1h5");
-    expect(tasteOf(queen, tomek, 2)).toBeGreaterThan(100);
-    expect(tasteOf(queen, tomek, tomek.queenUntilPly)).toBe(0);
+    expect(tasteOf(queen, turbo, 2)).toBeGreaterThan(100);
+    expect(tasteOf(queen, turbo, turbo.queenUntilPly)).toBe(0);
     // A queen move a pawn worse than the knight still wins out at move two.
     const candidates = [{ uci: "b1c3", score: 110 }, { uci: "d1h5", score: 0 }];
-    expect(choosePersonaMove(AFTER_E4_E5, candidates, { ...tomek, temperature: 1, randomMove: 0 }, 2, () => 0.5).uci).toBe("d1h5");
+    expect(choosePersonaMove(AFTER_E4_E5, candidates, { ...turbo, temperature: 1, randomMove: 0 }, 2, () => 0.5).uci).toBe("d1h5");
   });
 
-  it("gives Halina a taste for pawn moves", () => {
-    const halina = style("halina");
+  it("gives Zenek a taste for pawn moves", () => {
+    const zenek = style("zenek");
     const pawn = new Chess(START).moves({ verbose: true }).find((move) => move.san === "e4")!;
     const knight = new Chess(START).moves({ verbose: true }).find((move) => move.san === "Nf3")!;
-    expect(tasteOf(pawn, halina, 0)).toBeGreaterThan(tasteOf(knight, halina, 0));
+    expect(tasteOf(pawn, zenek, 0)).toBeGreaterThan(tasteOf(knight, zenek, 0));
   });
 
   it("keeps the ladder ordered: higher ratings choose more strictly and search deeper", () => {

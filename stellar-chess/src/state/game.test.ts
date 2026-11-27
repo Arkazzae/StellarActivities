@@ -26,7 +26,7 @@ describe("premove selection", () => {
   beforeEach(() => {
     useGameStore.getState().newGame({
       timeControl: { initial: 300, increment: 0 },
-      seats: { w: { id: "kuba" }, b: null },
+      seats: { w: { id: "glut" }, b: null },
       players: PLAYERS,
     });
   });
@@ -120,7 +120,7 @@ describe("local two-player game", () => {
   });
 });
 
-const MATCH = { w: { id: "hiro" as const }, b: { id: "stockfish" as const, engine: { skill: 5, depth: 6, moveTimeMs: 500 } } };
+const MATCH = { w: { id: "bogdan" as const }, b: { id: "stockfish" as const, engine: { skill: 5, depth: 6, moveTimeMs: 500 } } };
 
 describe("a game between two bots", () => {
   beforeEach(() => {
@@ -169,7 +169,7 @@ describe("a game between two bots", () => {
   });
 
   it("only pauses games the player watches", () => {
-    useGameStore.getState().newGame({ timeControl: { initial: 0, increment: 0 }, seats: { w: null, b: { id: "hiro" } }, players: PLAYERS });
+    useGameStore.getState().newGame({ timeControl: { initial: 0, increment: 0 }, seats: { w: null, b: { id: "bogdan" } }, players: PLAYERS });
     useGameStore.getState().setPaused(true);
 
     const state = useGameStore.getState();
@@ -188,7 +188,7 @@ describe("a game from a set-up position", () => {
     useGameStore.getState().reset();
     useGameStore.getState().newGame({
       timeControl: { initial: 0, increment: 0 },
-      seats: { w: { id: "hiro" }, b: null },
+      seats: { w: { id: "bogdan" }, b: null },
       players: PLAYERS,
       startFen: PHILIDOR,
     });
@@ -232,7 +232,7 @@ describe("the board before a game", () => {
     useGameStore.getState().previewStart(PHILIDOR);
     expect(useGameStore.getState()).toMatchObject({ phase: "lobby", fen: PHILIDOR, startFen: PHILIDOR });
 
-    useGameStore.getState().newGame({ timeControl: { initial: 0, increment: 0 }, seats: { w: null, b: { id: "hiro" } }, players: PLAYERS });
+    useGameStore.getState().newGame({ timeControl: { initial: 0, increment: 0 }, seats: { w: null, b: { id: "bogdan" } }, players: PLAYERS });
     useGameStore.getState().previewStart(PHILIDOR);
     expect(useGameStore.getState().fen).toBe("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
   });

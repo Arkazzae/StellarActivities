@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { usePieceUrl } from "@/board-style";
 import { Chess } from "chess.js";
 import { BotPortrait, PersonAvatar } from "@/components/BotPortrait";
 import { getOpponent, OPPONENTS } from "@/ai/bots";
@@ -8,6 +9,8 @@ import { useUiStore } from "@/state/ui";
 import { useOnlineStore } from "@/online/sync";
 import { loadOpeningBook, lookupOpening, type OpeningInfo } from "@/engine/openings";
 import { tn, formatLocale, useTranslation } from "@/i18n";
+import { StatsEmpty } from "./StatsEmpty";
+import { CHAOS_ENABLED } from "@/features";
 
 const LADDER = OPPONENTS.filter((opponent) => opponent.kind === "character");
 const PERIODS = [7, 14, 30, null] as const;
@@ -32,8 +35,11 @@ const percent = (part: number, whole: number) => (whole ? Math.round((part / who
 
 /** The statistics page, which is also the menu's start page. */
 export function StatsPage() {
+  const pieceUrl = usePieceUrl();
   const { t } = useTranslation();
-  const games = useHistoryStore((s) => s.games);
+  const allGames = useHistoryStore((s) => s.games);
+  // While Chaos Chess is hidden its games are left out of the statistics too.
+  const games = useMemo(() => (CHAOS_ENABLED ? allGames : allGames.filter((game) => game.kind !== "chaos")), [allGames]);
   const openReview = useHistoryStore((s) => s.openReview);
   const bots = useStatsStore((s) => s.bots);
   const room = useStatsStore((s) => s.online);
@@ -96,26 +102,7 @@ export function StatsPage() {
     setView("play");
   };
 
-  if (!games.length) {
-    return (
-      <div className="stats">
-        <header className="stats__head">
-          <div><h1>{t("stats.title")}</h1><p>{t("stats.emptyLead")}</p></div>
-        </header>
-        <div className="stats-empty">
-          <img src="icons/nav/stats.webp" alt="" />
-          <div>
-            <h2>{t("stats.emptyTitle")}</h2>
-            <p>{t("stats.emptyText")}</p>
-            <div className="stats-empty__actions">
-              <button type="button" className="btn btn--green" onClick={() => { setMode("vsBot"); setView("play"); }}>{t("flyout.bot")}</button>
-              <button type="button" className="btn" onClick={() => setView("puzzles")}>{t("nav.puzzles")}</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  if (!games.length) return <StatsEmpty />;
 
   return (
     <div className="stats">
@@ -183,7 +170,7 @@ export function StatsPage() {
           {byColor.map((item) => (
             <div key={item.color} className="stats-split">
               <div className="stats-split__head">
-                <img src={`pieces/${item.color}k.webp`} alt="" />
+                <img src={pieceUrl(item.color, "k")} alt="" />
                 <strong>{t(`stats.as.${item.color}`)}</strong>
                 <span>{percent(item.w, item.n)}% · {item.w}–{item.d}–{item.l}</span>
               </div>

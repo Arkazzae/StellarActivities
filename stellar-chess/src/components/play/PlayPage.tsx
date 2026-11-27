@@ -12,6 +12,7 @@ import { EvalBar } from "./EvalBar";
 import { MobileBar } from "./MobileBar";
 import { MoveStrip } from "./MoveStrip";
 import { DraftOverlay, TargetBanner } from "@/components/chaos/DraftOverlay";
+import { CHAOS_ENABLED } from "@/features";
 
 /** The board with its player bars, and the panel beside it: the bot screen, the room, or the game. */
 export function PlayPage() {
@@ -39,7 +40,10 @@ export function PlayPage() {
 
   // The Chaos Chess lobby is its own page: the bot screen never runs in Chaos mode.
   useEffect(() => {
-    if (view === "play" && phase === "lobby" && mode === "chaos") useUiStore.getState().setView("chaos");
+    if (view !== "play" || phase !== "lobby" || mode !== "chaos") return;
+    // While Chaos Chess is hidden, a Chaos lobby is an ordinary bot game.
+    if (CHAOS_ENABLED) useUiStore.getState().setView("chaos");
+    else useUiStore.getState().setMode("vsBot");
   }, [view, phase, mode]);
 
   // Before the game the board faces the colour the player picked; White when two bots play; in the

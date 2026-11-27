@@ -10,10 +10,10 @@ describe("finishing a Chaos game", () => {
     useGameStore.getState().reset();
     useGameStore.getState().newGame({
       timeControl: { initial: 0, increment: 0 },
-      seats: { w: null, b: { id: "kuba" } },
+      seats: { w: null, b: { id: "glut" } },
       players: {
         w: { userId: "player", username: "Player", avatarUrl: null },
-        b: { userId: "kuba", username: "Kuba", avatarUrl: null },
+        b: { userId: "glut", username: "Glut", avatarUrl: null },
       },
       chaos: true,
     });
@@ -24,11 +24,11 @@ describe("finishing a Chaos game", () => {
     chess.remove("e4");
     chess.put({ type: "p", color: "w" }, "d3");
     const fen = chess.fen();
-    const before = useStatsStore.getState().bots.kuba;
+    const before = useStatsStore.getState().bots.glut;
 
     expect(() => finishGame({ winner: "w", reason: "resignation" })).not.toThrow();
     expect(useGameStore.getState().chess.fen()).toBe(fen);
-    expect(useHistoryStore.getState().games[0]).toMatchObject({ kind: "chaos", opponentId: "kuba", outcome: "w", moves: "e2e4 e7e5" });
-    expect(useStatsStore.getState().bots.kuba).toEqual(before);
+    expect(useHistoryStore.getState().games[0]).toMatchObject({ kind: "chaos", opponentId: "glut", outcome: "w", moves: "e2e4 e7e5" });
+    expect(useStatsStore.getState().bots.glut).toEqual(before);
   });
 });

@@ -38,3 +38,6 @@ Thumbs.db
 output/
 PRODUCT.md
 .stellarr-release/
+
+# Raw art-direction samples (only the comparison sheet is kept)
+artwork/portraits-games/samples/*/

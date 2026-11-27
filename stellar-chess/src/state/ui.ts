@@ -9,6 +9,7 @@ import { DEFAULT_ENGINE, DEFAULT_OPPONENT, getOpponent, normalizeEngine, type En
 import { readSaved, writeSaved } from "@/stellarr/storage";
 import type { PieceColor, Square, TimeControl } from "@/engine/types";
 import { PICKS, randomChess960, type PositionPick } from "@/engine/positions";
+import { CHAOS_ENABLED } from "@/features";
 
 /** The statistics page (the start page), the board, the multiplayer room, puzzles, the ladder and the Chaos Chess menu. */
 export type View = "home" | "play" | "online" | "puzzles" | "ladder" | "chaos";
@@ -80,7 +81,7 @@ function load(): Partial<Saved> {
   const engine = (saved.engine ?? {}) as Partial<Record<EngineSlot, unknown>>;
   const chess960 = Number(saved.chess960);
   return {
-    mode: saved.mode === "match" || saved.mode === "positions" || saved.mode === "chaos" ? saved.mode : "vsBot",
+    mode: saved.mode === "match" || saved.mode === "positions" || (saved.mode === "chaos" && CHAOS_ENABLED) ? saved.mode : "vsBot",
     opponent: opponentId(saved.opponent),
     chaosOpponent: getOpponent(typeof saved.chaosOpponent === "string" ? saved.chaosOpponent : null).kind === "chaos" ? saved.chaosOpponent as OpponentId : undefined,
     match: { w: opponentId(match.w), b: opponentId(match.b) },
@@ -147,7 +148,7 @@ export const useUiStore = create<UiState>((set, get) => {
     mode: initial.mode ?? "vsBot",
     opponent: initial.opponent ?? DEFAULT_OPPONENT,
     chaosOpponent: initial.chaosOpponent ?? "iskra",
-    match: initial.match ?? { w: "tomek", b: "diego" },
+    match: initial.match ?? { w: "turbo", b: "bazyl" },
     engine: initial.engine ?? { vs: DEFAULT_ENGINE, w: DEFAULT_ENGINE, b: DEFAULT_ENGINE },
     matchSide: "w",
     side: initial.side ?? "w",

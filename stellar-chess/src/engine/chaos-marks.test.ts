@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Chess } from "chess.js";
 import { followMove, markChanges, pieceArt, type PieceMarks } from "./chaos-marks";
+import { pieceUrl } from "@/board-style";
 
 const board = (fen: string) => new Chess(fen).board();
 
@@ -47,7 +48,7 @@ describe("Chaos piece marks", () => {
   });
 
   it("falls back to the ordinary piece when a variant has no art", () => {
-    expect(pieceArt("b", "q", { variant: "forged", effectId: "chain_reaction", owner: "b", ply: 3 })).toBe("pieces/bq.webp");
-    expect(pieceArt("b", "q")).toBe("pieces/bq.webp");
+    expect(pieceArt("b", "q", { variant: "forged", effectId: "chain_reaction", owner: "b", ply: 3 })).toBe(pieceUrl("b", "q"));
+    expect(pieceArt("b", "q")).toBe(pieceUrl("b", "q"));
   });
 });

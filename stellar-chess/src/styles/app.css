@@ -1,4 +1,4 @@
-/* Stellar Chess shell: dark chess-site layout. */
+/* Arcade Chess shell: dark chess-site layout. */
 
 :root {
   --bg: #302e2b;
@@ -759,3 +759,21 @@ button:focus-visible, select:focus-visible, input:focus-visible, canvas:focus-vi
 .btn--wide { flex: 1; }
 .online-lobby .btn--wide { width: 100%; }
 .sidebar__nav .live-dot { position: absolute; top: 8px; right: 8px; }
+
+/* ── Board look (settings) ── */
+.look-preview { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); margin-bottom: 14px; border-radius: 6px; overflow: hidden; }
+.look-preview span { aspect-ratio: 1; display: grid; place-items: center; background: var(--board-light); }
+.look-preview span.is-dark { background: var(--board-dark); }
+.look-preview img { width: 92%; height: 92%; object-fit: contain; }
+.look-label { display: block; margin: 4px 0 8px; color: var(--text-2); font-size: 13px; font-weight: 700; }
+.set-pick, .theme-pick { display: grid; gap: 8px; margin-bottom: 14px; }
+.set-pick { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.theme-pick { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.set-pick button, .theme-pick button { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 6px; border: 0; border-radius: 8px; background: var(--btn); color: var(--text-2); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.set-pick button:hover, .theme-pick button:hover { background: var(--btn-hi); color: #fff; }
+.set-pick button.is-selected, .theme-pick button.is-selected { color: #fff; box-shadow: 0 0 0 2px var(--green); }
+.set-pick__pieces { display: flex; justify-content: center; width: 100%; padding: 4px 0; border-radius: 6px; background: var(--board-light); }
+.set-pick__pieces img { width: 32%; max-width: 40px; aspect-ratio: 1; object-fit: contain; }
+.theme-pick__swatch { display: grid; grid-template-columns: repeat(2, 22px); grid-template-rows: repeat(2, 22px); border-radius: 4px; overflow: hidden; }
+.theme-pick__swatch i:nth-child(1), .theme-pick__swatch i:nth-child(4) { background: var(--l); }
+.theme-pick__swatch i:nth-child(2), .theme-pick__swatch i:nth-child(3) { background: var(--d); }

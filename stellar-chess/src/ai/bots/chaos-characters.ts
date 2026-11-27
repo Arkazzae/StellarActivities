@@ -1,5 +1,6 @@
 /**
- * The opponents of Chaos Chess: five original characters who live for the cards. Each plays chess
+ * The opponents of Chaos Chess: five fantasy classes who live for the cards (Sorceress, Chronomancer,
+ * Warrior, Oracle, and the Arbiter of Chaos), painted in the cinematic style of the Chaos card art. Each plays chess
  * through the same persona machinery as the ladder (src/ai/persona.ts) and has a favourite kind of
  * card that it reaches for in the draft; Nox has none and always takes the card the engine rates best.
  *
@@ -37,9 +38,9 @@ export const CHAOS_CHARACTERS: Character[] = [
     style: { depth: 3, moveTimeMs: 300, lines: 9, temperature: 180, randomMove: 0.18, captureBonus: 80, checkBonus: 60, queenBonus: 0, queenUntilPly: 0, pawnBonus: 0 },
     text: {
       en: {
-        short: "Street magician",
-        description: "Sixteen, with a deck always in her pocket. In Chaos she reaches for Arcane cards: moving pieces, summoning pawns and swapping everything around.",
-        greetings: ["Pick a card, any card.", "Watch the queen closely. She's about to vanish.", "There's no magic, just quick hands."],
+        short: "The Sorceress",
+        description: "The youngest of the mage circle, an obsidian knight floating over her palm. In Chaos she reaches for Arcane cards: moving pieces, summoning pawns and swapping everything around.",
+        greetings: ["Watch the queen closely. She's about to vanish.", "The mage circle sent me for your pieces.", "A little magic never hurt anyone."],
         won: "Iskra won",
         over: "Iskra Wins!",
         quips: {
@@ -49,9 +50,9 @@ export const CHAOS_CHARACTERS: Character[] = [
         },
       },
       pl: {
-        short: "Uliczna iluzjonistka",
-        description: "Szesnaście lat i talia kart zawsze w kieszeni. W Chaosie sięga po karty Magii: przenosi figury, przyzywa piony i zamienia wszystko miejscami.",
-        greetings: ["Wybierz kartę, dowolną kartę.", "Patrz uważnie na hetmana. Zaraz zniknie.", "Nie ma magii, są tylko szybkie ręce."],
+        short: "Czarodziejka",
+        description: "Najmłodsza w kręgu magów, z obsydianowym skoczkiem nad dłonią. W Chaosie sięga po karty Magii: przenosi figury, przyzywa piony i zamienia wszystko miejscami.",
+        greetings: ["Patrz uważnie na hetmana. Zaraz zniknie.", "Krąg magów przysłał mnie po twoje figury.", "Odrobina magii jeszcze nikomu nie zaszkodziła."],
         won: "Iskra wygrała",
         over: "Iskra wygrała!",
         quips: {
@@ -73,7 +74,7 @@ export const CHAOS_CHARACTERS: Character[] = [
         idle: ["Shuffle, shuffle…", "Pick a move, any move.", "I love the moment before the trick.", ""],
         mirror: ["A mirror! My favourite illusion.", "Which one of us is real?"],
         mirrorEnd: ["The illusion is over.", "We both take a bow!"],
-        card: ["Watch my sleeve…", "This card is mine!", "Magic, real magic!"],
+        card: ["Let the magic work.", "This card is mine!", "The mage circle would smile."],
       },
       pl: {
         start: ["Karty potasowane. Zaczynamy!", "Hokus-pokus, pierwszy ruch!", "Uwaga, ta partia ma podwójne dno."],
@@ -86,7 +87,7 @@ export const CHAOS_CHARACTERS: Character[] = [
         idle: ["Tasuję, tasuję…", "Wybierz ruch, dowolny ruch.", "Lubię ten moment przed sztuczką.", ""],
         mirror: ["Lustro! Moja ulubiona iluzja.", "Która z nas jest prawdziwa?"],
         mirrorEnd: ["Iluzja się skończyła.", "Obie się kłaniamy!"],
-        card: ["Patrz na rękaw…", "Ta karta jest moja!", "Magia, prawdziwa magia!"],
+        card: ["Niech zadziała magia.", "Ta karta jest moja!", "Krąg magów by się uśmiechnął."],
       },
     },
   },
@@ -99,8 +100,8 @@ export const CHAOS_CHARACTERS: Character[] = [
     style: { depth: 4, moveTimeMs: 350, lines: 7, temperature: 110, randomMove: 0.08, captureBonus: 40, checkBonus: 40, queenBonus: 0, queenUntilPly: 0, pawnBonus: 0 },
     text: {
       en: {
-        short: "Watchmaker, counts every second",
-        description: "Thirty years of mending clocks and no patience for wasted time. In Chaos he takes Time cards and plays to run you out of yours.",
+        short: "The Chronomancer",
+        description: "Counts time in grains of starlight sand and hates to see it wasted. In Chaos he takes Time cards and plays to run you out of yours.",
         greetings: ["Tick-tock. We start on time.", "I trust the clock is set.", "Every second counts. Yours too."],
         won: "Bruno won",
         over: "Bruno Wins!",
@@ -111,8 +112,8 @@ export const CHAOS_CHARACTERS: Character[] = [
         },
       },
       pl: {
-        short: "Zegarmistrz, liczy każdą sekundę",
-        description: "Naprawia zegary od trzydziestu lat i nie znosi marnowania czasu. W Chaosie bierze karty Czasu i gra tak, żeby tobie go zabrakło.",
+        short: "Kronomanta",
+        description: "Liczy czas w ziarnach gwiezdnego piasku i nie znosi, gdy ktoś go marnuje. W Chaosie bierze karty Czasu i gra tak, żeby tobie go zabrakło.",
         greetings: ["Tik-tak. Zaczynamy punktualnie.", "Mam nadzieję, że zegar jest nastawiony.", "Każda sekunda się liczy. Twoja też."],
         won: "Bruno wygrał",
         over: "Bruno wygrał!",
@@ -161,8 +162,8 @@ export const CHAOS_CHARACTERS: Character[] = [
     style: { depth: 5, moveTimeMs: 550, lines: 6, temperature: 80, randomMove: 0.04, captureBonus: 120, checkBonus: 30, queenBonus: 0, queenUntilPly: 0, pawnBonus: 0 },
     text: {
       en: {
-        short: "Blacksmith, forges pieces in fire",
-        description: "A blacksmith with a big laugh and an even bigger hammer. In Chaos he takes Battle cards: forging pawns into rooks and rewarding every capture.",
+        short: "The Warrior",
+        description: "A war-smith in obsidian armour with a big laugh and an even bigger hammer. In Chaos he takes Battle cards: forging pawns into rooks and rewarding every capture.",
         greetings: ["Ha! The forge is hot, sit down.", "I like games where sparks fly.", "Every pawn is raw steel."],
         won: "Bolko won",
         over: "Bolko Wins!",
@@ -173,8 +174,8 @@ export const CHAOS_CHARACTERS: Character[] = [
         },
       },
       pl: {
-        short: "Kowal, kuje figury w ogniu",
-        description: "Kowal z wielkim śmiechem i jeszcze większym młotem. W Chaosie sięga po karty Walki: przekuwa piony w wieże i nagradza każde bicie.",
+        short: "Wojownik",
+        description: "Kowal wojny w obsydianowej zbroi, z wielkim śmiechem i jeszcze większym młotem. W Chaosie sięga po karty Walki: przekuwa piony w wieże i nagradza każde bicie.",
         greetings: ["Ha! Kuźnia rozgrzana, siadaj.", "Lubię partie, w których lecą iskry.", "Każdy pionek to surowa stal."],
         won: "Bolko wygrał",
         over: "Bolko wygrał!",
@@ -223,8 +224,8 @@ export const CHAOS_CHARACTERS: Character[] = [
     style: { depth: 6, moveTimeMs: 800, lines: 5, temperature: 55, randomMove: 0.02, captureBonus: 0, checkBonus: 20, queenBonus: 0, queenUntilPly: 0, pawnBonus: 0 },
     text: {
       en: {
-        short: "Fortune-teller, plays with fate",
-        description: "Reads the future in cards and claims she can see your next move. In Chaos she picks Fate cards: bringing lost pieces back and taking a gamble.",
+        short: "The Oracle",
+        description: "Sees the future in a single card and claims she already knows your next move. In Chaos she picks Fate cards: bringing lost pieces back and taking a gamble.",
         greetings: ["I see… I see your first move.", "The cards say this will be interesting.", "Fate is already dealt. Almost."],
         won: "Mira won",
         over: "Mira Wins!",
@@ -235,8 +236,8 @@ export const CHAOS_CHARACTERS: Character[] = [
         },
       },
       pl: {
-        short: "Wróżka, gra losem",
-        description: "Czyta przyszłość z kart i twierdzi, że widzi twój następny ruch. W Chaosie wybiera karty Losu: przywraca stracone figury i lubi zaryzykować.",
+        short: "Wyrocznia",
+        description: "Widzi przyszłość w jednej karcie i twierdzi, że twój następny ruch już zna. W Chaosie wybiera karty Losu: przywraca stracone figury i lubi zaryzykować.",
         greetings: ["Widzę… widzę twój pierwszy ruch.", "Karty mówią, że będzie ciekawie.", "Los już jest rozdany. Prawie."],
         won: "Mira wygrała",
         over: "Mira wygrała!",
@@ -285,8 +286,8 @@ export const CHAOS_CHARACTERS: Character[] = [
     style: { depth: 8, moveTimeMs: 1200, lines: 3, temperature: 28, randomMove: 0, captureBonus: 0, checkBonus: 0, queenBonus: 0, queenUntilPly: 0, pawnBonus: 0 },
     text: {
       en: {
-        short: "The Chaos dealer",
-        description: "Nobody has seen the face behind the mask. Nox has dealt cards for years and always takes the one that hurts most. The hardest opponent in Chaos.",
+        short: "The Arbiter of Chaos",
+        description: "Nobody has seen the face behind the obsidian mask. Nox has dealt the cards of fate forever and always takes the one that hurts most. The hardest opponent in Chaos.",
         greetings: ["The cards are dealt. Please, take a seat.", "Everything is at stake. As always.", "The house always wins. Almost always."],
         won: "Nox won",
         over: "Nox Wins!",
@@ -297,8 +298,8 @@ export const CHAOS_CHARACTERS: Character[] = [
         },
       },
       pl: {
-        short: "Krupier Chaosu",
-        description: "Nikt nie widział twarzy spod maski. Nox rozdaje karty od lat i zawsze bierze tę, która zaboli najbardziej. Najtrudniejszy rywal Chaosu.",
+        short: "Arbiter Chaosu",
+        description: "Nikt nie widział twarzy spod obsydianowej maski. Nox rozdaje karty losu od zawsze i zawsze bierze tę, która zaboli najbardziej. Najtrudniejszy rywal Chaosu.",
         greetings: ["Karty rozdane. Proszę zająć miejsce.", "Stawką jest wszystko. Jak zawsze.", "Dom zawsze wygrywa. Prawie zawsze."],
         won: "Wygrywa Nox",
         over: "Nox wygrywa!",

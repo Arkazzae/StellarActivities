@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePieceUrl } from "@/board-style";
 import { BotPortrait, PersonAvatar } from "@/components/BotPortrait";
 import { useChatStore } from "@/state/chat";
 import { useTranslation } from "@/i18n";
@@ -15,12 +16,13 @@ const VALUE: Record<PieceType, number> = { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 };
 const ORDER: PieceType[] = ["p", "n", "b", "r", "q"];
 
 function Captured({ pieces, color }: { pieces: PieceType[]; color: PieceColor }) {
+  const pieceUrl = usePieceUrl();
   const groups = ORDER.map((type) => ({ type, count: pieces.filter((p) => p === type).length })).filter((g) => g.count);
   return (
     <span className="captured">
       {groups.map(({ type, count }) => (
         <span key={type} className="captured__group">
-          {Array.from({ length: count }, (_, i) => <img key={i} src={`pieces/${color}${type}.webp`} alt="" />)}
+          {Array.from({ length: count }, (_, i) => <img key={i} src={pieceUrl(color, type)} alt="" />)}
         </span>
       ))}
     </span>

@@ -17,6 +17,10 @@ interface Settings {
   moveAnimation: boolean;
   /** Let the bots comment on the game in their speech bubble. */
   botChat: boolean;
+  /** The colours of the squares (see src/board-style.ts). */
+  boardTheme: string;
+  /** The picture set for the pieces (see src/board-style.ts). */
+  pieceSet: string;
 }
 
 export interface SettingsState extends Settings {
@@ -28,6 +32,8 @@ export interface SettingsState extends Settings {
   setPremoveEnabled: (enabled: boolean) => void;
   setMoveAnimation: (enabled: boolean) => void;
   setBotChat: (enabled: boolean) => void;
+  setBoardTheme: (id: string) => void;
+  setPieceSet: (id: string) => void;
 }
 
 const DEFAULTS: Settings = {
@@ -39,7 +45,13 @@ const DEFAULTS: Settings = {
   premoveEnabled: true,
   moveAnimation: true,
   botChat: true,
+  boardTheme: "green",
+  // "" follows the app's default set (src/board-style.ts) until the player picks one.
+  pieceSet: "",
 };
+
+const THEMES = ["green", "brown", "blue", "purple", "coral", "slate"];
+const SETS = ["classic", "stellar", "cburnett"];
 
 const KEY = "settings";
 const KEYS = Object.keys(DEFAULTS) as (keyof Settings)[];
@@ -53,7 +65,12 @@ function load(): Settings {
   try {
     const saved = readSaved(KEY) as Partial<Settings> | null;
     const settings = { ...DEFAULTS, ...pick(saved ?? {}) };
-    return { ...settings, volume: clampVolume(settings.volume) };
+    return {
+      ...settings,
+      volume: clampVolume(settings.volume),
+      boardTheme: THEMES.includes(settings.boardTheme) ? settings.boardTheme : DEFAULTS.boardTheme,
+      pieceSet: SETS.includes(settings.pieceSet) ? settings.pieceSet : "",
+    };
   } catch {
     return { ...DEFAULTS };
   }
@@ -82,5 +99,7 @@ export const useSettingsStore = create<SettingsState>((set, get) => {
     setPremoveEnabled: (premoveEnabled) => update({ premoveEnabled }),
     setMoveAnimation: (moveAnimation) => update({ moveAnimation }),
     setBotChat: (botChat) => update({ botChat }),
+    setBoardTheme: (boardTheme) => { if (THEMES.includes(boardTheme)) update({ boardTheme }); },
+    setPieceSet: (pieceSet) => { if (SETS.includes(pieceSet)) update({ pieceSet }); },
   };
 });

@@ -57,7 +57,7 @@ export const DEFAULT_ENGINE: EngineConfig = { skill: 10, depth: 10, moveTimeMs: 
 export const ENGINE_MOVE_TIMES = [100, 250, 500, 1000, 2000, 5000];
 
 /** The opponent offered first. */
-export const DEFAULT_OPPONENT: OpponentId = "amara";
+export const DEFAULT_OPPONENT: OpponentId = "mimik";
 
 /** One side of the board taken by a bot; `engine` only when Stockfish sits there. */
 export interface Seat {
@@ -96,9 +96,30 @@ export function isOpponentId(id: unknown): id is OpponentId {
   return OPPONENTS.some((opponent) => opponent.id === id);
 }
 
-/** Unknown or legacy ids fall back to the default opponent. */
+/**
+ * The first ladder (people, 0.1.0) and the characters who took over each rung at the same rating,
+ * so a player's saved record, history and choices follow the rung to its new character.
+ */
+const RENAMED: Record<string, OpponentId> = {
+  kuba: "glut",
+  halina: "zenek",
+  tomek: "turbo",
+  amara: "mimik",
+  diego: "bazyl",
+  ingrid: "bronka",
+  hiro: "bogdan",
+  wiktor: "mordax",
+};
+
+/** A saved opponent id as it is today: a first-ladder id becomes the character on its rung. */
+export function currentOpponentId(id: unknown): unknown {
+  return typeof id === "string" && Object.hasOwn(RENAMED, id) ? RENAMED[id] : id;
+}
+
+/** Unknown ids fall back to the default opponent; the first ladder's ids find their rung. */
 export function getOpponent(id: string | null | undefined): Opponent {
-  return OPPONENTS.find((opponent) => opponent.id === id) ?? OPPONENTS.find((opponent) => opponent.id === DEFAULT_OPPONENT)!;
+  const current = currentOpponentId(id);
+  return OPPONENTS.find((opponent) => opponent.id === current) ?? OPPONENTS.find((opponent) => opponent.id === DEFAULT_OPPONENT)!;
 }
 
 export function getCharacter(id: OpponentId): Character | undefined {

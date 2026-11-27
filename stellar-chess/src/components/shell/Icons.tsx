@@ -89,10 +89,10 @@ export const IconExpand = ({ size = 18 }: P) => (
   </svg>
 );
 
-/** Brand wordmark; collapses to "SC" in the narrow sidebar. */
+/** Brand wordmark; collapses to "AC" in the narrow sidebar. */
 export const Logo = () => (
   <span className="logo">
-    <span className="logo__word">Stellar<b>Chess</b></span>
-    <span className="logo__short" aria-hidden="true">S<b>C</b></span>
+    <span className="logo__word">Arcade<b>Chess</b></span>
+    <span className="logo__short" aria-hidden="true">A<b>C</b></span>
   </span>
 );

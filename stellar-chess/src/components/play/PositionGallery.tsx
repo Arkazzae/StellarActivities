@@ -1,16 +1,19 @@
 import { useMemo } from "react";
+import { usePieceUrl } from "@/board-style";
+import type { PieceColor } from "@/engine/types";
 import { useTranslation } from "@/i18n";
 import { useUiStore } from "@/state/ui";
 import { boardCells, chess960Fen, parsePosition, PRESETS, type PositionPick, type PresetId } from "@/engine/positions";
 
 /** A small, static picture of a position, White at the bottom like a book diagram. */
 export function MiniBoard({ fen }: { fen: string | null }) {
+  const pieceUrl = usePieceUrl();
   const cells = useMemo(() => (fen ? boardCells(fen) : Array<string | null>(64).fill(null)), [fen]);
   return (
     <span className="mini-board" aria-hidden="true">
       {cells.map((piece, i) => (
         <span key={i} className={`mini-board__sq${((i >> 3) + i) % 2 ? " is-dark" : ""}`}>
-          {piece && <img src={`pieces/${piece}.webp`} alt="" draggable={false} />}
+          {piece && <img src={pieceUrl(piece[0] as PieceColor, piece[1])} alt="" draggable={false} />}
         </span>
       ))}
     </span>

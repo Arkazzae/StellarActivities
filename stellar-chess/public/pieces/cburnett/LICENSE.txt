@@ -1,0 +1,6 @@
+Chess pieces "cburnett" by Colin M.L. Burnett (https://en.wikipedia.org/wiki/User:Cburnett),
+licensed under the GNU General Public License, version 2 or later (GPLv2+):
+https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+The SVG files in this folder are unmodified copies of that set as distributed with Lichess
+(https://github.com/lichess-org/lila/tree/master/public/piece/cburnett).

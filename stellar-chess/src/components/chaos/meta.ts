@@ -17,24 +17,29 @@ import { getLocale, t, tn } from "@/i18n";
 export type ChaosCategory = ChaosEffectDefinition["category"];
 export type ChaosRarity = ChaosEffectDefinition["rarity"];
 
-export const CATEGORY: Record<ChaosCategory, { color: string; deep: string; band: string }> = {
-  arcane: { color: "#b393f5", deep: "#5b3fa8", band: "rgba(143, 106, 224, 0.45)" },
-  time: { color: "#5fb4f0", deep: "#1f5f96", band: "rgba(61, 155, 224, 0.42)" },
-  battle: { color: "#f07a55", deep: "#8a2f1a", band: "rgba(224, 97, 63, 0.42)" },
-  fate: { color: "#ffd65a", deep: "#9a7417", band: "rgba(255, 214, 90, 0.35)" },
+/**
+ * Category accents from Multiversal Chess's Chaos palette (orchid, ember, gold, mint): a thin edge
+ * glow, a sigil and the type line, never a filled frame.
+ */
+export const CATEGORY: Record<ChaosCategory, { color: string; deep: string }> = {
+  arcane: { color: "#9b6cff", deep: "#3b2a66" },
+  battle: { color: "#f28c38", deep: "#5a2c14" },
+  time: { color: "#d9b45b", deep: "#4d3d17" },
+  fate: { color: "#77e2a8", deep: "#1d4a37" },
 };
 
-export const RARITY: Record<ChaosRarity, { gems: number; color: string; inner: string }> = {
-  common: { gems: 1, color: "#c3c2c1", inner: "rgba(255, 255, 255, 0.08)" },
-  rare: { gems: 2, color: "#7fc4ff", inner: "rgba(127, 196, 255, 0.35)" },
-  legendary: { gems: 3, color: "#ffd65a", inner: "rgba(255, 214, 90, 0.55)" },
+/** Rarity as the metal of the card's edge: iron, silver, gold. */
+export const RARITY: Record<ChaosRarity, { edge: string; label: string }> = {
+  common: { edge: "rgba(241, 233, 210, 0.16)", label: "#aaa0b8" },
+  rare: { edge: "#9fb3d1", label: "#c3d2ea" },
+  legendary: { edge: "#d9b45b", label: "#ecd28a" },
 };
 
 export const effect = (id: ChaosEffectId) => CHAOS_EFFECT_BY_ID[id];
 export const effectName = (id: ChaosEffectId) => getChaosCopy(effect(id).name, getLocale());
 export const effectText = (id: ChaosEffectId) => getChaosCopy(effect(id).description, getLocale());
-export const effectIcon = (id: ChaosEffectId) => `icons/effects/${id}.webp`;
-export const categoryIcon = (category: ChaosCategory) => `icons/categories/${category}.webp`;
+/** A small picture of an effect: its own card illustration, cropped by the stylesheet. */
+export const effectIcon = (id: ChaosEffectId) => effect(id).art;
 export const categoryColor = (id: ChaosEffectId) => CATEGORY[effect(id).category].color;
 
 /** The card's own illustration, or null when it borrows another card's (its icon stands in). */

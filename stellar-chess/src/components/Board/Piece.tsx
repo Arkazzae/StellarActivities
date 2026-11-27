@@ -21,9 +21,7 @@ interface Props {
   src?: string;
 }
 
-function getPieceUrl(color: PieceColor, type: PieceType): string {
-  return `pieces/${color}${type}.webp`;
-}
+import { usePieceUrl } from "@/board-style";
 
 export function PieceComponent({
   color,
@@ -36,6 +34,7 @@ export function PieceComponent({
   src,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const pieceUrl = usePieceUrl();
   const [offset, setOffset] = useState(animateFrom);
 
   // When animateFrom changes, set initial offset then clear it to trigger transition
@@ -80,7 +79,7 @@ export function PieceComponent({
   return (
     <div className={classes} ref={ref} style={style}>
       <img
-        src={src ?? getPieceUrl(color, type)}
+        src={src ?? pieceUrl(color, type)}
         alt={`${color === "w" ? "White" : "Black"} ${type}`}
         draggable={false}
       />

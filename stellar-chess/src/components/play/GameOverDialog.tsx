@@ -4,7 +4,7 @@ import { isSpectating, useGameStore } from "@/state/game";
 import { useUiStore } from "@/state/ui";
 import { getOpponent } from "@/ai/bots";
 import { backToLobby, reasonText, rematch } from "@/game/session";
-import { useOnlineStore } from "@/online/sync";
+import { useOnlineStore, matchById } from "@/online/sync";
 import { useTranslation } from "@/i18n";
 import type { PieceColor } from "@/engine/types";
 import { presetGoal, startLabel } from "@/engine/positions";
@@ -23,7 +23,8 @@ export function GameOverDialog() {
   const spectating = useGameStore(isSpectating);
   const setPanelTab = useUiStore((s) => s.setPanelTab);
   const setViewPly = useGameStore((s) => s.setViewPly);
-  const match = useOnlineStore((s) => s.shared.match);
+  const shownId = useGameStore((s) => s.online?.matchId ?? null);
+  const match = useOnlineStore((s) => matchById(s.shared, shownId));
   const [open, setOpen] = useState(false);
   const [quip] = useState(() => Math.floor(Math.random() * 2));
   const { t } = useTranslation();
