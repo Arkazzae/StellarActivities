@@ -1,84 +1,32 @@
 # Doodle Drift
 
-A telephone drawing game for a Stellarr voice channel. Everyone starts an album, then writes,
-draws and describes in each other's albums; the host walks everyone through the reveal.
-The screens follow the design canvas the team accepted (lobby, round, reveal, end, modes).
+![Doodle Drift: telephone drawing chains and 22 party modes for Stellarr](../docs/doodle-drift/hero.webp)
 
-Start Doodle Drift in a voice channel to pass albums between players. To play on your own,
-open **Add a server and more → Solo activities → Doodle Drift** in the left rail and pick a
-one-player mode such as Flipbook.
+Doodle Drift is a broken-telephone drawing game for up to 14 players in a Stellarr voice channel, plus solo modes. Everyone starts an album, passes prompts, drawings and guesses around the circle, and watches the host walk through every page at the reveal.
 
-## Run
+![Doodle Drift live demo: choosing from 22 modes, sketching a rocket-toaster cat, and watching the album reveal with live reaction stamps](../docs/doodle-drift/demo.webp)
 
-```bash
-pnpm build                 # type-check + Vite build into dist/
-pnpm sdk:dev               # Stellarr simulator; each tab at / is a new player
-pnpm test                  # plan and protocol tests (node --test)
-```
+## Twenty-two modes, from classic chains to shared mosaics
 
-`pnpm dev` (plain Vite) runs a one-player stand-in without a room, which is enough for UI work.
+Pick a familiar sentence-drawing-caption chain, roll a random constraint every round in **Mixed bag**, or switch the structure of the game completely.
 
-The simulator and end-to-end tests use the workspace version of `@stellarr/sdk`. Set `STELLARR_SDK` to test a local SDK checkout.
+![Doodle Drift mode picker showing all four mode groups in English](../docs/doodle-drift/modes.webp)
 
-End-to-end in the simulator (Playwright's Chromium: `pnpm exec playwright install chromium` once):
+- **To start:** play **Classic chain**, roll a die twist per drawing in **Mixed bag**, write **Story** lines, or set **Custom rules**.
+- **One-round twists:** connect stars in **Constellation**, draw in **One line**, mirror strokes in **Kaleidoscope**, or use **Three crayons**. You can also sketch blind **In the dark** or cap captions at four words in **Telegram**.
+- **Different flows:** redraw vanishing art **From memory**, guess the opening line in **Between sentences**, or answer the **Same question**. Build **From scribbles**, fill a **Missing piece**, score links **For points**, or frame a **Masterpiece**.
+- **Animation and split canvas:** draw onion-skin frames in **Flipbook**, **Relay animation** and **Animation on a backdrop**. Or split creatures in **Patchwork monster** and paint live tiles of one **Mosaic**.
 
-```bash
-pnpm build && pnpm e2e classic 3   # mode, players
-RELOAD=1 pnpm e2e classic 3        # guest and host reload mid-round
-CLOSE=1 pnpm e2e classic 3         # the host leaves, the next player takes over
-```
+## Tactile sketchpad and group reveal
 
-Screenshots go to `reports/` (ignored by git).
+![Doodle Drift drawing studio next to the host-guided album reveal with floating reaction stamps](../docs/doodle-drift/draw-and-reveal.webp)
 
-## How the room is used
+- **Built-in drawing studio:** sketch with pen, brush, marker, flood fill and shapes across 12 colors and four sizes. Includes undo, redo, onion-skin overlays and kaleidoscope mirrors.
+- **Step-by-step reveal:** the host flips through each album at the group's pace while everyone throws live floating reaction stamps (`😂`, `❤️`, `😮`, `🔥`, `👏`).
+- **Save any chain as a GIF:** export your favourite album or flipbook animation as a shareable GIF at the end screen. Interface copy switches automatically between English and Polish.
 
-Stellarr gives a host-authoritative room (`"authority": "host"`). Its limits shape the design:
+## Install in Stellarr
 
-| Channel | Used for | Why |
-| --- | --- | --- |
-| Shared state (≤ 256 KiB) | phase, settings, roster, the match plan, round clock, who finished, reveal pointer, revealed sentences, votes | public, small, survives reloads |
-| Private assignments | each player's prompt for this round and a copy of every sentence they wrote | a new host rebuilds the sentences from the checkpoint |
-| Commands | `submit` (page key + text or picture hash) and `advance` (after the deadline) | the room's command ledger holds only 4096 entries and 4 MiB **per room**, so pictures never go through it |
-| Binary messages (≤ 64 KiB) | pictures (`img`), acknowledged by the host (`ack`), re-requested (`need`), mosaic tile previews (`tile`) | pictures are WebP/JPEG/PNG shrunk until they fit one message |
+Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **Doodle Drift**, and click **Install and enable**. Start it in a voice channel for group play, or open **Add a server and more → Solo activities → Doodle Drift** for solo modes like **Flipbook**.
 
-- The host writes state directly (`state.set`) for round changes and the reveal; it needs a command only when it must also hand out private assignments.
-- `state.store` holds the boot id of the host tab that holds the pictures. When it changes (host reload or failover), every player sends back the pictures and sentences they hold. The host also leaves a copy of its own drawings with another player.
-- Any player may ask to `advance` once the deadline plus a grace period has passed, because a hidden host tab sleeps.
-- Pictures are painted on `<canvas>` from decoded bytes, never shown through `blob:`/`data:` URLs, which the simulator's Content-Security-Policy refuses.
-- Names come from Stellarr without grammatical gender or case, so the copy uses forms like "Album: Ola" and "Kuba · rysunek".
-
-## Code map
-
-- `src/game/` — pure rules: modes table, `buildPlan()` (who works on which album each round, what they see, what they hand on), timings, stars, holes, tiles. Tested for every mode and 1–14 players.
-- `src/net/` — protocol types, reveal order, binary packets, picture encoding, and `Game`, which mirrors the room for the UI and runs the host's rules.
-- `src/draw/` — the drawing board: locked layers, onion skin, clip regions, kaleidoscope mirrors, one-line, blind drawing and the star tool.
-- `src/ui/` — screens: lobby and mode picker, countdown, tasks, waiting, reveal (chain, points, gallery, animation, monster, mosaic, exhibition), end and GIF export, settings.
-
-## Modes
-
-| Group | Mode | Rule |
-| --- | --- | --- |
-| To start | Klasyczny łańcuszek | sentence → drawing → caption, alternating |
-| | Mieszanka | each drawing round draws one of the dice rules; captions sometimes go by telegram |
-| | Opowieść | sentences only, you see only the previous one |
-| | Własne zasady | the host picks the order (sentence first, drawing first, drawings only as a comic, sentences only), rounds, seconds per sentence and drawing, and one extra rule |
-| One-round rule | Gwiazdozbiór | draw only by joining stars on a shared night sky |
-| | Jedna kreska | the whole drawing in one stroke |
-| | Kalejdoskop | strokes repeat 2, 4 or 6 times around the centre |
-| | Trzy kredki | three random colours per drawing |
-| | Po ciemku | the canvas is hidden and typed letters show as dots |
-| | Telegram | captions have at most four words |
-| Different flow | Z pamięci | drawings only after the first sentence; the previous drawing disappears at your first touch; less time each round |
-| | Między zdaniami | sentence, drawings from memory, the last player guesses the first sentence |
-| | Wspólny temat | everyone asks a question, everyone draws the same questions, gallery reveal |
-| | Z bazgrołów | a quick scribble, then everyone adds on without erasing what is there |
-| | Na punkty | a chain; on the reveal players mark pages that fit the previous one, the author scores |
-| | Brakujący kawałek | now and then you fill a hole cut out of someone's drawing |
-| | Arcydzieło | write a painting title, someone paints it with plenty of time, exhibition reveal |
-| Animation and split canvas | Kineograf | each player animates someone's theme in 4–5 frames with onion skin |
-| | Animacja w sztafecie | the animation travels; each player draws the next frame |
-| | Animacja na tle | one player draws a still backdrop, the next ones animate on top of it |
-| | Potwór z kawałków | head, body and legs by different players, each seeing only the edge above |
-| | Mozaika | a shared picture cut into tiles, drawn at the same time, with neighbours' edges visible |
-
-Several rules borrow mechanics from party drawing games; names, pictures, copy and layouts are this game's own.
+[All activities](../README.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases)
