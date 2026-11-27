@@ -2,7 +2,7 @@
 
 ![Stellarr Activities: SyncTube and Whiteboard](docs/hero.webp)
 
-Multiplayer apps that run directly inside a Stellarr voice channel or in a private solo session. Paste this repository URL into Cockpit once, pick an activity, and everyone in the channel can jump in with zero setup.
+Activities run inside Stellarr voice channels. Some also work solo, such as Whiteboard for private sketches. Paste this repository URL into Cockpit once, pick an activity, and everyone in the channel can jump in with zero setup.
 
 ---
 
@@ -16,7 +16,7 @@ Drop any YouTube link into the side panel to start a watch party. The first vide
 - **Frame-tight room playback:** play, pause, scrub and change speed (`0.5×` to `2×`) for everyone at once. Late joiners land on the current timestamp automatically.
 - **Democratic skip votes:** anyone can vote to skip, and the room moves on as soon as more than half of the viewers agree. The host, room founder and instance owner can skip right away.
 - **Saved spots per account:** SyncTube remembers where you stopped in unfinished videos. Open an empty room later to resume from that exact second.
-- **Personal device controls:** set your own volume on top of Stellarr's Game audio slider, press `T` for cinema mode, or launch a private solo queue.
+- **Personal device controls:** set your own volume on top of Stellarr's Game audio slider and press `T` for cinema mode.
 
 **[See the full SyncTube tour and screenshots →](synctube/)**
 
@@ -48,7 +48,7 @@ Everyone in the voice channel draws on the same infinite canvas at the same time
 
 1. Open **Cockpit → Activities** on your Stellarr instance and paste `https://github.com/Arkazzae/StellarrActivities`.
 2. Pick **SyncTube** or **Whiteboard**, check its version, download size and permissions, and select **Install and enable**.
-3. Open any voice channel to start a shared room with everyone there, or open **Friends → Activities → Launch for myself** for a private session.
+3. Start a shared activity from a voice channel. For a private Whiteboard, open **Add a server and more → Solo activities** at the bottom of the left rail and choose **Whiteboard**.
 
 Each activity updates and uninstalls independently in your library.
 

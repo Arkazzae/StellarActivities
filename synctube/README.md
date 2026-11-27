@@ -41,6 +41,6 @@ If the current host disconnects, SyncTube pauses at the last five-second checkpo
 
 ## Install in Stellarr
 
-Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **SyncTube**, and click **Install and enable**. Start it from a voice channel for a shared room, or open **Friends → Activities → SyncTube → Launch for myself** for a private queue.
+Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **SyncTube**, and click **Install and enable**. Open **Activities** in a voice channel and choose **SyncTube** to start a shared queue.
 
 [All activities](../README.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases) · [Artwork and font credits](ARTWORK.md)

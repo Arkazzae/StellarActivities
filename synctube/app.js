@@ -21,7 +21,6 @@ let participants = [];
 let host = null;
 let connection = "connected";
 let ready = false;
-let personal = false;
 let player;
 let playerItem;
 let endedItem;
@@ -389,15 +388,12 @@ function syncPlayer() {
 // Rendering
 
 function controlNote() {
-  if (personal) return "";
   if (state.settings.control !== "host") return t("ctrlEveryone");
   return host === me() ? t("ctrlYou") : t("ctrlHost", nameOf(host));
 }
 
 function renderHeader() {
   const people = connected();
-  ui["people-button"].hidden = personal;
-  ui["private-label"].hidden = !personal;
   ui["people-label"].textContent = ready ? t("watching", people.length) : t("joining");
   ui["people-stack"].replaceChildren(...(ready ? people.slice(0, 4).map(avatarFor) : []));
 }
@@ -411,7 +407,7 @@ function renderStage() {
   ui.stage.classList.toggle("is-empty", !item);
   ui.stage.classList.toggle("hosted", Boolean(session?.media?.youtube && item?.source === "youtube"));
   ui.welcome.hidden = Boolean(item) || state.history.length > 0;
-  ui["welcome-text"].textContent = t(personal ? "welcomePersonal" : "welcomeText");
+  ui["welcome-text"].textContent = t("welcomeText");
   ui["ran-out"].hidden = Boolean(item) || state.history.length === 0;
   ui.sample.disabled = !online || adding;
   ui.controls.hidden = !item;
@@ -488,7 +484,7 @@ function renderInfo() {
   const channel = item ? itemChannel(item) : "SyncTube";
   ui["channel-name"].textContent = channel;
   ui["channel-avatar"].textContent = channel.slice(0, 1).toUpperCase();
-  ui["added-line"].textContent = !item ? t("addToStart") : personal ? t("inPrivate") :
+  ui["added-line"].textContent = !item ? t("addToStart") :
     item.addedBy === me() ? t("addedByYou") : t("addedBy", nameOf(item.addedBy));
   ui.actions.hidden = !item;
 
@@ -496,7 +492,7 @@ function renderInfo() {
   const votes = liveVotes(state, ids);
   const threshold = voteThreshold(ids.length);
   const voted = votes.includes(me());
-  ui.vote.hidden = personal || !item;
+  ui.vote.hidden = !item;
   ui.vote.disabled = !hostOnline();
   ui.vote.setAttribute("aria-pressed", String(voted));
   ui["vote-text"].textContent = ui.vote.title = t(voted ? "voted" : "vote");
@@ -505,38 +501,26 @@ function renderInfo() {
     el("span", { class: index < votes.length ? "on" : "" })));
 
   const role = skipAs();
-  ui["skip-now"].hidden = personal || !item || !role || role === "control";
+  ui["skip-now"].hidden = !item || !role || role === "control";
   ui["skip-now"].title = t(role === "owner" ? "skipNowOwner" : "skipNowFounder");
   ui["copy-link"].hidden = item?.source !== "youtube";
   ui["open-youtube"].hidden = item?.source !== "youtube";
 
-  const bits = personal ? [t("privateSession")] : [t("watching", ids.length), controlNote()];
+  const bits = [t("watching", ids.length), controlNote()];
   bits.push(t(state.settings.autoplay ? "autoOn" : "autoOff"));
   if (state.settings.repeat) bits.push(t("repeatOn"));
   if ((state.playback.rate || 1) !== 1) bits.push(t("rateX", state.playback.rate));
   ui["room-line"].textContent = bits.join(" · ");
-  let sub;
-  if (personal) sub = t(progress.supported ? "roomSubPersonal" : "roomSubPersonalPlain");
-  else {
-    const founder = state.founder && participants.some(person => person.id === state.founder) ? state.founder : null;
-    const extra = ownerIds().includes(me()) ? t("roomSubYouOwner") :
-      founder === me() ? t("roomSubYouFounder") : founder ? t("roomSubFounder", nameOf(founder)) : "";
-    sub = [t("roomSubVote"), extra].filter(Boolean).join(" ");
-  }
-  ui["room-sub"].textContent = sub;
-}
-
-function visibleTabs() {
-  return TABS.filter(id => !(personal && id === "people"));
+  const founder = state.founder && participants.some(person => person.id === state.founder) ? state.founder : null;
+  const extra = ownerIds().includes(me()) ? t("roomSubYouOwner") :
+    founder === me() ? t("roomSubYouFounder") : founder ? t("roomSubFounder", nameOf(founder)) : "";
+  ui["room-sub"].textContent = [t("roomSubVote"), extra].filter(Boolean).join(" ");
 }
 
 function renderTabs() {
-  const visible = visibleTabs();
-  if (!visible.includes(tab)) tab = "queue";
   for (const id of TABS) {
     const button = ui[`tab-${id}`];
     const selected = id === tab;
-    button.hidden = !visible.includes(id);
     button.setAttribute("aria-selected", String(selected));
     button.tabIndex = selected ? 0 : -1;
     ui[`panel-${id}`].hidden = !selected;
@@ -582,7 +566,7 @@ function renderResume() {
   ui["resume-title"].textContent = spot.title || `YouTube · ${spot.videoId}`;
   ui["resume-meta"].textContent = [spot.author, t("resumeStopped", formatTime(spot.position))].filter(Boolean).join(" · ");
   ui["resume-bar"].style.width = spot.duration ? `${Math.min(100, spot.position / spot.duration * 100)}%` : "0";
-  ui["resume-start"].textContent = t(personal ? "resumeHere" : "resumeStartRoom", formatTime(spot.position));
+  ui["resume-start"].textContent = t("resumeStartRoom", formatTime(spot.position));
   ui["resume-start"].disabled = !hostOnline() || adding;
   ui["resume-start"].onclick = () => addVideo({
     source: "youtube", type: "add", videoId: spot.videoId, startSeconds: spot.position, title: spot.title, author: spot.author,
@@ -609,12 +593,12 @@ function renderQueue() {
     toggle.setAttribute("aria-checked", String(state.settings.autoplay));
     toggle.disabled = !isHost();
   }
-  ui["lock-note"].hidden = personal || ctl || !online;
+  ui["lock-note"].hidden = ctl || !online;
   ui["lock-note"].textContent = t("lockNote", nameOf(host)) + (skipAs() ? t("lockSkip") : "");
   renderResume();
   ui["queue-empty"].hidden = state.queue.length > 0;
 
-  const signature = JSON.stringify([state.queue, ctl, me(), openMenu, language, personal,
+  const signature = JSON.stringify([state.queue, ctl, me(), openMenu, language,
     participants.map(person => [person.id, person.name])]);
   if (listSignatures.queue === signature) return;
   listSignatures.queue = signature;
@@ -628,8 +612,7 @@ function renderQueue() {
       disabled: !ctl, "data-action": `${item.id}:play`,
     });
     playButton.onclick = () => run({ type: "select", id: item.id, currentId: state.current?.id });
-    const by = personal ? (item.startSeconds ? t("from", formatTime(item.startSeconds)) : t("inYourQueue")) :
-      (item.addedBy === me() ? t("addedByYou") : t("addedBy", nameOf(item.addedBy))) +
+    const by = (item.addedBy === me() ? t("addedByYou") : t("addedBy", nameOf(item.addedBy))) +
       (item.startSeconds ? ` · ${t("from", formatTime(item.startSeconds))}` : "");
     const text = el("div", { class: "row-text" },
       el("div", { class: "row-title", text: title, title }),
@@ -745,8 +728,7 @@ function renderSettings() {
   for (const button of ui.language.querySelectorAll("[data-language]"))
     button.setAttribute("aria-pressed", String(button.dataset.language === languagePref));
   ui["language-sub"].textContent = t("languageSub", LANGUAGE_NAMES[resolveLanguage(stellarrLocale)]);
-  ui["room-note"].textContent = personal ? t("roomNotePersonal") : isHost() ? t("roomNoteHost") : t("roomNoteGuest", nameOf(host));
-  ui["control-setting"].hidden = personal;
+  ui["room-note"].textContent = isHost() ? t("roomNoteHost") : t("roomNoteGuest", nameOf(host));
   for (const button of ui["control-mode"].querySelectorAll("[data-control]")) {
     button.setAttribute("aria-pressed", String(button.dataset.control === state.settings.control));
     button.disabled = !isHost();
@@ -1032,13 +1014,12 @@ ui.tabs.onclick = event => {
   render();
 };
 ui.tabs.onkeydown = event => {
-  const visible = visibleTabs();
-  const index = visible.indexOf(tab);
+  const index = TABS.indexOf(tab);
   let next;
-  if (event.key === "ArrowRight") next = visible[(index + 1) % visible.length];
-  else if (event.key === "ArrowLeft") next = visible[(index - 1 + visible.length) % visible.length];
-  else if (event.key === "Home") next = visible[0];
-  else if (event.key === "End") next = visible.at(-1);
+  if (event.key === "ArrowRight") next = TABS[(index + 1) % TABS.length];
+  else if (event.key === "ArrowLeft") next = TABS[(index - 1 + TABS.length) % TABS.length];
+  else if (event.key === "Home") next = TABS[0];
+  else if (event.key === "End") next = TABS.at(-1);
   if (!next) return;
   event.preventDefault();
   tab = next;
@@ -1119,7 +1100,6 @@ try {
   session = await connect({ initialState: emptyRoom() });
   if (!session.commands || !session.host || !session.media?.volume || !session.participants)
     throw new Error("sdkMissing");
-  personal = session.context.launchMode === "personal";
   canRate = !session.media.youtube;
   stellarrLocale = session.context.locale || stellarrLocale;
   const setDevice = device => { if (device) document.documentElement.dataset.device = device; };

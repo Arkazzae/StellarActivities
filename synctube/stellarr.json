@@ -22,7 +22,6 @@
     }
   ],
   "launchModes": [
-    "voice",
-    "personal"
+    "voice"
   ]
 }

@@ -4,6 +4,10 @@ A telephone drawing game for a Stellarr voice channel. Everyone starts an album,
 draws and describes in each other's albums; the host walks everyone through the reveal.
 The screens follow the design canvas the team accepted (lobby, round, reveal, end, modes).
 
+Start Doodle Drift in a voice channel to pass albums between players. To play on your own,
+open **Add a server and more → Solo activities → Doodle Drift** in the left rail and pick a
+one-player mode such as Flipbook.
+
 ## Run
 
 ```bash

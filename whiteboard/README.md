@@ -41,6 +41,6 @@ Export any board or selection to a `1×`, `2×` or `3×` PNG (on paper or transp
 
 ## Install in Stellarr
 
-Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **Whiteboard**, and click **Install and enable**. Launch it in a voice channel so everyone shares the board, or open **Friends → Activities → Whiteboard → Launch for myself** for a private scratchpad.
+Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **Whiteboard**, and click **Install and enable**. Launch it in a voice channel so everyone shares the board, or choose **Add a server and more → Solo activities → Whiteboard** in the left rail for a private scratchpad.
 
 [All activities](../README.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases) · [Artwork and font credits](ARTWORK.md)

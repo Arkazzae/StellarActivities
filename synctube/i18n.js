@@ -1,6 +1,5 @@
 // English and Polish strings. The default follows session.context.locale; Settings can override it.
 const en = {
-  privateSession: "Private session",
   watching: n => `${n} watching`,
   roomPanel: "Room panel",
   tabQueue: "Queue",
@@ -26,7 +25,6 @@ const en = {
   addedBy: n => `Added by ${n}`,
   addedByYou: "Added by you",
   from: t => `from ${t}`,
-  inYourQueue: "In your queue",
   playNow: "Play now",
   playNowLabel: x => `Play ${x} now`,
   moreLabel: x => `Actions for ${x}`,
@@ -40,7 +38,6 @@ const en = {
   resumeOnlyYou: "Only you see this",
   resumeStopped: t => `You stopped at ${t}`,
   resumeStartRoom: t => `Start the room at ${t}`,
-  resumeHere: t => `Resume at ${t}`,
   forget: "Forget",
 
   playedSession: "Played this session",
@@ -72,7 +69,6 @@ const en = {
   myVolume: "My volume",
   volumeSub: "On top of Stellarr’s Game audio level",
   theRoom: "The room",
-  roomNotePersonal: "Only you are here, so these apply to your queue.",
   roomNoteHost: "These apply to everyone watching.",
   roomNoteGuest: h => `${h} changes these for the room.`,
   whoControls: "Who controls playback",
@@ -90,7 +86,6 @@ const en = {
 
   welcomeTitle: "Watch together",
   welcomeText: "Paste a YouTube link in the Queue tab. The first video starts the room for everyone here.",
-  welcomePersonal: "Paste a YouTube link in the Queue tab to start your private queue.",
   trySample: "Try the sample clip",
   sampleNote: "The sample is bundled with SyncTube and plays without YouTube.",
   sampleTitle: "SyncTube cinema sample",
@@ -125,7 +120,6 @@ const en = {
 
   nothingPlaying: "Nothing playing",
   addToStart: "Add a video to start the room",
-  inPrivate: "In your private queue",
   vote: "Vote to skip",
   voted: "Voted to skip",
   skipNow: "Skip now",
@@ -144,8 +138,6 @@ const en = {
   roomSubYouFounder: "You started this room, so you can skip without a vote.",
   roomSubFounder: n => `${n} started this room and can skip without a vote.`,
   roomSubYouOwner: "You own this instance, so you can skip without a vote.",
-  roomSubPersonal: "Only you see this queue. Your spot in each video is saved to your account.",
-  roomSubPersonalPlain: "Only you see this queue.",
 
   added: "Added to the queue",
   noticeVote: "Skipped by vote",
@@ -205,7 +197,6 @@ const en = {
 };
 
 const pl = {
-  privateSession: "Sesja prywatna",
   watching: n => `Ogląda: ${n}`,
   roomPanel: "Panel pokoju",
   tabQueue: "Kolejka",
@@ -231,7 +222,6 @@ const pl = {
   addedBy: n => `Dodaje ${n}`,
   addedByYou: "Dodane przez ciebie",
   from: t => `od ${t}`,
-  inYourQueue: "W twojej kolejce",
   playNow: "Odtwórz teraz",
   playNowLabel: x => `Odtwórz teraz: ${x}`,
   moreLabel: x => `Opcje: ${x}`,
@@ -245,7 +235,6 @@ const pl = {
   resumeOnlyYou: "Widzisz to tylko ty",
   resumeStopped: t => `Twoje miejsce: ${t}`,
   resumeStartRoom: t => `Zacznij pokój od ${t}`,
-  resumeHere: t => `Wznów od ${t}`,
   forget: "Zapomnij",
 
   playedSession: "Obejrzane w tym seansie",
@@ -277,7 +266,6 @@ const pl = {
   myVolume: "Moja głośność",
   volumeSub: "Dodatkowo do suwaka dźwięku gry w Stellarr",
   theRoom: "Pokój",
-  roomNotePersonal: "Nikogo więcej tu nie ma, więc to dotyczy twojej kolejki.",
   roomNoteHost: "Dotyczy wszystkich oglądających.",
   roomNoteGuest: h => `Dla pokoju zmienia je: ${h}.`,
   whoControls: "Kto steruje odtwarzaniem",
@@ -295,7 +283,6 @@ const pl = {
 
   welcomeTitle: "Oglądajcie razem",
   welcomeText: "Wklej link z YouTube w zakładce Kolejka. Pierwszy film uruchamia pokój dla wszystkich.",
-  welcomePersonal: "Wklej link z YouTube w zakładce Kolejka, aby zacząć prywatną kolejkę.",
   trySample: "Wypróbuj przykładowy klip",
   sampleNote: "Przykład jest dołączony do SyncTube i działa bez YouTube.",
   sampleTitle: "Przykładowy klip SyncTube",
@@ -330,7 +317,6 @@ const pl = {
 
   nothingPlaying: "Nic nie gra",
   addToStart: "Dodaj film, aby zacząć",
-  inPrivate: "W twojej prywatnej kolejce",
   vote: "Głosuj za pominięciem",
   voted: "Głos oddany",
   skipNow: "Pomiń teraz",
@@ -349,8 +335,6 @@ const pl = {
   roomSubYouFounder: "Ten pokój jest twój, więc możesz pominąć film bez głosowania.",
   roomSubFounder: n => `Założyciel pokoju: ${n}. Może pominąć film bez głosowania.`,
   roomSubYouOwner: "Masz uprawnienia właściciela instancji, więc możesz pominąć film bez głosowania.",
-  roomSubPersonal: "Tylko ty widzisz tę kolejkę. Twoje miejsce w każdym filmie zapisuje się na koncie.",
-  roomSubPersonalPlain: "Tylko ty widzisz tę kolejkę.",
 
   added: "Dodano do kolejki",
   noticeVote: "Pominięto głosowaniem",
