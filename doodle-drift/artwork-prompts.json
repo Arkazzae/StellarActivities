@@ -1,0 +1,18 @@
+{
+  "generator": "built-in image_gen",
+  "created": "2026-09-07",
+  "slug": "doodle-drift",
+  "name": "Doodle Drift",
+  "palette": "deep navy #07152c, warm cream paper #f7e8c9, coral #ff6847 and lime #b5cf3b",
+  "style": "playful editorial cut-paper illustration with thick hand-drawn navy outlines, visible warm paper grain and charming imperfect shapes",
+  "bg": "A lively chain of drawing and guessing: three warm paper sheets connected by a looping hand-drawn line, a simple doodled cat transforming into a rocket then into a flower, a large coral pencil and a lime speech bubble floating nearby. Scattered across deep navy, playful tactile party-game energy, no words.",
+  "icon": "A chunky coral pencil joined with a cream speech bubble in one compact playful mark, a lime looping cord suggesting telephone and drawing, thick navy hand-drawn outline on deep navy background.",
+  "assets": {
+    "background": "public/artwork/activity-bg-v2.webp",
+    "icon": "public/artwork/icon-v2.png"
+  },
+  "prompts": {
+    "background": "Use case: stylized-concept. Asset type: standalone app activity background / store cover for StellarPhone. Generate ONE finished image, landscape 16:9, ideally 1536x864. Scene: A lively chain of drawing and guessing: three warm paper sheets connected by a looping hand-drawn line, a simple doodled cat transforming into a rocket then into a flower, a large coral pencil and a lime speech bubble floating nearby. Scattered across deep navy, playful tactile party-game energy, no words. Style: playful editorial cut-paper illustration with thick hand-drawn navy outlines, visible warm paper grain and charming imperfect shapes. Palette: deep navy #07152c, warm cream paper #f7e8c9, coral #ff6847 and lime #b5cf3b. Composition: strong memorable main subject in the central 60 percent so both landscape and square center crops work, atmospheric quieter edges and dark enough lower edge for a host to overlay its own title. Full-bleed finished artwork, no frames. This is artwork, not a screenshot, not a UI mockup. No typography, words, letters, watermark, logos, title, collage, asset sheet or inset icon. Use only the named subjects. Art-direct it specifically to this application's character.",
+    "icon": "Use case: logo-brand. Asset type: standalone square app icon for StellarPhone. Generate ONE finished square 1024x1024 image. Subject: A chunky coral pencil joined with a cream speech bubble in one compact playful mark, a lime looping cord suggesting telephone and drawing, thick navy hand-drawn outline on deep navy background. Style: playful editorial cut-paper illustration with thick hand-drawn navy outlines, visible warm paper grain and charming imperfect shapes. Palette: deep navy #07152c, warm cream paper #f7e8c9, coral #ff6847 and lime #b5cf3b. Composition: one central large emblem filling about 72 percent of the square, ample clear padding, bold simplified forms that remain instantly recognizable at 32px. Background fills the entire square to the edges; do not draw rounded outer app-tile corners, border, inset card or mockup device. Refined material and lighting, restrained details. No typography, words, letters, watermark, titles, extra logos, collage or multiple icon variants. Must feel like the sibling icon of this application's background."
+  }
+}

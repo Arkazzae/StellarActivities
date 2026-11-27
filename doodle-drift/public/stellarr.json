@@ -1,0 +1,11 @@
+{
+  "protocol": 1,
+  "id": "doodle-drift",
+  "name": "Doodle Drift",
+  "description": "A telephone game for your voice channel: write a sentence, draw someone else's, describe a drawing, then watch every album unfold together. Twenty-two modes, from the classic chain to constellations, one-line drawings, a patchwork monster, relay animations and a shared mosaic.",
+  "version": "0.2.0",
+  "icon": "artwork/icon-v2.png",
+  "cover": "artwork/activity-bg-v2.webp",
+  "launchModes": ["voice", "personal"],
+  "authority": "host"
+}

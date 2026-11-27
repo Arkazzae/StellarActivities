@@ -1,0 +1,19 @@
+{
+  "id": "doodle-drift",
+  "name": "Doodle Drift",
+  "version": "0.1.0",
+  "type": "activity",
+  "description": "Telephone-style drawing and writing party game for friends",
+  "author": "Stellar",
+  "category": "game",
+  "tags": ["party", "drawing", "writing", "telephone", "social", "multiplayer"],
+  "supportedLanguages": ["en", "pl"],
+  "platforms": ["desktop"],
+  "environment": "development",
+  "minPlayers": 2,
+  "maxPlayers": 14,
+  "capabilities": ["syncState", "storage"],
+  "entryPoints": {
+    "activity": { "path": "index.html", "type": "iframe" }
+  }
+}

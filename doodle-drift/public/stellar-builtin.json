@@ -1,0 +1,11 @@
+{
+  "kind": "activity",
+  "entry": "index.html",
+  "displayName": "Doodle Drift",
+  "description": "Telephone-style drawing and writing party game for friends",
+  "author": "Stellar",
+  "color": "#ff6847",
+  "icon": "artwork/icon-v2.png",
+  "activityBg": "artwork/activity-bg-v2.webp",
+  "needsSetup": false
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@stellar/app-doodle-drift",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "node --test src/game/ src/net/",
+    "sdk:dev": "node scripts/stellarr.mjs dev --dir dist",
+    "sdk:validate": "node scripts/stellarr.mjs validate --dir dist",
+    "e2e": "node scripts/e2e.mjs"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.40.0",
+    "modern-gif": "^2.0.4",
+    "perfect-freehand": "^1.2.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@stellarr/sdk": "0.3.0",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "~5.9.3",
+    "vite": "^6.0.1"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules
+dist
+*.tsbuildinfo
+
+# Scraped reference assets (Gartic Phone copyright — local-only inspiration)
+_refs/
+reports/
+dist-next
