@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Renamed from Stellar Chess to Arcade Chess, to match the game-character bots and the pixel-art look. Only the shown name changed: the activity id stays `stellar-chess`, so saved progress carries over.
+- Renamed from Stellar Chess to Arcade Chess, to match the game-character bots and the pixel-art look. The folder and the activity id are now `arcade-chess`; there was no release under the old id, so no saved progress is lost.
 - A new pixel-art icon (a knight on an arcade screen, also the logo mark in the sidebar) and cover (the bots around the board in a night-time arcade).
 - New bots: eight parodies of video-game types instead of eight ordinary people, with 32-bit-style pixel-art portraits (Stockfish too) and new lines in Polish and English: Glut the level-1 slime (250), Zenek the villager NPC (450), Turbo the speedrunner (700), Mimik the treasure-chest trap (1000), Bazyl the travelling merchant (1300), Bronka the tank (1600), Bogdan the fighting-game combo master (1900) and Mordax the final boss (2200). Each keeps its rung's strength, with a play style to match. Records, history and choices against the first ladder move to the character on the same rung.
 - Stellarr Elo for Multiplayer: every finished game moves both players' rating (start 1200, K = 32). The Ladder page has a Players tab: the session ranked by Elo with each player's last change, games, wins–draws–losses, score and best rating, the session's results with the change each game made, and your own card with your last games. The bots' ladder moved to a Bots tab. Your Elo is saved in your Stellarr progress and shows under your name in the sidebar.

@@ -48,7 +48,7 @@ try {
   await cover.goto(`http://localhost:${port}/`);
   await cover.waitForSelector(".home");
   await cover.waitForTimeout(600);
-  const png = join(mkdtempSync(join(tmpdir(), "stellar-chess-")), "cover.png");
+  const png = join(mkdtempSync(join(tmpdir(), "arcade-chess-")), "cover.png");
   await cover.screenshot({ path: png });
   execFileSync("cwebp", ["-quiet", "-q", "82", png, "-o", join(root, "public/cover.webp")]);
 } finally {

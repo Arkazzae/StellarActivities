@@ -64,7 +64,7 @@ function observable<T>(initial: T) {
   };
 }
 
-const PROGRESS_KEY = "stellar-chess:progress";
+const PROGRESS_KEY = "arcade-chess:progress";
 
 function readLocal(): ActivityState | null {
   try {

@@ -2,7 +2,7 @@
 
 Szachy dla Stellarra, zbudowane na interfejsie [FlyChess](https://github.com/Arkazzae/flychess), ale bez muchy: bez konektomu, modelu DROSO-1 i widoku mózgu. Zostały plansza, analiza partii, zadania i boty grające ruchami Stockfisha. Do tego doszły menu, drabinka przeciwników, Chaos Chess z Multiversal Chess i gra z ludźmi na kanale głosowym przez SDK Stellarra.
 
-Do 27 listopada 2026 aktywność nazywała się Stellar Chess. Identyfikator `stellar-chess` (folder, manifest, zapisany postęp graczy) został bez zmian.
+Do 27 listopada 2026 aktywność nazywała się Stellar Chess, a jej folder i identyfikator `stellar-chess`. Nie miała jeszcze wydania, więc zmiana identyfikatora nie kasuje niczyjego postępu.
 
 ## Co jest w środku
 
