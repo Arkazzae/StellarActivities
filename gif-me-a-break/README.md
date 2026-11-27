@@ -1,52 +1,35 @@
 # Gif Me a Break
 
-Gra na GIF-y dla kanału głosowego Stellarr, po polsku i po angielsku. Pada temat (dwa do wyboru, czasem z imieniem kogoś z kanału), każdy szuka GIF-a, który pasuje najlepiej, potem pokaz memów jeden po drugim z naklejkami rzucanymi na żywo i głosowanie. Od 3 do 8 osób.
+![Gif Me a Break: voice-channel GIF party game for Stellarr](../docs/gif-me-a-break/hero.webp)
 
-Projekt ekranów: https://claude.ai/artifact/5wCWMBuDjzX1uJKq2W9cQk (strona „Kierunek C”). Roboczo gra nazywała się „Pętla”, stąd `window.petla` w konsoli i nazwy plików grafik.
+Gif Me a Break is a reaction-GIF party game for 3 to 8 players in a Stellarr voice channel. A prompt drops, everyone hunts down the sharpest GIF, submissions play under the spotlight while stickers fly, and the room votes a winner.
 
-## Tryby
+![Gif Me a Break live demo: starting from the lobby, throwing reaction stickers during the spotlight show, voting, and celebrating on the podium](../docs/gif-me-a-break/demo.webp)
 
-| Tryb | Zasady |
-| --- | --- |
-| Klasyk / Classic | Wszyscy szukają, wszyscy głosują. 1 pkt za głos, na swój mem nie wolno. |
-| Zakaz słów / Banned words | Jak Klasyk, ale wyszukiwarka nie przyjmie słów z tematu ani ich odmian (każdy widzi zakaz w swoim języku). |
-| Reżyser / Director | Co rundę ktoś inny (po kolei, z pominięciem nieobecnych) wybiera temat i zwycięzcę, sam nie szuka. Wybrany mem: 3 pkt. |
-| Napisy / Captions | Prowadzący losuje dwa GIF-y, gracze wybierają jeden i każdy dopisuje do niego tekst (do 90 znaków). Głosuje się na napisy. |
+## Anonymous spotlight show and live stickers
 
-## Języki
+Each player reads prompts, labels and awards in English or Polish from their own Stellarr locale, even in mixed-language channels.
 
-Każdy gracz widzi grę w języku swojego interfejsu Stellarr (`session.locale`): polski dla `pl*`, angielski dla reszty. Pokój trzyma tylko id tematów, imiona i liczby; zdania (tematy, nagrody, odmowy prowadzącego) każdy składa u siebie. Teksty: `src/i18n/index.ts`, tematy w obu językach: `src/game/topics.ts`.
+![Gif Me a Break spotlight reveal with flying stickers alongside the 6-card voting grid](../docs/gif-me-a-break/reveal-and-vote.webp)
 
-## GIF-y
+- **Vote on the prompt:** each round offers two situations (with an option to weave channel members' names into the jokes).
+- **Privacy-safe GIPHY search:** search runs through Stellarr's `media.gifs` proxy, keeping API keys and player addresses private.
+- **Throw stickers mid-show:** authors stay hidden during the reveal while everyone throws five stickers (`haha`, `10/10`, `nieee`, `pff`, `brawo`).
+- **Desktop, tablet and phone layouts:** scales cleanly from widescreen desktop stages down to vertical mobile screens.
 
-Gra korzysta z `session.media.gifs` (uprawnienie `media.gifs` w `stellarr.json`). Stellarr szuka w GIPHY kluczem instancji i z ustawieniem prywatności gracza; ramka gry dostaje tylko id, rozmiary i obrazki, nigdy klucza ani adresów. Podpis GIPHY dorysowuje sam Stellarr. Do stanu pokoju trafiają wyłącznie id GIF-ów.
+## Four ways to play, plus end-of-match awards
 
-- Limity ramki: 30 wyszukiwań i 120 wczytań na minutę, 4 naraz. Gra szuka po 12 wyników, miniatury wczytuje dopiero w polu widzenia i w osobnej kolejce (memy z pokazu idą pierwsze), a odrzucone przez limit wczytanie ponawia po przerwie.
-- Lobby sprawdza, czy GIF-y działają: bez GIF-ów na instancji prowadzący nie zacznie, a gracz z wyłączonym GIPHY dostaje uwagę.
-- `stellarr dev`: odpowiada własnym zestawem testowych GIF-ów, bez sieci i klucza.
-- zwykłe `vite dev` (poza Stellarr): sześć zdjęć zastępczych z `public/art/demo/`.
+![Gif Me a Break lobby showing all four modes next to the confetti podium and match awards](../docs/gif-me-a-break/modes-and-podium.webp)
 
-## Polecenia
+- **Classic:** everyone searches for a GIF and votes (`1 pt` per vote, never for your own submission).
+- **Banned words:** search refuses words from the prompt and their inflected forms, forcing creative workarounds.
+- **Director:** one rotating player picks the round's prompt and crowns a single `3 pt` winner.
+- **Captions:** two random GIFs appear, everyone writes a caption up to 90 characters, and the room votes on the funniest line.
 
-```sh
-pnpm install
-pnpm test            # zasady, tryby, języki (vitest)
-pnpm build
-pnpm sdk:validate
-pnpm test:browser    # w stellarr dev: mecz w Zakazie słów (5 rund, gracze PL i EN, wyłączone GIF-y,
-                     # przeładowanie, widz, odejście prowadzącego), runda Reżysera, runda Napisów;
-                     # potem piaskownica z CSP Stellarr
-pnpm test:screens    # zrzuty każdego ekranu i trybu z ?preview=<faza>, PL i EN, 1360×812, 1100×650 i 390
-pnpm sdk:dev         # symulator; „New player” dodaje kolejną osobę
-```
+At the end, Pętlik crowns the top three on the podium and hands out awards (**On a roll**, **Full house**, **Fastest finger**, **Tough crowd**). Every round-winning meme lines up below.
 
-Podgląd jednego ekranu bez grania: zbudowana aplikacja otwarta poza Stellarr z `?preview=lobby|topic|search|reveal|vote|results|final`, opcjonalnie `&mode=rezyser|napisy`, `&lang=pl|en`, `&as=guest`.
+## Install in Stellarr
 
-## Budowa
+Your Stellarr instance needs GIPHY enabled in Cockpit so `media.gifs` searches are available. Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **Gif Me a Break**, and click **Install and enable**. Gather 3 to 8 people in a voice channel and launch the activity to play.
 
-- `src/game`: czyste zasady (fazy, punkty, tryby, tematy, zakaz słów) z testami. Każda decyzja prowadzącego zależy tylko od stanu, przypisań graczy i ziarna z id meczu, więc nowy prowadzący decyduje tak samo.
-- `src/net/game.ts`: pokój. Komendy idą do zasad, prowadzący popycha terminy i losuje GIF-y w Napisach, naklejki lecą przez `send` (nie zapychają rejestru komend), obrazki GIF-ów są trzymane, dopóki runda ich potrzebuje.
-- `src/ui`: ekrany. Na komputerze scena 1360×812 jak na canvasie, skalowana do ramki; na telefonie układ pionowy.
-- GIF, napis i głos gracza są w jego prywatnym przypisaniu aż do pokazu i wyników; stan publiczny mówi tylko, kto skończył. Kolejność pokazu losuje ziarno z prywatnymi czasami wysłania, więc ze stanu publicznego nie da się odgadnąć autorów.
-
-Grafiki (kot Pętlik, logo, naklejki, tła, okładka, zdjęcia zastępcze) zrobił Codex wg `ARTWORK.md`; źródła w `artwork/`, wersje do gry w `public/art/`.
+[All activities](../README.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases) · [Artwork notes](ARTWORK.md)
