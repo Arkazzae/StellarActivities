@@ -1,75 +1,49 @@
 # Arcade Chess
 
-Szachy dla Stellarra, zbudowane na interfejsie [FlyChess](https://github.com/Arkazzae/flychess), ale bez muchy: bez konektomu, modelu DROSO-1 i widoku mózgu. Zostały plansza, analiza partii, zadania i boty grające ruchami Stockfisha. Do tego doszły menu, drabinka przeciwników, Chaos Chess z Multiversal Chess i gra z ludźmi na kanale głosowym przez SDK Stellarra.
+![Arcade Chess: pixel-art bots, voice-channel tables and puzzles for Stellarr](../docs/arcade-chess/hero.webp)
 
-Do 27 listopada 2026 aktywność nazywała się Stellar Chess, a jej folder i identyfikator `stellar-chess`. Nie miała jeszcze wydania, więc zmiana identyfikatora nie kasuje niczyjego postępu.
+Arcade Chess brings timed multiplayer tables, a pixel-art rival ladder, tactical puzzles and Stockfish analysis into Stellarr. Play head-to-head in a voice channel while friends spectate, or open a solo session to climb the bot ladder and drill tactics.
 
-## Co jest w środku
+![Arcade Chess live demo: picking a pixel-art rival, playing a match, checking open voice tables and opening Puzzles](../docs/arcade-chess/demo.webp)
 
-- **Menu.** Boczny pasek jak na stronach szachowych: Graj (rozwija listę: gra z botem, multiplayer, bot kontra bot, zadania, analiza ostatniej partii), Zadania, Multiplayer, Drabinka i Statystyki. Tryb wybiera się tylko w menu; ekran gry pokazuje już tylko opcje danego trybu. Na telefonie pasek zmienia się w górną belkę z ikonami.
-- **Statystyki** (strona startowa). Partie, procent wygranych, najdłuższa seria i postęp na drabince za 7, 14 lub 30 dni albo cały czas; wygrane, remisy i porażki dzień po dniu; wyniki białymi i czarnymi; ostatnie partie z przejściem do analizy; najczęstsze debiuty. Historia (do 40 partii) zapisuje się w postępie Stellarra.
-- **Zadania.** Ranking zadań (Elo względem rankingu zadania), seria dni z zadaniem dnia (codziennie inne zadanie z banku) i ostatni tydzień, odliczanie do następnego zadania, Błyskawica (3 minuty matów w 1, trzy pomyłki kończą serię, rekord), motywy na prawdziwych pozycjach (mat na ostatniej linii, stłumiony, promocja, podwójny szach, maty poszczególnymi figurami), pozycje testowe i końcówki przeciw obronie Stockfisha z najlepszym czasem, sześć odznak. Przy pozycji testowej panel jak w makiecie: stan próby, podpowiedź, „zagraj następny ruch”, od nowa, następne zadanie. Bank 190 zadań (150 matów w 1, 40 w 2) generuje `scripts/puzzle-bank.mjs` z partii rozegranych przez prostą politykę, a `src/data/puzzle-bank.test.ts` sprawdza, że każde ma jedno rozwiązanie. Chess960 i własny FEN zostały jako „inne starty”.
-- **Chaos Chess (na razie ukryte).** Gotowe, ale wyłączone przełącznikiem `CHAOS_ENABLED` w `src/features.ts`, dopóki karty i grafiki nie są dopracowane. Karty mają wygląd Multiversal Chess: ciemna karta, ilustracja przechodząca w tekst, kategoria jako znak, rzadkość jako metal krawędzi. Każda z 50 kart ma własną ilustrację. Rywale to klasy fantasy w tym samym kinowym stylu: Czarodziejka Iskra (600, karty Magii), Kronomanta Bruno (950, Czasu), Wojownik Bolko (1300, Walki), Wyrocznia Mira (1650, Losu) i Arbiter Chaosu Nox (2000, zawsze najlepsza karta). Ma własne menu z talią do przejrzenia. Rozgrywka: co 4 ruchy draft 1 z 3 kart z talii 50 efektów, niektóre karty każą wskazać pole, aktywne efekty w panelu i kronice, specjalne figury, bot dobiera karty sam. Tylko przeciw botom; ruchów nie da się cofnąć, a zamiast analizy silnikiem partię przegląda się ruch po ruchu.
-- **Drabinka graczy i Stellarr Elo.** Zakładka „Gracze” na stronie Drabinki: ranking osób z sesji według Stellarr Elo (ostatnia zmiana, partie, W–R–P, wynik procentowy, najwyższe Elo), wyniki skończonych partii z tym, ile każda zmieniła obu graczom, i karta gracza z jego ostatnimi partiami. Elo liczą tylko partie w Multiplayerze: start 1200, K = 32. Elo jest też pod nazwą w pasku bocznym.
-- **Drabinka przeciwników** (zakładka „Boty”). Ośmiu botów rodem z gier: parodie typów postaci, które zna każdy gracz, a nie konkretnych bohaterów. Każdy ma własny styl gry, teksty po polsku i angielsku, ranking i portret w pixel arcie w stylu ery 32-bit:
+## Climb an eight-bot video-game ladder
 
-  | Bot | Ranking | Kto to i jak gra |
-  | --- | --- | --- |
-  | Glut | 250 | glut z poziomu 1; połowa ruchów losowa, połyka wszystko, co się da |
-  | Zenek | 450 | NPC przy studni; pcha piony, myśli powoli, powtarza się |
-  | Turbo | 700 | speedrunnerka; ruchy natychmiast, wczesny hetman i szybki mat |
-  | Mimik | 1000 | skrzynia-pułapka; czeka i uwielbia nagłe szachy |
-  | Bazyl | 1300 | wędrowny handlarz; wymienia figury, gdzie się da |
-  | Bronka | 1600 | tank z tarczą; solidnie, mur pionów |
-  | Bogdan | 1900 | mistrz combosów z bijatyk; forsowne serie szachów i bić |
-  | Mordax | 2200 | ostatni boss; głęboko i precyzyjnie, z „drugą fazą” w czacie |
-  | Stockfish | ustawiany | poziom 0–20, głębokość i czas na ruch |
+Every opponent parodies a classic video-game archetype with a 32-bit pixel-art portrait, custom search depth and bilingual chat. Configurable **Stockfish** (levels `0` to `20`, depth and move time) waits at the top.
 
-  Zapisane wyniki, historia i wybory z pierwszej drabinki (Kuba … Wiktor) przechodzą na postać z tego samego szczebla (`currentOpponentId` w `src/ai/bots/index.ts`).
+![Arcade Chess bot ladder showing Glut, Zenek, Turbo, Mimik, Bazyl, Bronka, Bogdan and Mordax](../docs/arcade-chess/bot-ladder.webp)
 
-  Rankingi to cele, pod które dobrano styl (`src/ai/bots/characters.ts`). Nie zostały zmierzone w partiach.
-- **Wygląd planszy.** W ustawieniach: trzy zestawy figur (Klasyczne, domyślne i narysowane dla Arcade Chess; Kreskówkowe; Turniejowe, czyli cburnett) i sześć kolorów pól, z podglądem. Zapisują się w postępie Stellarra.
-- **Multiplayer.** Własna strona zamiast planszy: otwarte stoły czekające na przeciwnika, trwające partie z podglądem pozycji, formularz „Hostuj grę” i lista osób w aktywności. Plansza otwiera się dopiero przy partii. Stoły jak na serwerze gry: każdy może hostować stół (czas i kolor), a inni dołączają do wybranego albo oglądają dowolną partię, więc przy większej liczbie osób kilka partii toczy się naraz. Zegar z inkrementem, propozycja remisu, poddanie, wygrana po wyjściu przeciwnika i rewanż przy tym samym stole ze zmianą kolorów. Gdy gracz po partii wstaje od stołu, stół się zamyka. Poza wspólną sesją Stellarra strona wyjaśnia, jak zagrać razem. Tylko zwykłe szachy.
-- **Bez kanału** (tryb `personal` albo zwykłe `pnpm dev`) wszystko poza grą z ludźmi działa solo.
+| Rival | Target Elo | Playstyle |
+| --- | --- | --- |
+| **Glut** | `250` | Level-1 slime. Plays half its moves at random and gobbles up loose pieces. |
+| **Zenek** | `450` | Village NPC by the well. Pushes pawns slowly and repeats familiar lines. |
+| **Turbo** | `700` | Any% speedrunner. Moves at once, brings the queen out early and hunts quick mates. |
+| **Mimik** | `1000` | Dungeon chest trap. Waits quietly, then springs sudden checks. |
+| **Bazyl** | `1300` | Travelling merchant. Trades pieces at every opportunity. |
+| **Bronka** | `1600` | Shield tank in plate armour. Builds a stubborn wall of pawns. |
+| **Bogdan** | `1900` | Arena combo fighter. Chains forcing checks and captures. |
+| **Mordax** | `2200` | Final boss. Searches 10 plies deep with a second-phase attitude in chat. |
+| **Stockfish** | `0–20` | Full engine strength dialled to the skill level, depth or clock you pick. |
 
-## Jak to działa ze Stellarrem
+## Host tables in your voice channel
 
-- `public/stellarr.json`: protocol 1, `launchModes: ["voice", "personal"]`, `authority: "host"`.
-- SDK jest ładowane w trakcie działania z `/_stellarr/sdk/v1.js`, więc aktywność mówi wersją hosta. Poza Stellarrem (`pnpm dev`) lokalna sesja zastępcza daje tryb solo.
-- Multiplayer (`src/online/`) to stan współdzielony (lista stołów) z komendami rozstrzyganymi przez hosta sesji: `host`, `close`, `join`, `leave`, `move`, `resign`, `draw`, `decline`, `flag`, `abandon` i `rematch`, każda dla swojego stołu. Zasady w `protocol.ts` są czystymi funkcjami. Każdy klient rejestruje te same reguły, a stan partii odtwarza się z listy ruchów, więc po rozłączeniu hosta sesji kolejny gracz przejmuje sędziowanie bez straty.
-- Stellarr Elo: sędzia liczy zmianę przy końcu partii z Elo obu graczy z chwili jej startu i dopisuje wynik do `results` (ostatnie 30) oraz kart graczy w `profiles` stanu współdzielonego. Każdy gracz zapisuje zmianę u siebie w `session.progress` (raz na partię) i przy wejściu do sesji wysyła swoją kartę komendą `profile`. SDK nie ma wspólnego magazynu dla całej instancji, więc ranking pokazuje osoby z bieżącej sesji, a Elo każdego idzie z nim między sesjami. Liczby w karcie pochodzą od samego gracza: między znajomymi to wystarczy, ale nie jest to ranking odporny na oszustwa.
-- Ustawienia, wybory z ekranu botów, język i statystyki trafiają do `session.progress`. W ramce Stellarra `localStorage` nie istnieje. Język startuje z języka Stellarra, dopóki gracz nie wybierze własnego. Dźwięki słuchają suwaka Game audio.
-- Pobieranie plików w ramce jest zablokowane, dlatego PGN pokazuje się w okienku do skopiowania.
+![Arcade Chess bot match with character banter alongside the multi-table voice multiplayer room](../docs/arcade-chess/match-and-tables.webp)
 
-## Uruchomienie
+Open **Multiplayer** to run a mini chess club inside your voice channel:
 
-Wymagane są Node.js 22+ i pnpm 10+. Folder jest samodzielny, ma własny lockfile i nie należy do workspace'u w katalogu głównym.
+- **Multiple boards at once:** host a table with your clock and color, join an open table, or click **Watch** to spectate any live game.
+- **Stellarr Elo ladder:** rated channel games start at `1200` (`K = 32`), rank the session, and save your rating to your Stellarr account.
+- **Built for live calls:** offer draws, play rematches with swapped colors, and reload mid-game safely. Referee duties pass automatically if the host leaves.
 
-```bash
-pnpm install
-pnpm dev            # http://localhost:5180, tryb solo
-pnpm build
-pnpm sdk:dev        # symulator Stellarra; „New player” otwiera kolejnego gracza
-```
+## 190 puzzles, Puzzle Rush and Stockfish review
 
-Skrypty `sdk:*` używają wersji `@stellarr/sdk` przypiętej w repozytorium. Zmienna `STELLARR_SDK` wskazuje opcjonalny lokalny katalog SDK.
+![Arcade Chess Puzzles hub with Puzzle of the day and Puzzle Rush next to the account Statistics dashboard](../docs/arcade-chess/puzzles-and-stats.webp)
 
-## Weryfikacja
+- **Daily puzzle and streaks:** solve a fresh single-solution tactic every day. Or race the three-minute **Puzzle Rush** clock, where three mistakes end the run.
+- **Themed drills and endgames:** practice back-rank, smothered and piece-specific mates, promotions and double checks, or play endgames against Stockfish's defense.
+- **Stats, themes and PGN:** track up to 40 games by color and ECO opening, review moves with Stockfish, copy PGN, or start from **Chess960** and custom FENs. Pick from three piece sets and six board palettes in **Settings**.
 
-```bash
-pnpm check          # testy, typecheck, build i stellarr validate
-pnpm test:browser   # po buildzie: dwie osoby grają na kanale w symulatorze, host przeładowuje
-                    # stronę w trakcie partii, trzecia osoba ogląda; zadanie z trenerem,
-                    # statystyki, drabinka, partia Chaos z wyborem kart; potem bot w ramce
-                    # bez allow-same-origin (jak w Stellarrze) odpowiada na ruch
-```
+## Install in Stellarr
 
-Zrzuty ekranu z testu przeglądarkowego trafiają do `reports/`.
+Open **Cockpit → Activities**, paste `https://github.com/Arkazzae/StellarrActivities`, choose **Arcade Chess**, and click **Install and enable**. Launch it in a voice channel for multiplayer tables, or open **Add a server and more → Solo activities → Arcade Chess** for bots and puzzles.
 
-## Grafiki
-
-Portrety botów, figury (z wariantami Chaos), ikony menu, kategorii i 50 efektów wygenerował Codex; ilustracje kart, ikona i okładka pochodzą z Multiversal Chess. Szczegóły i źródła są w [ARTWORK.md](ARTWORK.md).
-
-## Licencje
-
-Kod gry jest dostępny na licencji MIT. Stockfish używa GPL-3.0, zestaw figur cburnett GPL-2.0-or-later, a fonty Montserrat i Noto Sans licencji SIL OFL 1.1. Tabele debiutów pochodzą z JeffML/eco.json (MIT). Licencje są dołączone do paczki w katalogu `licenses/`. Pochodzenie ilustracji i nagrania opisuje [ARTWORK.md](ARTWORK.md).
+[All activities](../README.md) · [Changelog](CHANGELOG.md) · [Releases](https://github.com/Arkazzae/StellarrActivities/releases) · [Artwork and licences](ARTWORK.md)
