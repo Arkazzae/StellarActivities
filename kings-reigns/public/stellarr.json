@@ -1,0 +1,11 @@
+{
+  "protocol": 1,
+  "id": "kings-reigns",
+  "name": "Kings Reigns",
+  "description": "Król i czterech doradców przez trzy lata ratują królestwo, a jeden z nich potajemnie chce je pogrążyć. Każdy doradca zna inną część skutków dekretu, Król nie zna żadnych liczb. Rok to 12 spraw i znak roku, który zmienia talię, a na koniec roku Rada sądzi, kto jest Zdrajcą. Gra dla kanału głosowego, z botami na wolnych krzesłach, albo solo.",
+  "version": "0.1.0",
+  "icon": "icon.png",
+  "cover": "cover.webp",
+  "launchModes": ["voice", "personal"],
+  "authority": "host"
+}

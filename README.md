@@ -87,10 +87,16 @@ A reaction-GIF party game for 3 to 8 players in a voice channel. English and Pol
 
 ---
 
+## [Kings Reigns](kings-reigns/)
+
+One of the king’s four advisors is a traitor. Vote on decrees, keep the kingdom standing and decide whom to put on trial. The repository includes the Polish game’s source and instructions for running it locally.
+
+---
+
 ## Add an activity to Stellarr
 
 1. Open **Cockpit → Activities** on your Stellarr instance and paste `https://github.com/Arkazzae/StellarrActivities`.
-2. Pick any of the five activities, review its version, download size and permissions, and select **Install and enable**.
+2. Pick a published activity, review its version, download size and permissions, and select **Install and enable**.
 3. Start a shared session from a voice channel. For solo play, open **Add a server and more → Solo activities** in the left rail for **Whiteboard**, **Arcade Chess** or **Doodle Drift**.
 
 Each activity updates and uninstalls independently in your library.
