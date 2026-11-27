@@ -3,10 +3,6 @@ import { useUiStore } from "@/state/ui";
 import { gamePgn } from "@/game/session";
 import { useTranslation } from "@/i18n";
 
-/**
- * The game as PGN, to copy. Inside Stellarr the activity frame may not download files, so the text
- * is shown and selected instead; the copy button uses the clipboard where the browser allows it.
- */
 export function PgnDialog() {
   const open = useUiStore((s) => s.pgnOpen);
   const setOpen = useUiStore((s) => s.setPgnOpen);
@@ -47,6 +43,7 @@ export function PgnDialog() {
         <textarea ref={area} className="pgn-text" readOnly value={pgn} rows={10} spellCheck={false} />
         <div className="pgn-actions">
           <button type="button" className="btn btn--green" onClick={() => void copy()}>{copied ? t("pgn.copied") : t("pgn.copy")}</button>
+          <a className="btn" href={'data:application/x-chess-pgn;charset=utf-8,' + encodeURIComponent(pgn)} download="arcade-chess.pgn">{t("pgn.download")}</a>
           <span className="modal__note">{t("pgn.note")}</span>
         </div>
       </div>

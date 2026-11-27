@@ -64,5 +64,14 @@
     "src/ui/toolbar.js",
     "stellarr.json",
     "styles.css"
-  ]
+  ],
+  "arcade-chess": {
+    "build": "dist"
+  },
+  "doodle-drift": {
+    "build": "dist"
+  },
+  "gif-me-a-break": {
+    "build": "dist"
+  }
 }

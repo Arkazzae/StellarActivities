@@ -44,11 +44,19 @@ Everyone in the voice channel draws on the same infinite canvas at the same time
 
 ---
 
+## Games
+
+| Activity | Where to play | What to do |
+| --- | --- | --- |
+| [Arcade Chess](arcade-chess/) | Voice or solo | Play a timed match, challenge a bot, solve puzzles or export your game as PGN. |
+| [Doodle Drift](doodle-drift/) | Voice or solo | Pass drawings and captions around the room or make a solo flipbook. |
+| [Gif Me a Break](gif-me-a-break/) | Voice | Answer a prompt with a GIF and vote on the submissions. The instance must have GIPHY configured. |
+
 ## Add an activity to Stellarr
 
 1. Open **Cockpit → Activities** on your Stellarr instance and paste `https://github.com/Arkazzae/StellarrActivities`.
-2. Pick **SyncTube** or **Whiteboard**, check its version, download size and permissions, and select **Install and enable**.
-3. Start a shared activity from a voice channel. For a private Whiteboard, open **Add a server and more → Solo activities** at the bottom of the left rail and choose **Whiteboard**.
+2. Pick one of the five activities, check its version, download size and permissions, and select **Install and enable**.
+3. Start a shared activity from a voice channel. For a solo session, open **Add a server and more → Solo activities** at the bottom of the left rail and choose Whiteboard, Arcade Chess or Doodle Drift.
 
 Each activity updates and uninstalls independently in your library.
 

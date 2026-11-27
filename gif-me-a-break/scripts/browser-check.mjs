@@ -17,7 +17,7 @@ import { spawn } from "node:child_process";
 import { mkdirSync, readFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { extname, join, resolve } from "node:path";
-import { stellarrCli } from "./stellarr.mjs";
+import { stellarrCli } from "../../scripts/stellarr.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const dist = join(root, "dist");

@@ -1,68 +1,42 @@
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
-import { copyFile, lstat, mkdir, mkdtemp, readFile, realpath, rename, rm, utimes, writeFile } from "node:fs/promises";
+import { copyFile, lstat, mkdir, mkdtemp, readFile, realpath, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { publishedCli } from "./stellarr.mjs";
 
-const root = await realpath(fileURLToPath(new URL("..", import.meta.url)));
+const root = await realpath(join(import.meta.dirname, ".."));
 const catalog = JSON.parse(await readFile(join(root, "catalog.json"), "utf8"));
 const id = process.argv[2];
-if (!id || !/^[a-z0-9-]{1,100}$/.test(id) || !Object.hasOwn(catalog, id)) {
-  throw new Error("Choose one activity ID from catalog.json: " + Object.keys(catalog).join(", "));
-}
+if (!id || !/^[a-z0-9-]{1,100}$/.test(id) || !Object.hasOwn(catalog, id))
+  throw new Error("Choose an activity from catalog.json.");
+const activity = join(root, id);
+const entry = catalog[id];
 const output = resolve(process.argv[3] ?? join(root, "dist", id));
-const timestamp = new Date("2000-01-01T00:00:00Z");
-
-async function archive(id, files, outputDir) {
-  if (!Array.isArray(files) || !files.includes("stellarr.json") || !files.includes("index.html"))
-    throw new Error("Incomplete catalog entry: " + id);
-  const directory = join(root, id);
-  const manifest = JSON.parse(await readFile(join(directory, "stellarr.json"), "utf8"));
-  if (manifest.id !== id || manifest.protocol !== 1) throw new Error("Unexpected manifest in " + id);
-  if (typeof manifest.name !== "string" || !manifest.name.trim() || typeof manifest.description !== "string" || !manifest.description.trim())
-    throw new Error("Provide a name and description for " + id);
-  const modes = manifest.launchModes ?? ["voice"];
-  if (!Array.isArray(modes) || !modes.length || modes.some(mode => !["voice", "personal"].includes(mode)) || new Set(modes).size !== modes.length)
-    throw new Error("Invalid launchModes for " + id);
-  if (!manifest.icon) throw new Error("Add an icon to " + id + " before publishing.");
-  for (const role of ["icon", "cover"]) {
-    const path = manifest[role];
-    if (path === undefined) continue;
-    if (typeof path !== "string" || !files.includes(path) || !/\.(png|jpe?g|webp)$/i.test(path))
-      throw new Error(id + ": include " + role + " as a PNG, JPEG or WebP in the catalog.");
-    const limit = role === "icon" ? 512 * 1024 : 2 * 1024 * 1024;
-    if ((await lstat(join(directory, path))).size > limit) throw new Error(id + ": " + role + " exceeds its size limit.");
-  }
-  const stage = await mkdtemp(join(tmpdir(), "activity-release-"));
-  try {
-    for (const file of files) {
+const stage = await mkdtemp(join(tmpdir(), "activity-release-"));
+try {
+  let source = stage;
+  if (entry.build === "dist") {
+    execFileSync("pnpm", ["run", "build"], { cwd: activity, stdio: "inherit" });
+    source = join(activity, "dist");
+  } else {
+    if (!Array.isArray(entry) || !entry.includes("stellarr.json") || !entry.includes("index.html"))
+      throw new Error("Incomplete catalog entry for " + id);
+    for (const file of entry.filter(name => name !== "LICENSE")) {
       if (file.includes("\\") || file.split("/").some(part => !part || part.startsWith(".") || part.startsWith("-")))
-        throw new Error("Invalid distribution path in " + id);
-      let source = join(directory, file);
-      if (file === "LICENSE" && !(await lstat(source).catch(() => null))) source = join(root, file);
-      if (await realpath(source) !== source || !(await lstat(source)).isFile()) throw new Error("Expected a regular file: " + source);
+        throw new Error("Invalid catalog path in " + id);
+      const from = join(activity, file);
+      if (await realpath(from) !== from || !(await lstat(from)).isFile())
+        throw new Error("Expected a regular file at " + from);
       const target = join(stage, file);
       await mkdir(dirname(target), { recursive: true });
-      await copyFile(source, target);
-      await utimes(target, timestamp, timestamp);
+      await copyFile(from, target);
     }
-    const asset = id + ".zip";
-    const path = join(outputDir, asset);
-    execFileSync("zip", ["-X", "-q", "-9", path, ...[...files].sort()], { cwd: stage, env: { ...process.env, TZ: "UTC" } });
-    const bytes = await readFile(path);
-    return { id, name: manifest.name, version: manifest.version, asset,
-      sha256: createHash("sha256").update(bytes).digest("hex"), bytes: bytes.length };
-  } finally { await rm(stage, { recursive: true, force: true }); }
+  }
+  const license = join(activity, "LICENSE");
+  await copyFile(await lstat(license).catch(() => null) ? license : join(root, "LICENSE"), join(source, "LICENSE"));
+  const manifest = JSON.parse(await readFile(join(source, "stellarr.json"), "utf8"));
+  if (manifest.id !== id || !manifest.icon) throw new Error("Check manifest ID and icon for " + id);
+  execFileSync(process.execPath, [publishedCli, "pack", "--dir", source, "--out", output], { stdio: "inherit" });
+} finally {
+  await rm(stage, { recursive: true, force: true });
 }
-
-await mkdir(output, { recursive: true });
-const temporary = await mkdtemp(join(output, ".release-"));
-try {
-  const activity = await archive(id, catalog[id], temporary);
-  const index = "stellarr-release.json";
-  await writeFile(join(temporary, index), JSON.stringify({ protocol: 1, activities: [activity] }, null, 2) + "\n");
-  await rename(join(temporary, activity.asset), join(output, activity.asset));
-  await rename(join(temporary, index), join(output, index));
-  console.log("Packaged " + activity.asset + " " + activity.version);
-} finally { await rm(temporary, { recursive: true, force: true }); }

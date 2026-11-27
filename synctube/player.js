@@ -1,38 +1,5 @@
-const YOUTUBE_API = "https://www.youtube.com/iframe_api";
 const YOUTUBE_EMBED = "https://www.youtube-nocookie.com/embed/";
 const RESYNC_SECONDS = 1.5;
-
-let youtubeReady;
-
-function loadYouTube() {
-  if (window.YT?.Player) return Promise.resolve(window.YT);
-  if (youtubeReady) return youtubeReady;
-  youtubeReady = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = YOUTUBE_API;
-    script.referrerPolicy = "origin";
-    const deadline = setTimeout(fail, 10_000);
-    function fail() {
-      clearTimeout(deadline);
-      script.remove();
-      window.onYouTubeIframeAPIReady = undefined;
-      youtubeReady = undefined;
-      reject(new Error("errYouTubeApi"));
-    }
-    script.addEventListener("error", fail, { once: true });
-    window.onYouTubeIframeAPIReady = () => {
-      if (!window.YT?.Player) {
-        fail();
-        return;
-      }
-      clearTimeout(deadline);
-      window.onYouTubeIframeAPIReady = undefined;
-      resolve(window.YT);
-    };
-    document.head.append(script);
-  });
-  return youtubeReady;
-}
 
 // Status messages are translation keys; app.js turns them into text.
 function youtubeError(code) {
@@ -42,91 +9,96 @@ function youtubeError(code) {
   return "errGeneric";
 }
 
-function mountYouTube(item, mount, events, hosted) {
-  if (hosted) return hosted.mount(item.videoId, mount, {
-    ready: events.ready,
-    blocked: events.blocked,
-    error: code => events.error(youtubeError(code)),
-    stateChange(state) {
-      if (state === 1) events.playing();
-      if (state === 0) events.ended();
-    },
+function mountYouTube(item, mount, events, embed) {
+  const id = crypto.randomUUID();
+  const url = new URL(YOUTUBE_EMBED + item.videoId);
+  url.search = new URLSearchParams({
+    enablejsapi: "1", origin: location.origin, controls: "0", disablekb: "1",
+    playsinline: "1", rel: "0", start: String(Math.floor(item.startSeconds)),
   });
-  let player;
-  let disposed = false;
-  const deadline = setTimeout(() => events.error("errTimeout"), 16_000);
-  loadYouTube().then(api => {
-    if (disposed) return;
-    const frame = document.createElement("iframe");
-    frame.id = "synctube-youtube";
-    frame.title = "YouTube video player";
-    frame.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture";
-    frame.allowFullscreen = true;
-    frame.setAttribute("credentialless", "");
-    frame.referrerPolicy = "origin";
-    const params = new URLSearchParams({
-      enablejsapi: "1",
-      origin: location.origin,
-      controls: "0",
-      disablekb: "1",
-      playsinline: "1",
-      rel: "0",
-      start: String(Math.floor(item.startSeconds)),
-    });
-    frame.src = `${YOUTUBE_EMBED}${item.videoId}?${params}`;
-    mount.replaceChildren(frame);
-    player = new api.Player(frame.id, {
-      events: {
-        onReady({ target }) {
-          if (disposed) return;
-          player = target;
-          clearTimeout(deadline);
-          events.ready();
-        },
-        onStateChange({ data }) {
-          if (disposed) return;
-          if (data === 1) events.playing();
-          if (data === 0) events.ended();
-        },
-        onAutoplayBlocked() {
-          if (!disposed) events.blocked();
-        },
-        onError({ data }) {
-          if (disposed) return;
-          clearTimeout(deadline);
-          events.error(youtubeError(data));
-        },
-      },
-    });
-  }).catch(error => {
-    if (disposed) return;
+  let handle;
+  let ready = false;
+  let closed = false;
+  let time = 0;
+  let duration = 0;
+  let state = -1;
+  let playbackRate = 1;
+  const listen = () => post({ event: "listening" });
+  const retry = setInterval(listen, 300);
+  const deadline = setTimeout(() => fail("errTimeout"), 16000);
+  function stopTimers() {
+    clearInterval(retry);
     clearTimeout(deadline);
-    events.error(error.message === "errYouTubeApi" ? "errYouTubeApi" : "errGeneric");
-  });
-
+  }
+  function post(message) {
+    if (!closed) handle?.postMessage(JSON.stringify({ ...message, id, channel: "widget" }));
+  }
+  function command(func, ...args) {
+    post({ event: "command", func, args });
+  }
+  function fail(message) {
+    stopTimers();
+    closed = true;
+    events.error(message);
+  }
+  function receive(raw) {
+    if (closed) return;
+    let data = raw;
+    if (typeof raw === "string") {
+      try { data = JSON.parse(raw); } catch { return; }
+    }
+    if (!data || (data.id && data.id !== id)) return;
+    const info = data.info;
+    switch (data.event) {
+      case "onReady":
+        if (ready) return;
+        ready = true;
+        stopTimers();
+        for (const event of ["onStateChange", "onError", "onAutoplayBlocked"])
+          command("addEventListener", event);
+        events.ready();
+        break;
+      case "infoDelivery":
+      case "initialDelivery":
+        if (Number.isFinite(info?.currentTime)) time = info.currentTime;
+        if (Number.isFinite(info?.duration)) duration = info.duration;
+        if (Number.isFinite(info?.playerState)) state = info.playerState;
+        break;
+      case "onStateChange":
+        state = info;
+        if ((state === 1 || state === 5) && playbackRate !== 1) command("setPlaybackRate", playbackRate);
+        if (state === 1) events.playing();
+        if (state === 0) {
+          if (duration > 0) time = duration;
+          events.ended();
+        }
+        break;
+      case "onAutoplayBlocked": events.blocked(); break;
+      case "onError": fail(youtubeError(info)); break;
+    }
+  }
+  try {
+    handle = embed.mount(url.href, mount, { title: "YouTube", onLoad: listen, onMessage: receive });
+  } catch {
+    fail("errGeneric");
+  }
   return {
-    prepare(target, playing) {
-      const args = { videoId: item.videoId, startSeconds: target };
-      if (playing) player.loadVideoById(args);
-      else player.cueVideoById(args);
+    prepare: (position, playing) => command(playing ? "loadVideoById" : "cueVideoById", item.videoId, position),
+    time: () => time,
+    duration: () => duration,
+    running: () => state === 1 || state === 3,
+    seek: position => command("seekTo", position, true),
+    rate(value) {
+      playbackRate = value;
+      command("setPlaybackRate", value);
     },
-    time: () => player?.getCurrentTime?.() || 0,
-    duration: () => player?.getDuration?.() || 0,
-    running: () => [1, 3].includes(player.getPlayerState()),
-    seek: position => player.seekTo(position, true),
-    rate: value => player?.setPlaybackRate?.(value),
-    play: () => player.playVideo(),
-    pause: () => player.pauseVideo(),
-    volume(value) {
-      player.setVolume(Math.round(value * 100));
-      if (value === 0) player.mute();
-      else player.unMute();
-    },
+    play: () => command("playVideo"),
+    pause: () => command("pauseVideo"),
+    volume: value => command("setVolume", Math.round(value * 100)),
     destroy() {
-      disposed = true;
-      clearTimeout(deadline);
-      player?.destroy?.();
-      mount.replaceChildren();
+      closed = true;
+      stopTimers();
+      handle?.destroy();
     },
   };
 }
@@ -223,7 +195,7 @@ export function createPlayer(item, mount, view) {
   };
 
   view.status("loading", item.source === "sample" ? "loadingSample" : "loadingYouTube");
-  const provider = item.source === "sample" ? mountSample(mount, events) : mountYouTube(item, mount, events, view.youtube);
+  const provider = item.source === "sample" ? mountSample(mount, events) : mountYouTube(item, mount, events, view.embed);
 
   function sync() {
     if (!ready || !target || failed) return;
@@ -274,8 +246,6 @@ export function createPlayer(item, mount, view) {
       target = next;
       sync();
     },
-    fullscreen: provider.fullscreen,
-    canRate: Boolean(provider.rate),
     getDuration: () => ready && !failed ? provider.duration() : 0,
     // Seconds between this device and the room clock, or null before the first sync.
     drift: () => ready && !failed && prepared ? drift : null,

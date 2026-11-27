@@ -6,7 +6,7 @@ export default defineConfig({
   base: "./",
   plugins: [react()],
   resolve: {
-    alias: { "@": path.resolve(__dirname, "./src") },
+    alias: { "@": path.resolve(import.meta.dirname, "./src") },
   },
   server: { port: 5183, cors: true },
   build: {

@@ -10,7 +10,7 @@ permissions:
 jobs:
   commits:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -37,6 +37,11 @@ jobs:
             git show -s --format='%B%n%an <%ae>%n%cn <%ce>' "$commit" > "$msg"
             .githooks/commit-msg "$msg"
           done < "$msg.commits"
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 26
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - run: pnpm install --frozen-lockfile
       - name: Check release tooling
         run: node --test scripts/test/*.test.mjs
       - name: Test and package affected activities
@@ -45,7 +50,5 @@ jobs:
         run: |
           node scripts/changed-activities.mjs "$BASE" > "$RUNNER_TEMP/activities"
           while read -r id; do
-            node --test "$id"/test/*.test.mjs
-            node scripts/package-release.mjs "$id"
-            unzip -t "dist/$id/$id.zip"
+            bash scripts/check-activity.sh "$id"
           done < "$RUNNER_TEMP/activities"

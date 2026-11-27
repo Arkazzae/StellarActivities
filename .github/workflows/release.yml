@@ -12,15 +12,15 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
-          node-version: 22
+          node-version: 26
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - run: pnpm install --frozen-lockfile
       - name: Check the tag and read this activity's changelog
         run: node scripts/release-notes.mjs "$GITHUB_REF_NAME" > "$RUNNER_TEMP/notes.md"
       - name: Test and package the selected activity
         run: |
           id=${GITHUB_REF_NAME%%/*}
-          node --test "$id"/test/*.test.mjs
-          node scripts/package-release.mjs "$id"
-          unzip -t "dist/$id/$id.zip"
+          bash scripts/check-activity.sh "$id"
       - name: Publish this activity
         env:
           GH_TOKEN: ${{ github.token }}
@@ -31,5 +31,6 @@ jobs:
           version=$(jq -r '.activities[0].version' "$index")
           options=()
           if [[ "${version%%+*}" == *-* ]]; then options+=(--prerelease); fi
-          gh release create "$GITHUB_REF_NAME" "dist/$id/$id.zip" "$index" \
+          asset=$(jq -er '.activities[0].asset' "$index")
+          gh release create "$GITHUB_REF_NAME" "dist/$id/$asset" "$index" \
             --verify-tag --title "$title" --notes-file "$RUNNER_TEMP/notes.md" "${options[@]}"

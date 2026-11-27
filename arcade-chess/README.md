@@ -52,7 +52,7 @@ pnpm build
 pnpm sdk:dev        # symulator Stellarra; „New player” otwiera kolejnego gracza
 ```
 
-Skrypty `sdk:*` używają `../../Stellarr-newest/sdk/cli.js`, jeśli taki checkout istnieje. Inny checkout wskazuje zmienna `STELLARR_SDK`. W ostateczności używany jest opublikowany `@stellarr/sdk`.
+Skrypty `sdk:*` używają wersji `@stellarr/sdk` przypiętej w repozytorium. Zmienna `STELLARR_SDK` wskazuje opcjonalny lokalny katalog SDK.
 
 ## Weryfikacja
 
@@ -72,4 +72,4 @@ Portrety botów, figury (z wariantami Chaos), ikony menu, kategorii i 50 efektó
 
 ## Licencje
 
-Kod: MIT (patrz [LICENSE](LICENSE), dziedziczona po FlyChess). Stockfish (`public/stockfish.js`): GPL-3.0. Figury, portrety i ikony: wygenerowane przez Codex dla tego projektu. Fonty Montserrat i Noto Sans: SIL OFL 1.1. Tabele otwarć ECO (`public/libraries`) przeniesione z FlyChess.
+Kod gry jest dostępny na licencji MIT. Stockfish używa GPL-3.0, zestaw figur cburnett GPL-2.0-or-later, a fonty Montserrat i Noto Sans licencji SIL OFL 1.1. Tabele debiutów pochodzą z JeffML/eco.json (MIT). Licencje są dołączone do paczki w katalogu `licenses/`. Pochodzenie ilustracji i nagrania opisuje [ARTWORK.md](ARTWORK.md).

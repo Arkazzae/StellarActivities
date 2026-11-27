@@ -1,0 +1,9 @@
+{
+  "name": "stellarr-activities",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.23.0",
+  "devDependencies": {
+    "@stellarr/sdk": "0.4.0"
+  }
+}

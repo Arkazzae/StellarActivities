@@ -18,9 +18,7 @@ pnpm test                  # plan and protocol tests (node --test)
 
 `pnpm dev` (plain Vite) runs a one-player stand-in without a room, which is enough for UI work.
 
-The `sdk:*` scripts and the e2e run go through `scripts/stellarr.mjs`, which uses a local Stellarr
-checkout when it finds one (`STELLARR_SDK=<path to its sdk/ folder>`, or
-`~/Documents/GitHub/Stellarr-newest/sdk`) and the published `@stellarr/sdk` otherwise.
+The simulator and end-to-end tests use the workspace version of `@stellarr/sdk`. Set `STELLARR_SDK` to test a local SDK checkout.
 
 End-to-end in the simulator (Playwright's Chromium: `pnpm exec playwright install chromium` once):
 

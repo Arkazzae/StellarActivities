@@ -10,7 +10,7 @@ function changed() {
   if (!base || /^0+$/.test(base)) return ids;
   const git = (...args) => execFileSync("git", args, { encoding: "utf8" });
   const paths = git("diff", "--name-only", "--no-renames", "-z", base, head, "--").split("\0").filter(Boolean);
-  if (paths.some(path => path === "LICENSE" || path.startsWith("scripts/") || path.startsWith(".github/workflows/"))) return ids;
+  if (paths.some(path => ["LICENSE", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml"].includes(path) || path.startsWith("scripts/") || path.startsWith(".github/workflows/"))) return ids;
   let before = catalog;
   if (paths.includes("catalog.json")) {
     const hadCatalog = git("ls-tree", "--name-only", base, "--", "catalog.json").trim();

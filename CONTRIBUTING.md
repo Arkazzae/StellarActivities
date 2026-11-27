@@ -10,4 +10,4 @@ Enable the local check after cloning:
 git config core.hooksPath .githooks
 ```
 
-The contribution workflow checks pushed commits, pull request commits, and edited PR titles. For a SyncTube change, run `node --test synctube/test/*.test.mjs` and `node scripts/package-release.mjs synctube`. Use the corresponding activity ID for another project. Changes to shared packaging or workflows check all catalog entries. Run `node --test scripts/test/*.test.mjs` to check the release tooling.
+The contribution workflow checks pushed commits, pull request commits, and edited PR titles. Use Node 26, pnpm 12 and the system zip utility. Run `pnpm install --frozen-lockfile` from the repository root, then `bash scripts/check-activity.sh synctube` (substitute any catalogue ID). The command tests the activity, builds its production files, packs them with the pinned Stellarr SDK and checks the ZIP. Changes to shared packaging or workflows check all catalog entries. Run `node --test scripts/test/*.test.mjs` to check the release tooling.

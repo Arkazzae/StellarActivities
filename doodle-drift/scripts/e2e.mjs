@@ -10,7 +10,7 @@
 import { spawn } from "node:child_process";
 import { mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { stellarrCli } from "./stellarr.mjs";
+import { stellarrCli } from "../../scripts/stellarr.mjs";
 
 const { chromium } = await import(process.env.PLAYWRIGHT ?? "@playwright/test");
 const root = resolve(import.meta.dirname, "..");

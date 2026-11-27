@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.2.0
+
+- Export a game as a PGN file from the Stellarr activity frame or copy its moves. Built with SDK 0.4.
 
 - Renamed from Stellar Chess to Arcade Chess, to match the game-character bots and the pixel-art look. The folder and the activity id are now `arcade-chess`; there was no release under the old id, so no saved progress is lost.
 - A new pixel-art icon (a knight on an arcade screen, also the logo mark in the sidebar) and cover (the bots around the board in a night-time arcade).

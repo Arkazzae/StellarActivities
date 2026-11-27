@@ -202,8 +202,8 @@
             "eco_js": "Indian Game: Seirawan Attack",
             "ct": "Indian Game, Seirawan Attack",
             "chessGraph": "Seirawan Attack",
-            "chronos": "Neo-Indian (Seirawan) attack",
-            "icsbot": "Seirawan Attack "
+            "icsbot": "Seirawan Attack ",
+            "kent-eco": "Neo-Indian (Seirawan) attack"
         }
     },
     "rnbqkb1r/pppp1ppp/4pn2/8/2PP4/P7/1P2PPPP/RNBQKBNR b KQkq - 0 3": {
@@ -230,8 +230,8 @@
             "eco_js": "Indian Game: East Indian Defense",
             "ct": "Indian Game, Queen's Pawn Opening",
             "chessGraph": "East Indian Defense; E00",
-            "chronos": "Queen's pawn game",
-            "icsbot": "East Indian Defense; E00 "
+            "icsbot": "East Indian Defense; E00 ",
+            "kent-eco": "Queen's pawn game"
         },
         "isEcoRoot": true
     },
@@ -278,8 +278,8 @@
             "eco_js": "Catalan Opening: Closed Variation",
             "ct": "Catalan Opening, Closed Variation",
             "chessGraph": "Closed Variation, Catalan",
-            "chronos": "Catalan: closed",
-            "icsbot": "Closed Variation, Catalan "
+            "icsbot": "Closed Variation, Catalan ",
+            "kent-eco": "Catalan: closed"
         },
         "isEcoRoot": true
     },
@@ -362,7 +362,8 @@
         "aliases": {
             "scid": "Catalan: Open",
             "chessGraph": "E02"
-        }
+        },
+        "isEcoRoot": true
     },
     "rnbqkb1r/ppp2ppp/4pn2/8/Q1pP4/6P1/PP2PPBP/RNB1K1NR b KQkq - 1 5": {
         "src": "scid",
@@ -373,8 +374,7 @@
         "aliases": {
             "eco_js": "Catalan Opening: Open Defense, 4. Bg2 dxc4 5. Qa4+",
             "ct": "Catalan Opening, Open Defense"
-        },
-        "isEcoRoot": true
+        }
     },
     "rn1qkb1r/pppb1ppp/4pn2/8/Q1pP4/6P1/PP2PPBP/RNB1K1NR w KQkq - 2 6": {
         "src": "scid",
@@ -428,7 +428,7 @@
             "scid": "Catalan: Open, 5.Qa4+ Nbd7 6.Qxc4",
             "eco_js": "Catalan Opening: Open Defense, 5. Qa4+ Nbd7 6. Qxc4",
             "chessGraph": "E03",
-            "chronos": "Catalan: open, 5.Qa4 Nbd7, 6.Qxc4"
+            "kent-eco": "Catalan: open, 5.Qa4 Nbd7, 6.Qxc4"
         },
         "isEcoRoot": true
     },
@@ -442,8 +442,8 @@
             "scid": "Catalan: Open, Alekhine Variation",
             "ct": "Catalan Opening, Open Defense",
             "chessGraph": "Alekhine Variation, Catalan",
-            "chronos": "Catalan: open, Alekhine variation",
-            "icsbot": "Alekhine Variation, Catalan "
+            "icsbot": "Alekhine Variation, Catalan ",
+            "kent-eco": "Catalan: open, Alekhine variation"
         }
     },
     "r1bqkb1r/1ppn1ppp/p3pn2/8/2QP4/6P1/PP2PPBP/RNB1K1NR w KQkq - 0 7": {
@@ -532,8 +532,8 @@
         "aliases": {
             "scid": "Catalan: Open, 5.Nf3",
             "chessGraph": "Open Defense, Catalan; E04",
-            "chronos": "Catalan: open, 5.Nf3",
-            "icsbot": "Open Defense, Catalan; E04 "
+            "icsbot": "Open Defense, Catalan; E04 ",
+            "kent-eco": "Catalan: open, 5.Nf3"
         },
         "isEcoRoot": true
     },
@@ -767,8 +767,8 @@
             "scid": "Catalan: Open, Classical",
             "ct": "Catalan Opening, Open Defense",
             "chessGraph": "Classical Line, Catalan; E05",
-            "chronos": "Catalan: open, classical line",
-            "icsbot": "Classical Line, Catalan; E05 "
+            "icsbot": "Classical Line, Catalan; E05 ",
+            "kent-eco": "Catalan: open, classical line"
         },
         "isEcoRoot": true
     },
@@ -943,7 +943,7 @@
             "scid": "Catalan: Closed, 5.Nf3",
             "eco_js": "Catalan Opening: Closed Variation, 4. Bg2 Be7 5. Nf3",
             "ct": "Catalan Opening, Closed Variation",
-            "chronos": "Catalan: closed, 5.Nf3"
+            "kent-eco": "Catalan: closed, 5.Nf3"
         },
         "isEcoRoot": true
     },
@@ -1059,7 +1059,7 @@
             "eco_js": "Catalan Opening: Closed Variation, 5. Nf3 O-O 6. O-O Nbd7",
             "ct": "Catalan Opening, Closed Variation",
             "chessGraph": "E07",
-            "chronos": "Catalan: closed, 6...Nbd7"
+            "kent-eco": "Catalan: closed, 6...Nbd7"
         },
         "isEcoRoot": true
     },
@@ -1079,8 +1079,8 @@
             "scid": "Catalan: Closed, Botvinnik Variation",
             "ct": "Catalan Opening, Closed Variation",
             "chessGraph": "Botvinnik Variation, Catalan",
-            "chronos": "Catalan: closed, Botvinnik variation",
-            "icsbot": "Botvinnik Variation, Catalan "
+            "icsbot": "Botvinnik Variation, Catalan ",
+            "kent-eco": "Catalan: closed, Botvinnik variation"
         }
     },
     "r1bq1rk1/pppnbppp/4pn2/3p4/2PP4/1P3NP1/P3PPBP/RNBQ1RK1 b - - 0 7": {
@@ -1176,7 +1176,7 @@
         "aliases": {
             "scid": "Catalan: Closed, 7.Qc2 c6 8.b3",
             "eco_js": "Catalan Opening: Closed, 7. Qc2 c6 8. b3",
-            "chronos": "Catalan: closed, Qc2 & b3"
+            "kent-eco": "Catalan: closed, Qc2 & b3"
         }
     },
     "r1bq1rk1/pppnbppp/4pn2/3p4/2PP4/5NP1/PPQ1PPBP/RNB2RK1 b - - 7 7": {
@@ -1189,7 +1189,7 @@
             "scid": "Catalan: Closed, 7.Qc2",
             "ct": "Catalan Opening, Closed Variation",
             "chessGraph": "E08",
-            "chronos": "Catalan: closed, 7.Qc2"
+            "kent-eco": "Catalan: closed, 7.Qc2"
         },
         "isEcoRoot": true
     },
@@ -1207,7 +1207,7 @@
         "scid": "E08p",
         "aliases": {
             "scid": "Catalan: Closed, Spassky Gambit",
-            "chronos": "Catalan: closed, Spassky gambit"
+            "kent-eco": "Catalan: closed, Spassky gambit"
         }
     },
     "r1bq1rk1/p2nbppp/1pp1pn2/3p4/P1PP4/5NP1/1PQ1PPBP/RNBR2K1 b - - 0 9": {
@@ -1219,8 +1219,8 @@
         "aliases": {
             "scid": "Catalan: Closed, Zagoryansky Variation",
             "chessGraph": "Zagoriansky Variation, Catalan",
-            "chronos": "Catalan: closed, Zagoryansky variation",
-            "icsbot": "Zagoriansky Variation, Catalan "
+            "icsbot": "Zagoriansky Variation, Catalan ",
+            "kent-eco": "Catalan: closed, Zagoryansky variation"
         }
     },
     "r1bq1rk1/p1pnbppp/1p2pn2/3p4/2PP4/5NP1/PPQ1PPBP/RNB2RK1 w - - 0 8": {
@@ -1390,7 +1390,7 @@
         "aliases": {
             "scid": "Catalan: Closed, Main Line",
             "chessGraph": "E09",
-            "chronos": "Catalan: closed, main line"
+            "kent-eco": "Catalan: closed, main line"
         },
         "isEcoRoot": true
     },
@@ -1402,7 +1402,7 @@
         "scid": "E09e",
         "aliases": {
             "scid": "Catalan: Closed, Main Line, Sokolsky Variation",
-            "chronos": "Catalan: closed, Sokolsky variation"
+            "kent-eco": "Catalan: closed, Sokolsky variation"
         }
     },
     "r1bqr1k1/pp1nbppp/2p1pn2/3p4/2PP4/5NP1/PPQNPPBP/R1B2RK1 w - - 2 9": {
@@ -1550,8 +1550,8 @@
         "aliases": {
             "scid": "Blumenfeld: 5.Bg5",
             "chessGraph": "Dus-Chotimursky Variation",
-            "chronos": "Blumenfeld counter-gambit, Dus-Chotimursky variation",
-            "icsbot": "Dus-Chotimursky Variation "
+            "icsbot": "Dus-Chotimursky Variation ",
+            "kent-eco": "Blumenfeld counter-gambit, Dus-Chotimursky variation"
         }
     },
     "rnbqkb1r/p2p1pp1/5n1p/1ppP2B1/8/5N2/PP2PPPP/RN1QKB1R w KQkq - 0 7": {
@@ -1612,8 +1612,8 @@
             "eco_js": "Indian Game: Anti-Nimzo-Indian",
             "ct": "Indian Game, Anti-Nimzo-indian",
             "chessGraph": "Anti-Nimzo-Indian; E10",
-            "chronos": "Queen's pawn game",
-            "icsbot": "Anti-Nimzo-Indian; E10 "
+            "icsbot": "Anti-Nimzo-Indian; E10 ",
+            "kent-eco": "Queen's pawn game"
         },
         "isEcoRoot": true
     },
@@ -1628,8 +1628,8 @@
             "eco_js": "Indian Game: Doery Indian",
             "ct": "Indian Game, DÃ¶ry Indian",
             "chessGraph": "Dory (Doery) Defense",
-            "chronos": "Doery defence",
-            "icsbot": "Dory (Doery) Defense "
+            "icsbot": "Dory (Doery) Defense ",
+            "kent-eco": "Doery defence"
         }
     },
     "rnbqkb1r/1ppp1ppp/p3pn2/8/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 0 4": {
@@ -1643,8 +1643,8 @@
             "eco_js": "Indian Game: Dzindzi-Indian Defense",
             "ct": "Indian Game, Dzindzi-Indian Defense",
             "chessGraph": "Dzindzi-Indian Defense",
-            "chronos": "Dzindzikhashvili defence",
-            "icsbot": "Dzindzi-Indian Defense "
+            "icsbot": "Dzindzi-Indian Defense ",
+            "kent-eco": "Dzindzikhashvili defence"
         }
     },
     "rnbqkb1r/1ppp1ppp/p3pn2/8/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 1 4": {
@@ -1735,8 +1735,8 @@
             "scid": "Bogo-Indian: 4.Nbd2",
             "eco_js": "Bogo-Indian Defense: Gruenfeld Variation",
             "chessGraph": "Grunfeld Variation, Bogo-Indian",
-            "chronos": "Bogo-Indian defence, Gruenfeld variation",
-            "icsbot": "Grunfeld Variation, Bogo-Indian "
+            "icsbot": "Grunfeld Variation, Bogo-Indian ",
+            "kent-eco": "Bogo-Indian defence, Gruenfeld variation"
         }
     },
     "r1bqk2r/pppp1ppp/2n1pn2/8/1bPP4/5N2/PP1BPPPP/RN1QKB1R w KQkq - 4 5": {
@@ -1766,8 +1766,8 @@
         "aliases": {
             "scid": "Bogo-Indian: Nimzowitsch Variation",
             "chessGraph": "Nimzovich Variation, Bogo-Indian",
-            "chronos": "Bogo-Indian defence, Nimzovich variation",
-            "icsbot": "Nimzovich Variation, Bogo-Indian "
+            "icsbot": "Nimzovich Variation, Bogo-Indian ",
+            "kent-eco": "Bogo-Indian defence, Nimzovich variation"
         }
     },
     "rnbqk2r/ppppbppp/4pn2/8/2PP4/5N2/PP1BPPPP/RN1QKB1R w KQkq - 4 5": {
@@ -2174,8 +2174,8 @@
         "aliases": {
             "scid": "Queen's Indian: 4.Nc3",
             "chessGraph": "Kasparov Variation, QID",
-            "chronos": "Queen's Indian: 4.Nc3",
-            "icsbot": "Kasparov Variation, QID "
+            "icsbot": "Kasparov Variation, QID ",
+            "kent-eco": "Queen's Indian: 4.Nc3"
         }
     },
     "rn1qkb1r/pbpp1p2/1p2p2p/6pn/2PP4/2N2NB1/PP2PPPP/R2QKB1R w KQkq - 2 8": {
@@ -2186,8 +2186,8 @@
         "aliases": {
             "ct": "Queen's Indian Defense, Kasparov Variation",
             "chessGraph": "Botvinnik Variation, QID",
-            "chronos": "Queen's Indian: 4.Nc3, Botvinnik variation",
-            "icsbot": "Botvinnik Variation, QID "
+            "icsbot": "Botvinnik Variation, QID ",
+            "kent-eco": "Queen's Indian: 4.Nc3, Botvinnik variation"
         }
     },
     "rn1qkb1r/pbpp1ppp/1p2pn2/8/2PP4/P1N2N2/1P2PPPP/R1BQKB1R b KQkq - 2 5": {
@@ -2328,8 +2328,8 @@
         "aliases": {
             "scid": "Queen's Indian: Miles Variation",
             "chessGraph": "Miles Variation, QID",
-            "chronos": "Queen's Indian: Miles variation",
-            "icsbot": "Miles Variation, QID "
+            "icsbot": "Miles Variation, QID ",
+            "kent-eco": "Queen's Indian: Miles variation"
         }
     },
     "rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/P4N2/1P2PPPP/RNBQKB1R b KQkq - 0 4": {
@@ -2341,8 +2341,8 @@
         "aliases": {
             "scid": "Queen's Indian: Petrosian",
             "chessGraph": "Petrosian Variation, QID",
-            "chronos": "Queen's Indian: Petrosian system",
-            "icsbot": "Petrosian Variation, QID "
+            "icsbot": "Petrosian Variation, QID ",
+            "kent-eco": "Queen's Indian: Petrosian system"
         }
     },
     "rn1qkb1r/pbpp1ppp/1p2pn2/8/2PP4/P4N2/1PQ1PPPP/RNB1KB1R w KQkq - 3 6": {
@@ -2683,7 +2683,7 @@
             "scid": "Queen's Indian: 5.Bg5 h6 6.Bh4 Bb4",
             "eco_js": "Queen's Indian Defense: Kasparov Variation, 5. Bg5 h6 6. Bh4 Bb7",
             "chessGraph": "E13",
-            "chronos": "Queen's Indian: 4.Nc3, main line"
+            "kent-eco": "Queen's Indian: 4.Nc3, main line"
         },
         "isEcoRoot": true
     },
@@ -2858,8 +2858,8 @@
             "scid": "Queen's Indian: Averbakh Variation",
             "eco_js": "Queen's Indian, Averbakh Variation",
             "chessGraph": "Averbakh Variation, QID",
-            "chronos": "Queen's Indian: Averbakh variation",
-            "icsbot": "Averbakh Variation, QID "
+            "icsbot": "Averbakh Variation, QID ",
+            "kent-eco": "Queen's Indian: Averbakh variation"
         }
     },
     "rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/4PN2/PP3PPP/RNBQKB1R b KQkq - 0 4": {
@@ -2871,8 +2871,8 @@
         "aliases": {
             "scid": "Queen's Indian: 4.e3",
             "chessGraph": "Spassky System, QID; E14",
-            "chronos": "Queen's Indian: 4.e3",
-            "icsbot": "Spassky System, QID; E14 "
+            "icsbot": "Spassky System, QID; E14 ",
+            "kent-eco": "Queen's Indian: 4.e3"
         },
         "isEcoRoot": true
     },
@@ -3166,8 +3166,8 @@
             "scid": "Queen's Indian: Buerger Variation",
             "eco_js": "Queen's Indian, Buerger Variation",
             "chessGraph": "Buerger Variation, QID",
-            "chronos": "Queen's Indian: Buerger variation",
-            "icsbot": "Buerger Variation, QID "
+            "icsbot": "Buerger Variation, QID ",
+            "kent-eco": "Queen's Indian: Buerger variation"
         }
     },
     "rn1qkb1r/pbpp1ppp/1p2pn2/8/2PP4/5NP1/PP2PP1P/RNBQKB1R w KQkq - 1 5": {
@@ -3180,8 +3180,8 @@
             "scid": "Queen's Indian: 4.g3 Bb7",
             "ct": "Queen's Indian Defense, Fianchetto Traditional",
             "chessGraph": "Fianchetto Traditional, QID; E16",
-            "chronos": "Queen's Indian: 4.g3 Bb7",
-            "icsbot": "Fianchetto Traditional, QID; E16 "
+            "icsbot": "Fianchetto Traditional, QID; E16 ",
+            "kent-eco": "Queen's Indian: 4.g3 Bb7"
         }
     },
     "rnbqkb1r/p1pp1ppp/1p2pn2/8/2PP4/5NP1/PP2PP1P/RNBQKB1R b KQkq - 0 4": {
@@ -3193,8 +3193,8 @@
         "aliases": {
             "scid": "Queen's Indian: 4.g3",
             "chessGraph": "Fianchetto System, QID; E15",
-            "chronos": "Queen's Indian: 4.g3",
-            "icsbot": "Fianchetto System, QID; E15 "
+            "icsbot": "Fianchetto System, QID; E15 ",
+            "kent-eco": "Queen's Indian: 4.g3"
         },
         "isEcoRoot": true
     },
@@ -3239,8 +3239,8 @@
             "scid": "Queen's Indian: Nimzowitsch Variation (4.g3 Ba6)",
             "ct": "Queen's Indian Defense, Fianchetto Variation",
             "chessGraph": "Nimzovich Variation, QID",
-            "chronos": "Queen's Indian: Nimzovich variation (exaggerated fianchetto)",
-            "icsbot": "Nimzovich Variation, QID "
+            "icsbot": "Nimzovich Variation, QID ",
+            "kent-eco": "Queen's Indian: Nimzovich variation (exaggerated fianchetto)"
         }
     },
     "rn1qkb1r/p1pp1ppp/bp2pn2/8/Q1PP4/5NP1/PP2PP1P/RNB1KB1R b KQkq - 2 5": {
@@ -3292,8 +3292,8 @@
             "scid": "Queen's Indian: Rubinstein Variation",
             "ct": "Queen's Indian Defense, Fianchetto Variation",
             "chessGraph": "Rubinstein Variation, QID",
-            "chronos": "Queen's Indian: Rubinstein variation",
-            "icsbot": "Rubinstein Variation, QID "
+            "icsbot": "Rubinstein Variation, QID ",
+            "kent-eco": "Queen's Indian: Rubinstein variation"
         }
     },
     "rn1qkb1r/pb1p1ppp/1p2pn2/2p5/2PP4/5NP1/PP2PPBP/RNBQK2R w KQkq - 0 6": {
@@ -3603,8 +3603,8 @@
         "aliases": {
             "scid": "Queen's Indian: Capablanca Variation",
             "chessGraph": "Capablanca Variation, QID",
-            "chronos": "Queen's Indian: Capablanca variation",
-            "icsbot": "Capablanca Variation, QID "
+            "icsbot": "Capablanca Variation, QID ",
+            "kent-eco": "Queen's Indian: Capablanca variation"
         },
         "isEcoRoot": true
     },
@@ -3617,8 +3617,8 @@
         "aliases": {
             "scid": "Queen's Indian: Capablanca, Riumin Variation",
             "chessGraph": "Riumin Variation, QID",
-            "chronos": "Queen's Indian: Riumin variation",
-            "icsbot": "Riumin Variation, QID "
+            "icsbot": "Riumin Variation, QID ",
+            "kent-eco": "Queen's Indian: Riumin variation"
         }
     },
     "rn1qk2r/1bpp1ppp/1p2pn2/p7/1bPP4/5NP1/PP1BPPBP/RN1QK2R w KQkq - 2 7": {
@@ -3755,8 +3755,8 @@
         "aliases": {
             "ct": "Queen's Indian Defense, Yates Variation",
             "chessGraph": "Yates Variation, QID",
-            "chronos": "Queen's Indian: Yates variation",
-            "icsbot": "Yates Variation, QID "
+            "icsbot": "Yates Variation, QID ",
+            "kent-eco": "Queen's Indian: Yates variation"
         }
     },
     "rn1q1rk1/1bpp1ppp/1p2pn2/p7/1bPP4/5NP1/PP1BPPBP/RN1Q1RK1 w - - 2 8": {
@@ -3775,8 +3775,8 @@
         "aliases": {
             "scid": "Queen's Indian: 6.Nc3",
             "chessGraph": "Anti-Queen's Indian System",
-            "chronos": "Queen's Indian: anti-Queen's Indian system",
-            "icsbot": "Anti-Queen's Indian System "
+            "icsbot": "Anti-Queen's Indian System ",
+            "kent-eco": "Queen's Indian: anti-Queen's Indian system"
         }
     },
     "rn1qk2r/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 b kq - 4 6": {
@@ -3788,8 +3788,8 @@
         "aliases": {
             "scid": "Queen's Indian: 6.O-O",
             "chessGraph": "Classical Variation, QID",
-            "chronos": "Queen's Indian: old main line, 6.O-O",
-            "icsbot": "Classical Variation, QID "
+            "icsbot": "Classical Variation, QID ",
+            "kent-eco": "Queen's Indian: old main line, 6.O-O"
         }
     },
     "rn1q1rk1/pbppbppp/1p3n2/3p4/2P4N/6P1/PP2PPBP/RNBQ1RK1 b - - 1 8": {
@@ -3833,8 +3833,8 @@
         "aliases": {
             "scid": "Queen's Indian: Euwe Variation",
             "chessGraph": "Euwe Variation, QID",
-            "chronos": "Queen's Indian: Euwe variation",
-            "icsbot": "Euwe Variation, QID "
+            "icsbot": "Euwe Variation, QID ",
+            "kent-eco": "Queen's Indian: Euwe variation"
         }
     },
     "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQR1K1 b - - 6 7": {
@@ -3859,8 +3859,8 @@
         "aliases": {
             "scid": "Queen's Indian: Opovcensky Variation",
             "chessGraph": "Opocensky Variation, QID",
-            "chronos": "Queen's Indian: Opovcensky variation",
-            "icsbot": "Opocensky Variation, QID "
+            "icsbot": "Opocensky Variation, QID ",
+            "kent-eco": "Queen's Indian: Opovcensky variation"
         }
     },
     "rn1qk2r/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQK2R w KQkq - 3 6": {
@@ -3872,8 +3872,8 @@
         "aliases": {
             "scid": "Queen's Indian: 5.Bg2 Be7",
             "chessGraph": "Traditional Variation, QID; E17",
-            "chronos": "Queen's Indian: 5.Bg2 Be7",
-            "icsbot": "Traditional Variation, QID; E17 "
+            "icsbot": "Traditional Variation, QID; E17 ",
+            "kent-eco": "Queen's Indian: 5.Bg2 Be7"
         },
         "isEcoRoot": true
     },
@@ -4054,7 +4054,7 @@
             "scid": "Queen's Indian: 7.Nc3",
             "ct": "Queen's Indian Defense, Classical Variation",
             "chessGraph": "E18",
-            "chronos": "Queen's Indian: old main line, 7.Nc3"
+            "kent-eco": "Queen's Indian: old main line, 7.Nc3"
         },
         "isEcoRoot": true
     },
@@ -4305,7 +4305,7 @@
         "aliases": {
             "scid": "Queen's Indian: Old Main Line, 9.Qxc3",
             "ct": "Queen's Indian Defense, Classical Variation",
-            "chronos": "Queen's Indian: old main line, 9.Qxc3"
+            "kent-eco": "Queen's Indian: old main line, 9.Qxc3"
         },
         "isEcoRoot": true
     },
@@ -4443,8 +4443,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: 4.f3 (Kmoch)",
             "chessGraph": "Kmoch Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Kmoch variation",
-            "icsbot": "Kmoch Variation, Nimzo-Indian "
+            "icsbot": "Kmoch Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Kmoch variation"
         }
     },
     "rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2NQ4/PP2PPPP/R1B1KBNR b KQkq - 3 4": {
@@ -4455,7 +4455,7 @@
         "scid": "E20",
         "aliases": {
             "scid": "Nimzo-Indian: Mikenas Attack",
-            "chronos": "Nimzo-Indian: Mikenas attack"
+            "kent-eco": "Nimzo-Indian: Mikenas attack"
         }
     },
     "rnbqk2r/pppp1ppp/4pn2/8/1bPP4/2N3P1/PP2PP1P/R1BQKBNR b KQkq - 0 4": {
@@ -4467,8 +4467,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Romanishin",
             "chessGraph": "Steiner Variation, Nimzo-Indian; Romanishin Variation",
-            "chronos": "Nimzo-Indian: Romanishin-Kasparov (Steiner) system",
-            "icsbot": "Steiner Variation, Nimzo-Indian; Romanishin Variation "
+            "icsbot": "Steiner Variation, Nimzo-Indian; Romanishin Variation ",
+            "kent-eco": "Nimzo-Indian: Romanishin-Kasparov (Steiner) system"
         }
     },
     "rnbq1rk1/pp1p1ppp/4pn2/2p5/1bPP4/2N2NP1/PP2PPBP/R1BQK2R b KQ - 2 6": {
@@ -4635,8 +4635,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Three Knights",
             "chessGraph": "Three Knights Variation, Nimzo-Indian; E21",
-            "chronos": "Nimzo-Indian: three knights variation",
-            "icsbot": "Three Knights Variation, Nimzo-Indian; E21 "
+            "icsbot": "Three Knights Variation, Nimzo-Indian; E21 ",
+            "kent-eco": "Nimzo-Indian: three knights variation"
         },
         "isEcoRoot": true
     },
@@ -4650,8 +4650,8 @@
             "scid": "Nimzo-Indian: Three Knights, Euwe Variation",
             "eco_js": "Nimzo-Indian Defense: Three Knights, Euwe Variation",
             "chessGraph": "Euwe Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: three knights, Euwe variation",
-            "icsbot": "Euwe Variation, Nimzo-Indian "
+            "icsbot": "Euwe Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: three knights, Euwe variation"
         }
     },
     "rnbqk2r/pp1p1ppp/4pn2/2pP4/1bP5/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 0 5": {
@@ -4662,8 +4662,8 @@
         "aliases": {
             "ct": "Nimzo-Indian Defense, Three Knights Variation",
             "chessGraph": "Korchnoi Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: three knights, Korchnoi variation",
-            "icsbot": "Korchnoi Variation, Nimzo-Indian "
+            "icsbot": "Korchnoi Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: three knights, Korchnoi variation"
         }
     },
     "rnbqk2r/p2p1ppp/4pn2/1ppP4/1bP5/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 6": {
@@ -4766,8 +4766,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Spielmann Variation",
             "chessGraph": "Spielmann Variation, Nimzo-Indian; E22",
-            "chronos": "Nimzo-Indian: Spielmann variation",
-            "icsbot": "Spielmann Variation, Nimzo-Indian; E22 "
+            "icsbot": "Spielmann Variation, Nimzo-Indian; E22 ",
+            "kent-eco": "Nimzo-Indian: Spielmann variation"
         },
         "isEcoRoot": true
     },
@@ -4823,8 +4823,8 @@
             "scid": "Nimzo-Indian: Spielmann, Carlsbad Variation",
             "ct": "Nimzo-Indian Defense, Spielmann Variation",
             "chessGraph": "Carlsbad Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Spielmann, Karlsbad variation",
-            "icsbot": "Carlsbad Variation, Nimzo-Indian "
+            "icsbot": "Carlsbad Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Spielmann, Karlsbad variation"
         }
     },
     "r1bqk2r/pp1p1ppp/2n1pn2/2P5/1bP5/1QN5/PP2PPPP/R1B1KBNR w KQkq - 1 6": {
@@ -4837,8 +4837,8 @@
             "scid": "Nimzo-Indian: Spielmann, 4...c5 5.dxc5 Nc6",
             "ct": "Nimzo-Indian Defense, Spielmann Variation",
             "chessGraph": "Romanovsky Gambit, Nimzo-Indian; E23",
-            "chronos": "Nimzo-Indian: Spielmann, 4...c5, 5.dc Nc6",
-            "icsbot": "Romanovsky Gambit, Nimzo-Indian; E23 "
+            "icsbot": "Romanovsky Gambit, Nimzo-Indian; E23 ",
+            "kent-eco": "Nimzo-Indian: Spielmann, 4...c5, 5.dc Nc6"
         },
         "isEcoRoot": true
     },
@@ -4852,8 +4852,8 @@
             "scid": "Nimzo-Indian: Spielmann, San Remo Variation",
             "ct": "Nimzo-Indian Defense, Spielmann Variation",
             "chessGraph": "San Remo Variation, Nimzo-Indian; Stahlberg Variation",
-            "chronos": "Nimzo-Indian: Spielmann, San Remo variation",
-            "icsbot": "San Remo Variation, Nimzo-Indian; Stahlberg Variation "
+            "icsbot": "San Remo Variation, Nimzo-Indian; Stahlberg Variation ",
+            "kent-eco": "Nimzo-Indian: Spielmann, San Remo variation"
         }
     },
     "r1bqk2r/pp1p2pp/2n1p3/2n2p2/1bP5/2N2NP1/PPQBPP1P/R3KB1R b KQkq - 0 9": {
@@ -4866,8 +4866,8 @@
             "scid": "Nimzo-Indian: Spielmann, Stahlberg Variation",
             "eco_js": "Nimzo-Indian Defense: Spielmann, Stahlberg Variation",
             "chessGraph": "Stahlberg Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Spielmann, Staahlberg variation",
-            "icsbot": "Stahlberg Variation, Nimzo-Indian "
+            "icsbot": "Stahlberg Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Spielmann, Staahlberg variation"
         }
     },
     "r1bqk2r/pp1p1ppp/2n1pn2/2P3B1/1bP5/1QN5/PP2PPPP/R3KBNR b KQkq - 2 6": {
@@ -4902,8 +4902,8 @@
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, Accelerated",
             "ct": "Nimzo-Indian Defense, Saemisch Variation",
             "chessGraph": "Accelerated Saemisch Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Saemisch variation",
-            "icsbot": "Accelerated Saemisch Variation, Nimzo-Indian "
+            "icsbot": "Accelerated Saemisch Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Saemisch variation"
         },
         "isEcoRoot": true
     },
@@ -4917,8 +4917,8 @@
             "scid": "Nimzo-Indian: Saemisch, Botvinnik Variation",
             "eco_js": "Nimzo-Indian Defense: Saemisch, Botvinnik Variation",
             "chessGraph": "Botvinnik Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Saemisch, Botvinnik variation",
-            "icsbot": "Botvinnik Variation, Nimzo-Indian "
+            "icsbot": "Botvinnik Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Saemisch, Botvinnik variation"
         }
     },
     "rnbqk2r/pppp1ppp/4pn2/8/1bPP4/P1N5/1P2PPPP/R1BQKBNR b KQkq - 0 4": {
@@ -4992,7 +4992,7 @@
             "scid": "Nimzo-Indian: Saemisch, 5...c5 6.f3 d5 7.cxd5",
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, 6. bxc3 c5 7. cxd5",
             "chessGraph": "E25",
-            "chronos": "Nimzo-Indian: Saemisch variation"
+            "kent-eco": "Nimzo-Indian: Saemisch variation"
         },
         "isEcoRoot": true
     },
@@ -5007,8 +5007,8 @@
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, Keres Variation",
             "ct": "Nimzo-Indian Defense, Saemisch Variation",
             "chessGraph": "Keres Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Saemisch, Keres variation",
-            "icsbot": "Keres Variation, Nimzo-Indian "
+            "icsbot": "Keres Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Saemisch, Keres variation"
         }
     },
     "rnbqk2r/pp4pp/4p3/2Pn1p2/8/P1P2P2/4P1PP/R1BQKBNR w KQkq - 0 9": {
@@ -5021,8 +5021,8 @@
             "scid": "Nimzo-Indian: Saemisch, Keres, Romanovsky Variation",
             "eco_js": "Nimzo-Indian Defense: Saemisch, Romanovsky Variation",
             "chessGraph": "Romanovsky Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Saemisch, Romanovsky variation",
-            "icsbot": "Romanovsky Variation, Nimzo-Indian "
+            "icsbot": "Romanovsky Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Saemisch, Romanovsky variation"
         }
     },
     "rnbqk2r/pp3ppp/4p3/2pn4/3P4/P1P2P2/4P1PP/R1BQKBNR w KQkq - 0 8": {
@@ -5063,8 +5063,8 @@
             "scid": "Nimzo-Indian: Saemisch, 5...c5 6.e3",
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, 5. bxc3 c5 6. e3",
             "chessGraph": "Saemisch Variation, Nimzo-Indian; E26",
-            "chronos": "Nimzo-Indian: Saemisch variation",
-            "icsbot": "Saemisch Variation, Nimzo-Indian; E26 "
+            "icsbot": "Saemisch Variation, Nimzo-Indian; E26 ",
+            "kent-eco": "Nimzo-Indian: Saemisch variation"
         },
         "isEcoRoot": true
     },
@@ -5079,8 +5079,8 @@
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, O'Kelly Variation",
             "ct": "Nimzo-Indian Defense, Saemisch Variation",
             "chessGraph": "O'Kelly Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Saemisch, O'Kelly variation",
-            "icsbot": "O'Kelly Variation, Nimzo-Indian "
+            "icsbot": "O'Kelly Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Saemisch, O'Kelly variation"
         }
     },
     "rnbqk2r/pp3ppp/3ppn2/2p5/2PP4/P1P1P3/5PPP/R1BQKBNR w KQkq - 0 7": {
@@ -5121,7 +5121,7 @@
             "scid": "Nimzo-Indian: Saemisch, 5...O-O",
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation",
             "chessGraph": "E27",
-            "chronos": "Nimzo-Indian: Saemisch variation"
+            "kent-eco": "Nimzo-Indian: Saemisch variation"
         },
         "isEcoRoot": true
     },
@@ -5163,7 +5163,7 @@
             "scid": "Nimzo-Indian: Saemisch, 5...O-O 6.e3",
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, 5. a3 Bxc3+ 6. bxc3",
             "chessGraph": "E28",
-            "chronos": "Nimzo-Indian: Saemisch variation"
+            "kent-eco": "Nimzo-Indian: Saemisch variation"
         },
         "isEcoRoot": true
     },
@@ -5209,7 +5209,8 @@
         "name": "Nimzo-Indian Defense: Sämisch Variation",
         "aliases": {
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, 6. a3 Bxc3+ 7. bxc3 O-O"
-        }
+        },
+        "isEcoRoot": true
     },
     "r1bqnrk1/p2p1ppp/1pn1p3/2p5/2PPP3/P1PB4/4NPPP/R1BQK2R w KQ - 1 10": {
         "src": "eco_tsv",
@@ -5222,8 +5223,8 @@
             "eco_js": "Nimzo-Indian Defense: Saemisch Variation, Capablanca Variation",
             "ct": "Nimzo-Indian Defense, Saemisch Variation",
             "chessGraph": "Capablanca Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Saemisch, Capablanca variation",
-            "icsbot": "Capablanca Variation, Nimzo-Indian "
+            "icsbot": "Capablanca Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Saemisch, Capablanca variation"
         }
     },
     "r1bq1rk1/pp1p1ppp/2n1pn2/2p5/2PP4/P1PBP3/5PPP/R1BQK1NR w KQ - 2 8": {
@@ -5232,11 +5233,10 @@
         "moves": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. a3 Bxc3+ 5. bxc3 O-O 6. e3 c5 7. Bd3 Nc6",
         "name": "Nimzo-Indian: Saemisch, 5...O-O 6.e3 c5 7.Bd3 Nc6",
         "scid": "E29",
-        "isEcoRoot": true,
         "aliases": {
             "ct": "Nimzo-Indian Defense, Saemisch Variation",
             "chessGraph": "E29",
-            "chronos": "Nimzo-Indian: Saemisch, main line"
+            "kent-eco": "Nimzo-Indian: Saemisch, main line"
         }
     },
     "r1bq1rk1/pp1p1ppp/2n1pn2/2p5/2PP4/P1PBP3/4NPPP/R1BQK2R b KQ - 3 8": {
@@ -5297,8 +5297,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Leningrad",
             "chessGraph": "Leningrad Variation, Nimzo-Indian; E30",
-            "chronos": "Nimzo-Indian: Leningrad variation",
-            "icsbot": "Leningrad Variation, Nimzo-Indian; E30 "
+            "icsbot": "Leningrad Variation, Nimzo-Indian; E30 ",
+            "kent-eco": "Nimzo-Indian: Leningrad variation"
         },
         "isEcoRoot": true
     },
@@ -5312,8 +5312,8 @@
             "scid": "Nimzo-Indian: Leningrad, 6.d5 b5 Gambit",
             "ct": "Nimzo-Indian Defense, Leningrad Variation",
             "chessGraph": "Averbakh Gambit, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Leningrad, ...b5 gambit",
-            "icsbot": "Averbakh Gambit, Nimzo-Indian "
+            "icsbot": "Averbakh Gambit, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Leningrad, ...b5 gambit"
         }
     },
     "rnbqk2r/pp1p1ppp/4pn2/2p3B1/1bPP4/2N5/PP2PPPP/R2QKBNR w KQkq - 0 5": {
@@ -5438,8 +5438,8 @@
             "scid": "Nimzo-Indian: Leningrad, Main Line",
             "ct": "Nimzo-Indian Defense, Leningrad Variation",
             "chessGraph": "Benoni Defense, Nimzo-Indian; E31",
-            "chronos": "Nimzo-Indian: Leningrad, main line",
-            "icsbot": "Benoni Defense, Nimzo-Indian; E31 "
+            "icsbot": "Benoni Defense, Nimzo-Indian; E31 ",
+            "kent-eco": "Nimzo-Indian: Leningrad, main line"
         },
         "isEcoRoot": true
     },
@@ -5557,8 +5557,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Classical Variation",
             "chessGraph": "Classical Variation, Nimzo-Indian; E32",
-            "chronos": "Nimzo-Indian: classical variation",
-            "icsbot": "Classical Variation, Nimzo-Indian; E32 "
+            "icsbot": "Classical Variation, Nimzo-Indian; E32 ",
+            "kent-eco": "Nimzo-Indian: classical variation"
         },
         "isEcoRoot": true
     },
@@ -5585,8 +5585,8 @@
             "scid": "Nimzo-Indian: Classical, Adorjan Gambit",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "Vitolinsh-Adorjan Gambit, Nimzo Indian",
-            "chronos": "Nimzo-Indian: classical, Adorjan gambit",
-            "icsbot": "Vitolinsh-Adorjan Gambit, Nimzo Indian "
+            "icsbot": "Vitolinsh-Adorjan Gambit, Nimzo Indian ",
+            "kent-eco": "Nimzo-Indian: classical, Adorjan gambit"
         }
     },
     "rnbqk2r/p1pp1ppp/1p2pn2/8/1bPP4/2N5/PPQ1PPPP/R1B1KBNR w KQkq - 0 5": {
@@ -5739,8 +5739,8 @@
             "scid": "Nimzo-Indian: Classical, Milner-Barry (Zurich) Variation",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "Milner-Barry Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: classical, Milner-Barry (Zurich) variation",
-            "icsbot": "Milner-Barry Variation, Nimzo-Indian "
+            "icsbot": "Milner-Barry Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: classical, Milner-Barry (Zurich) variation"
         }
     },
     "r1bqk2r/pppp1ppp/2n1pn2/8/1bPP4/2N5/PPQ1PPPP/R1B1KBNR w KQkq - 4 5": {
@@ -5753,8 +5753,8 @@
             "scid": "Nimzo-Indian: Classical, 4...Nc6",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "Milner-Barry, Zurich Variation, Nimzo-Indian; E33",
-            "chronos": "Nimzo-Indian: classical, 4...Nc6",
-            "icsbot": "Milner-Barry, Zurich Variation, Nimzo-Indian; E33 "
+            "icsbot": "Milner-Barry, Zurich Variation, Nimzo-Indian; E33 ",
+            "kent-eco": "Nimzo-Indian: classical, 4...Nc6"
         },
         "isEcoRoot": true
     },
@@ -5823,8 +5823,8 @@
             "scid": "Nimzo-Indian: Classical, Noa Variation",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "Noa Variation, Nimzo-Indian; E34",
-            "chronos": "Nimzo-Indian: classical, Noa variation",
-            "icsbot": "Noa Variation, Nimzo-Indian; E34 "
+            "icsbot": "Noa Variation, Nimzo-Indian; E34 ",
+            "kent-eco": "Nimzo-Indian: classical, Noa variation"
         },
         "isEcoRoot": true
     },
@@ -5918,7 +5918,7 @@
             "scid": "Nimzo-Indian: Classical, Noa, Exchange",
             "eco_js": "Nimzo-Indian Defense: Classical, Noa Variation, 5. cxd5 exd5",
             "chessGraph": "E35",
-            "chronos": "Nimzo-Indian: classical, Noa variation, 5.cd ed"
+            "kent-eco": "Nimzo-Indian: classical, Noa variation, 5.cd ed"
         },
         "isEcoRoot": true
     },
@@ -5982,7 +5982,7 @@
             "eco_js": "Nimzo-Indian Defense: Classical Variation, Noa Variation, 4. Qc2 d5 5. a3",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "E36",
-            "chronos": "Nimzo-Indian: classical, Noa variation, 5.a3"
+            "kent-eco": "Nimzo-Indian: classical, Noa variation, 5.a3"
         },
         "isEcoRoot": true
     },
@@ -5996,8 +5996,8 @@
             "scid": "Nimzo-Indian: Classical, Noa, Botvinnik Variation",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "Botvinnik Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: classical, Botvinnik variation",
-            "icsbot": "Botvinnik Variation, Nimzo-Indian "
+            "icsbot": "Botvinnik Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: classical, Botvinnik variation"
         }
     },
     "rnbqk2r/ppp2ppp/4p3/3p4/2PPn3/P1Q5/1P2PPPP/R1B1KBNR w KQkq - 1 7": {
@@ -6010,7 +6010,7 @@
             "scid": "Nimzo-Indian: Classical, Noa, Main Line",
             "eco_js": "Nimzo-Indian Defense: Classical, Noa Variation, Main Line",
             "chessGraph": "E37",
-            "chronos": "Nimzo-Indian: classical, Noa variation, main line"
+            "kent-eco": "Nimzo-Indian: classical, Noa variation, main line"
         }
     },
     "rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/P1N5/1PQ1PPPP/R1B1KBNR w KQkq - 1 6": {
@@ -6058,7 +6058,7 @@
             "scid": "Nimzo-Indian: Classical, Noa, Main Line, 7.Qc2",
             "eco_js": "Nimzo-Indian Defense: Classical Variation, Noa Variation, 6. Qxc3 Ne4 7. Qc2",
             "ct": "Nimzo-Indian Defense, Classical Variation",
-            "chronos": "Nimzo-Indian: classical, Noa variation, main line, 7.Qc2"
+            "kent-eco": "Nimzo-Indian: classical, Noa variation, main line, 7.Qc2"
         },
         "isEcoRoot": true
     },
@@ -6072,8 +6072,8 @@
             "scid": "Nimzo-Indian: Classical, Noa, San Remo Variation",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "San Remo Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: classical, San Remo variation",
-            "icsbot": "San Remo Variation, Nimzo-Indian "
+            "icsbot": "San Remo Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: classical, San Remo variation"
         }
     },
     "rnbqk2r/pp3ppp/4p3/2pp4/2PPn3/P7/1PQ1PPPP/R1B1KBNR w KQkq - 0 8": {
@@ -6110,8 +6110,8 @@
             "scid": "Nimzo-Indian: Classical, 4...c5",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "Berlin Variation, Nimzo-Indian; E38",
-            "chronos": "Nimzo-Indian: classical, 4...c5",
-            "icsbot": "Berlin Variation, Nimzo-Indian; E38 "
+            "icsbot": "Berlin Variation, Nimzo-Indian; E38 ",
+            "kent-eco": "Nimzo-Indian: classical, 4...c5"
         },
         "isEcoRoot": true
     },
@@ -6243,8 +6243,8 @@
             "scid": "Nimzo-Indian: Classical, Pirc Variation",
             "ct": "Nimzo-Indian Defense, Classical Variation",
             "chessGraph": "Pirc Variation, Nimzo-Indian; E39",
-            "chronos": "Nimzo-Indian: classical, Pirc variation",
-            "icsbot": "Pirc Variation, Nimzo-Indian; E39 "
+            "icsbot": "Pirc Variation, Nimzo-Indian; E39 ",
+            "kent-eco": "Nimzo-Indian: classical, Pirc variation"
         },
         "isEcoRoot": true
     },
@@ -6345,8 +6345,8 @@
             "scid": "Nimzo-Indian: Rubinstein",
             "ct": "Nimzo-Indian Defense, Normal Line",
             "chessGraph": "Rubinstein Variation, Nimzo-Indian; E40",
-            "chronos": "Nimzo-Indian: 4.e3",
-            "icsbot": "Rubinstein Variation, Nimzo-Indian; E40 "
+            "icsbot": "Rubinstein Variation, Nimzo-Indian; E40 ",
+            "kent-eco": "Nimzo-Indian: 4.e3"
         },
         "isEcoRoot": true
     },
@@ -6360,8 +6360,8 @@
             "scid": "Nimzo-Indian: Taimanov",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Taimanov Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: 4.e3, Taimanov variation",
-            "icsbot": "Taimanov Variation, Nimzo-Indian "
+            "icsbot": "Taimanov Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: 4.e3, Taimanov variation"
         }
     },
     "r1bqk2r/pppp1ppp/2n1pn2/8/1bPP4/2NBP3/PP3PPP/R1BQK1NR b KQkq - 2 5": {
@@ -6396,8 +6396,8 @@
             "eco_js": "Nimzo-Indian Defense: Huebner Variation",
             "ct": "Nimzo-Indian Defense, Huebner Variation",
             "chessGraph": "Huebner Variation, Nimzo-Indian; E41",
-            "chronos": "Nimzo-Indian: 4.e3 c5",
-            "icsbot": "Huebner Variation, Nimzo-Indian; E41 "
+            "icsbot": "Huebner Variation, Nimzo-Indian; E41 ",
+            "kent-eco": "Nimzo-Indian: 4.e3 c5"
         },
         "isEcoRoot": true
     },
@@ -6411,7 +6411,7 @@
             "scid": "Nimzo-Indian: 4.e3 c5, Huebner Variation",
             "eco_js": "Nimzo-Indian Defense: Huebner Variation, Main Line",
             "ct": "Nimzo-Indian Defense, Huebner Variation",
-            "chronos": "Nimzo-Indian: e3, Huebner variation"
+            "kent-eco": "Nimzo-Indian: e3, Huebner variation"
         }
     },
     "rnbq1rk1/pp1p1ppp/4pn2/2p5/1bPP4/2N1PN2/PP3PPP/R1BQKB1R w KQ - 2 6": {
@@ -6504,8 +6504,8 @@
             "eco_js": "Nimzo-Indian Defense: Huebner Variation, Rubinstein Variation",
             "ct": "Nimzo-Indian Defense, Huebner Variation",
             "chessGraph": "Rubinstein Variation, Nimzo-Indian; E42",
-            "chronos": "Nimzo-Indian: 4.e3 c5, 5.Ne2 (Rubinstein)",
-            "icsbot": "Rubinstein Variation, Nimzo-Indian; E42 "
+            "icsbot": "Rubinstein Variation, Nimzo-Indian; E42 ",
+            "kent-eco": "Nimzo-Indian: 4.e3 c5, 5.Ne2 (Rubinstein)"
         },
         "isEcoRoot": true
     },
@@ -6575,8 +6575,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Nimzowitsch (Fischer) Variation",
             "chessGraph": "St. Petersburg Variation, Nimzo-Indian; E43",
-            "chronos": "Nimzo-Indian: Fischer variation",
-            "icsbot": "St. Petersburg Variation, Nimzo-Indian; E43 "
+            "icsbot": "St. Petersburg Variation, Nimzo-Indian; E43 ",
+            "kent-eco": "Nimzo-Indian: Fischer variation"
         },
         "isEcoRoot": true
     },
@@ -6665,8 +6665,8 @@
             "scid": "Nimzo-Indian: Nimzowitsch, 5.Ne2",
             "ct": "Nimzo-Indian Defense, Fischer Variation",
             "chessGraph": "Fischer Variation, Nimzo-Indian; E44",
-            "chronos": "Nimzo-Indian: Fischer variation, 5.Ne2",
-            "icsbot": "Fischer Variation, Nimzo-Indian; E44 "
+            "icsbot": "Fischer Variation, Nimzo-Indian; E44 ",
+            "kent-eco": "Nimzo-Indian: Fischer variation, 5.Ne2"
         },
         "isEcoRoot": true
     },
@@ -6711,8 +6711,8 @@
             "scid": "Nimzo-Indian: Nimzowitsch, 5.Ne2 Ba6",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Bronstein Variation, Nimzo-Indian; E45; Byrne Variation",
-            "chronos": "Nimzo-Indian: 4.e3, Bronstein (Byrne) variation",
-            "icsbot": "Bronstein Variation, Nimzo-Indian; E45; Byrne Variation "
+            "icsbot": "Bronstein Variation, Nimzo-Indian; E45; Byrne Variation ",
+            "kent-eco": "Nimzo-Indian: 4.e3, Bronstein (Byrne) variation"
         },
         "isEcoRoot": true
     },
@@ -6767,8 +6767,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: 4.e3 O-O",
             "chessGraph": "Normal Variation, Nimzo-Indian; E46",
-            "chronos": "Nimzo-Indian: 4.e3 O-O",
-            "icsbot": "Normal Variation, Nimzo-Indian; E46 "
+            "icsbot": "Normal Variation, Nimzo-Indian; E46 ",
+            "kent-eco": "Nimzo-Indian: 4.e3 O-O"
         },
         "isEcoRoot": true
     },
@@ -6781,8 +6781,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Reshevsky Variation",
             "chessGraph": "Reshevsky Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Reshevsky variation",
-            "icsbot": "Reshevsky Variation, Nimzo-Indian "
+            "icsbot": "Reshevsky Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Reshevsky variation"
         }
     },
     "rnbq1rk1/ppp2ppp/3bpn2/3p4/2PP4/P1N1P3/1P2NPPP/R1BQKB1R w KQ - 1 7": {
@@ -6794,8 +6794,8 @@
         "aliases": {
             "scid": "Nimzo-Indian: Reshevsky, Simagin Variation",
             "chessGraph": "Simagin Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: Simagin variation",
-            "icsbot": "Simagin Variation, Nimzo-Indian "
+            "icsbot": "Simagin Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: Simagin variation"
         }
     },
     "rnbq1rk1/p1pp1ppp/1p2pn2/8/1bPP4/2N1P3/PP2NPPP/R1BQKB1R w KQ - 0 6": {
@@ -6849,8 +6849,9 @@
         "aliases": {
             "scid": "Nimzo-Indian: 4.e3 O-O 5.Bd3",
             "chessGraph": "Bishop Attack, Nimzo-Indian; E47",
-            "chronos": "Nimzo-Indian: 4.e3 O-O, 5.Bd3",
-            "icsbot": "Bishop Attack, Nimzo-Indian; E47 "
+            "icsbot": "Bishop Attack, Nimzo-Indian; E47 ",
+            "kent-eco": "Nimzo-Indian: 4.e3 O-O, 5.Bd3",
+            "ct": "Nimzo-Indian Defense, Normal Variation, Bishop Attack"
         },
         "isEcoRoot": true
     },
@@ -6899,8 +6900,8 @@
             "scid": "Nimzo-Indian: 4.e3 O-O 5.Bd3 d5",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Classical Defense, Nimzo-Indian; E48",
-            "chronos": "Nimzo-Indian: 4.e3 O-O, 5.Bd3 d5",
-            "icsbot": "Classical Defense, Nimzo-Indian; E48 "
+            "icsbot": "Classical Defense, Nimzo-Indian; E48 ",
+            "kent-eco": "Nimzo-Indian: 4.e3 O-O, 5.Bd3 d5"
         },
         "isEcoRoot": true
     },
@@ -6994,8 +6995,8 @@
             "scid": "Nimzo-Indian: Botvinnik System",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Botvinnik System, Nimzo-Indian; E49",
-            "chronos": "Nimzo-Indian: 4.e3, Botvinnik system",
-            "icsbot": "Botvinnik System, Nimzo-Indian; E49 "
+            "icsbot": "Botvinnik System, Nimzo-Indian; E49 ",
+            "kent-eco": "Nimzo-Indian: 4.e3, Botvinnik system"
         },
         "isEcoRoot": true
     },
@@ -7058,7 +7059,7 @@
             "scid": "Nimzo-Indian: 4.e3 O-O 5.Nf3",
             "eco_js": "Nimzo-Indian Defense: 4. e3 O-O 5. Nf3, without ... d5",
             "chessGraph": "E50",
-            "chronos": "Nimzo-Indian: 4.e3 e8g8, 5.Nf3, without ...d5"
+            "kent-eco": "Nimzo-Indian: 4.e3 e8g8, 5.Nf3, without ...d5"
         },
         "isEcoRoot": true
     },
@@ -7126,8 +7127,8 @@
             "scid": "Nimzo-Indian: 4.e3 O-O 5.Nf3 d5",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Ragozin Variation, Nimzo-Indian; E51",
-            "chronos": "Nimzo-Indian: 4.e3 e8g8, 5.Nf3 d7d5",
-            "icsbot": "Ragozin Variation, Nimzo-Indian; E51 "
+            "icsbot": "Ragozin Variation, Nimzo-Indian; E51 ",
+            "kent-eco": "Nimzo-Indian: 4.e3 e8g8, 5.Nf3 d7d5"
         },
         "isEcoRoot": true
     },
@@ -7155,8 +7156,8 @@
             "scid": "Nimzo-Indian: 4.e3 O-O 5.Nf3 d5 6.Bd3 Nc6 7.O-O dxc4",
             "eco_js": "Nimzo-Indian Defense: 4. e3, Ragozin Variation",
             "chessGraph": "Ragozin Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: 4.e3, Ragozin variation",
-            "icsbot": "Ragozin Variation, Nimzo-Indian "
+            "icsbot": "Ragozin Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: 4.e3, Ragozin variation"
         }
     },
     "rnbq1rk1/ppp2ppp/4pn2/3p4/1bPP4/2NBPN2/PP3PPP/R1BQK2R b KQ - 1 6": {
@@ -7197,8 +7198,8 @@
             "scid": "Nimzo-Indian: Main Line, 6...b6",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Schlechter Defense, Nimzo-Indian; E52",
-            "chronos": "Nimzo-Indian: 4.e3, main line with ...b6",
-            "icsbot": "Schlechter Defense, Nimzo-Indian; E52 "
+            "icsbot": "Schlechter Defense, Nimzo-Indian; E52 ",
+            "kent-eco": "Nimzo-Indian: 4.e3, main line with ...b6"
         },
         "isEcoRoot": true
     },
@@ -7275,8 +7276,8 @@
             "scid": "Nimzo-Indian: Main Line, 6...c5",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Bernstein Defense; Gligoric System; E53",
-            "chronos": "Nimzo-Indian: 4.e3, main line with ...c5",
-            "icsbot": "Bernstein Defense; Gligoric System; E53 "
+            "icsbot": "Bernstein Defense; Gligoric System; E53 ",
+            "kent-eco": "Nimzo-Indian: 4.e3, main line with ...c5"
         },
         "isEcoRoot": true
     },
@@ -7290,7 +7291,7 @@
             "scid": "Nimzo-Indian: Main Line, 7...Nbd7",
             "eco_js": "Nimzo-Indian Defense: Normal Variation, Gligoric System, 6. Nf3 c5 7. O-O Nbd7",
             "ct": "Nimzo-Indian Defense, Normal Variation",
-            "chronos": "Nimzo-Indian: 4.e3, Gligoric system with 7...Nbd7"
+            "kent-eco": "Nimzo-Indian: 4.e3, Gligoric system with 7...Nbd7"
         }
     },
     "rnbq1rk1/p4ppp/1p2pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 w - - 0 8": {
@@ -7303,8 +7304,8 @@
             "scid": "Nimzo-Indian: Main Line, Keres Variation",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Keres Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: 4.e3, Keres variation",
-            "icsbot": "Keres Variation, Nimzo-Indian "
+            "icsbot": "Keres Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: 4.e3, Keres variation"
         }
     },
     "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/P1NBPN2/1P3PPP/R1BQK2R b KQ - 0 7": {
@@ -7346,7 +7347,7 @@
             "eco_js": "Nimzo-Indian Defense: Normal Variation, Gligoric System, Exchange at c4",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "E54",
-            "chronos": "Nimzo-Indian: 4.e3, Gligoric system with 7...dc"
+            "kent-eco": "Nimzo-Indian: 4.e3, Gligoric system with 7...dc"
         },
         "isEcoRoot": true
     },
@@ -7360,8 +7361,8 @@
             "scid": "Nimzo-Indian: Main Line, Smyslov Variation",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Smyslov Variation, Nimzo-Indian",
-            "chronos": "Nimzo-Indian: 4.e3, Gligoric system, Smyslov variation",
-            "icsbot": "Smyslov Variation, Nimzo-Indian "
+            "icsbot": "Smyslov Variation, Nimzo-Indian ",
+            "kent-eco": "Nimzo-Indian: 4.e3, Gligoric system, Smyslov variation"
         }
     },
     "rnbq1rk1/pp3ppp/4pn2/2p5/1bpP4/2NBPN2/PP3PPP/R1BQ1RK1 w - - 0 8": {
@@ -7465,8 +7466,8 @@
             "scid": "Nimzo-Indian: Main Line, Bronstein Variation",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Bronstein Variation, Nimzo-Indian; E55",
-            "chronos": "Nimzo-Indian: 4.e3, Gligoric system, Bronstein variation",
-            "icsbot": "Bronstein Variation, Nimzo-Indian; E55 "
+            "icsbot": "Bronstein Variation, Nimzo-Indian; E55 ",
+            "kent-eco": "Nimzo-Indian: 4.e3, Gligoric system, Bronstein variation"
         },
         "isEcoRoot": true
     },
@@ -7533,8 +7534,8 @@
             "scid": "Nimzo-Indian: Main Line, 7...Nc6",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "Bernstein Variation, Nimzo-Indian; E56",
-            "chronos": "Nimzo-Indian: 4.e3, main line with 7...Nc6",
-            "icsbot": "Bernstein Variation, Nimzo-Indian; E56 "
+            "icsbot": "Bernstein Variation, Nimzo-Indian; E56 ",
+            "kent-eco": "Nimzo-Indian: 4.e3, main line with 7...Nc6"
         },
         "isEcoRoot": true
     },
@@ -7610,7 +7611,7 @@
         "aliases": {
             "eco_js": "Nimzo-Indian Defense: 4. e3, Main Line, with 8... dxc4 and 9... cxd4",
             "chessGraph": "E57",
-            "chronos": "Nimzo-Indian: 4.e3, main line with 8...dc and 9...cd"
+            "kent-eco": "Nimzo-Indian: 4.e3, main line with 8...dc and 9...cd"
         },
         "isEcoRoot": true
     },
@@ -7680,7 +7681,7 @@
             "scid": "Nimzo-Indian: Main Line, 8...Bxc3",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "E58",
-            "chronos": "Nimzo-Indian: 4.e3, main line with 8...Bxc3"
+            "kent-eco": "Nimzo-Indian: 4.e3, main line with 8...Bxc3"
         },
         "isEcoRoot": true
     },
@@ -7764,7 +7765,7 @@
             "scid": "Nimzo-Indian: Main Line, 9.bxc3 dxc4 10.Bxc4",
             "ct": "Nimzo-Indian Defense, Normal Variation",
             "chessGraph": "E59",
-            "chronos": "Nimzo-Indian: 4.e3, main line"
+            "kent-eco": "Nimzo-Indian: 4.e3, main line"
         },
         "isEcoRoot": true
     },
@@ -7874,8 +7875,8 @@
         "aliases": {
             "eco_js": "Gruenfeld Defense: Counterthrust Variation",
             "chessGraph": "Counterthrust Variation",
-            "chronos": "King's Indian: 3.g3, counterthrust variation",
-            "icsbot": "Counterthrust Variation "
+            "icsbot": "Counterthrust Variation ",
+            "kent-eco": "King's Indian: 3.g3, counterthrust variation"
         }
     },
     "rnbqkb1r/p1pppp1p/5np1/1p1P4/2P5/8/PP2PPPP/RNBQKBNR w KQkq - 0 4": {
@@ -7889,8 +7890,8 @@
             "eco_js": "Indian Game: Anti-Gruenfeld, Adorjan Gambit",
             "ct": "Indian Game, Anti-Gruenfeld",
             "chessGraph": "Danube Gambit; Adorjan Gambit",
-            "chronos": "King's Indian: Danube gambit",
-            "icsbot": "Danube Gambit; Adorjan Gambit "
+            "icsbot": "Danube Gambit; Adorjan Gambit ",
+            "kent-eco": "King's Indian: Danube gambit"
         }
     },
     "rnbqkb1r/pppppp1p/5np1/3P4/2P5/8/PP2PPPP/RNBQKBNR b KQkq - 0 3": {
@@ -7904,8 +7905,8 @@
             "eco_js": "Indian Game: Anti-Gruenfeld, Advance Variation",
             "ct": "Indian Game, Anti-GrÃ¼nfeld",
             "chessGraph": "Anti-Grunfeld Variation",
-            "chronos": "King's Indian: Anti-Gruenfeld",
-            "icsbot": "Anti-Grunfeld Variation "
+            "icsbot": "Anti-Grunfeld Variation ",
+            "kent-eco": "King's Indian: Anti-Gruenfeld"
         }
     },
     "rnbqkb1r/pppppp1p/5np1/8/2PP4/5P2/PP2P1PP/RNBQKBNR b KQkq - 0 3": {
@@ -7962,8 +7963,8 @@
             "eco_js": "Indian Game: West Indian Defense",
             "ct": "Indian Game, Kingside Fianchetto",
             "chessGraph": "King's Indian Defense; West Indian Defense; D70",
-            "chronos": "King's Indian defence",
-            "icsbot": "King's Indian Defense; West Indian Defense; D70 "
+            "icsbot": "King's Indian Defense; West Indian Defense; D70 ",
+            "kent-eco": "King's Indian defence"
         },
         "isEcoRoot": true
     },
@@ -7977,8 +7978,8 @@
             "scid": "King's Indian: 3.g3",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Fianchetto Variation, KID",
-            "chronos": "King's Indian: 3.g3",
-            "icsbot": "Fianchetto Variation, KID "
+            "icsbot": "Fianchetto Variation, KID ",
+            "kent-eco": "King's Indian: 3.g3"
         }
     },
     "rnb1k2r/pp1pppbp/5np1/q1p5/2PP4/5NP1/PP2PPBP/RNBQK2R w KQkq - 2 6": {
@@ -8230,7 +8231,7 @@
             "scid": "King's Indian: 3.Nc3",
             "eco_js": "King's Indian Defense: 3. Nc3",
             "chessGraph": "E61",
-            "chronos": "King's Indian defence, 3.Nc3"
+            "kent-eco": "King's Indian defence, 3.Nc3"
         },
         "isEcoRoot": true
     },
@@ -8276,8 +8277,8 @@
         "aliases": {
             "scid": "King's Indian: Smyslov System",
             "chessGraph": "Smyslov Variation, KID",
-            "chronos": "King's Indian: Smyslov system",
-            "icsbot": "Smyslov Variation, KID "
+            "icsbot": "Smyslov Variation, KID ",
+            "kent-eco": "King's Indian: Smyslov system"
         }
     },
     "rnbqk2r/ppppppbp/5np1/8/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq - 2 4": {
@@ -8577,8 +8578,8 @@
             "scid": "King's Indian: Fianchetto Variation",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Delayed Fianchetto, KID; E62",
-            "chronos": "King's Indian: fianchetto variation",
-            "icsbot": "Delayed Fianchetto, KID; E62 "
+            "icsbot": "Delayed Fianchetto, KID; E62 ",
+            "kent-eco": "King's Indian: fianchetto variation"
         },
         "isEcoRoot": true
     },
@@ -8598,8 +8599,8 @@
             "scid": "King's Indian: Fianchetto, Kavalek/Bronstein Variation",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Bronstein Variation",
-            "chronos": "King's Indian: fianchetto, Kavalek (Bronstein) variation",
-            "icsbot": "Bronstein Variation "
+            "icsbot": "Bronstein Variation ",
+            "kent-eco": "King's Indian: fianchetto, Kavalek (Bronstein) variation"
         }
     },
     "rn1q1rk1/pp2ppbp/2pp1np1/5b2/2PP4/2N2NP1/PP2PPBP/R1BQ1RK1 w - - 2 8": {
@@ -8612,8 +8613,8 @@
             "scid": "King's Indian: Fianchetto, Larsen System",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Larsen Defense, KID",
-            "chronos": "King's Indian: fianchetto, Larsen system",
-            "icsbot": "Larsen Defense, KID "
+            "icsbot": "Larsen Defense, KID ",
+            "kent-eco": "King's Indian: fianchetto, Larsen system"
         }
     },
     "r2q1rk1/ppp1ppbp/2np1np1/5b2/2PP4/2N2NP1/PP2PPBP/R1BQ1RK1 w - - 4 8": {
@@ -8632,8 +8633,8 @@
             "scid": "King's Indian: Fianchetto, Simagin Variation",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Simagin Variation, KID",
-            "chronos": "King's Indian: fianchetto, Simagin variation",
-            "icsbot": "Simagin Variation, KID "
+            "icsbot": "Simagin Variation, KID ",
+            "kent-eco": "King's Indian: fianchetto, Simagin variation"
         }
     },
     "r2q1rk1/ppp1ppbp/2np1np1/8/2PP2b1/2N2NP1/PP2PPBP/R1BQ1RK1 w - - 3 8": {
@@ -8652,8 +8653,8 @@
             "scid": "King's Indian: Fianchetto, Uhlmann/Szabo Variation",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Szabo Variation",
-            "chronos": "King's Indian: fianchetto, Uhlmann (Szabo) variation",
-            "icsbot": "Szabo Variation "
+            "icsbot": "Szabo Variation ",
+            "kent-eco": "King's Indian: fianchetto, Uhlmann (Szabo) variation"
         }
     },
     "rnbq1rk1/ppp1ppbp/3p1np1/8/2PP4/2N2NP1/PP2PP1P/R1BQKB1R w KQ - 1 6": {
@@ -8700,8 +8701,8 @@
         "aliases": {
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Carlsbad Variation, KID",
-            "chronos": "King's Indian: fianchetto with ...Nc6",
-            "icsbot": "Carlsbad Variation, KID "
+            "icsbot": "Carlsbad Variation, KID ",
+            "kent-eco": "King's Indian: fianchetto with ...Nc6"
         }
     },
     "r1bq1rk1/ppp1ppbp/2np1np1/3P4/2P5/2N2NP1/PP2PPBP/R1BQK2R b KQ - 0 7": {
@@ -8769,8 +8770,8 @@
         "aliases": {
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Lesser Simagin (Spassky) Variation, KID",
-            "chronos": "King's Indian: fianchetto, lesser Simagin (Spassky) variation",
-            "icsbot": "Lesser Simagin (Spassky) Variation, KID "
+            "icsbot": "Lesser Simagin (Spassky) Variation, KID ",
+            "kent-eco": "King's Indian: fianchetto, lesser Simagin (Spassky) variation"
         }
     },
     "r2q1rk1/ppp1ppbp/2np1np1/3P1b2/2P5/2N2NP1/PP2PPBP/R1BQ1RK1 b - - 0 8": {
@@ -8804,8 +8805,8 @@
             "scid": "King's Indian: Fianchetto, Panno Variation",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Panno Variation, KID; E63",
-            "chronos": "King's Indian: fianchetto, Panno variation",
-            "icsbot": "Panno Variation, KID; E63 "
+            "icsbot": "Panno Variation, KID; E63 ",
+            "kent-eco": "King's Indian: fianchetto, Panno variation"
         },
         "isEcoRoot": true
     },
@@ -8934,8 +8935,8 @@
             "scid": "King's Indian: Fianchetto, Yugoslav System",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Yugoslav Variation",
-            "chronos": "King's Indian: fianchetto, Yugoslav system",
-            "icsbot": "Yugoslav Variation "
+            "icsbot": "Yugoslav Variation ",
+            "kent-eco": "King's Indian: fianchetto, Yugoslav system"
         },
         "isEcoRoot": true
     },
@@ -8977,7 +8978,7 @@
             "scid": "King's Indian: Fianchetto, Yugoslav, 7.O-O",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "E65",
-            "chronos": "King's Indian: fianchetto, Yugoslav, 7.O-O"
+            "kent-eco": "King's Indian: fianchetto, Yugoslav, 7.O-O"
         },
         "isEcoRoot": true
     },
@@ -9049,7 +9050,7 @@
             "scid": "King's Indian: Fianchetto, Yugoslav Panno",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "E66",
-            "chronos": "King's Indian: fianchetto, Yugoslav Panno"
+            "kent-eco": "King's Indian: fianchetto, Yugoslav Panno"
         },
         "isEcoRoot": true
     },
@@ -9153,14 +9154,15 @@
         "aliases": {
             "scid": "King's Indian: Fianchetto, Classical Variation",
             "ct": "King's Indian Defense, Fianchetto Variation",
-            "chronos": "King's Indian: fianchetto, classical variation"
+            "kent-eco": "King's Indian: fianchetto, classical variation"
         }
     },
     "r1bq1rk1/pppnppbp/3p1np1/8/2PP4/2N2NP1/PP2PPBP/R1BQK2R w KQ - 2 7": {
         "src": "eco_tsv",
         "eco": "E67",
         "moves": "1. d4 Nf6 2. c4 g6 3. g3 Bg7 4. Bg2 O-O 5. Nc3 d6 6. Nf3 Nbd7",
-        "name": "King's Indian Defense: Fianchetto Variation, Debrecen Defense"
+        "name": "King's Indian Defense: Fianchetto Variation, Debrecen Defense",
+        "isEcoRoot": true
     },
     "r1bq1rk1/pppn1pbp/3p1np1/4p3/2PP4/1PN2NP1/P3PPBP/R1BQ1RK1 b - - 0 8": {
         "src": "eco_tsv",
@@ -9188,7 +9190,6 @@
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. Nf3 d6 5. g3 O-O 6. Bg2 Nbd7",
         "name": "King's Indian: Fianchetto with 6...Nd7",
         "scid": "E67a",
-        "isEcoRoot": true,
         "aliases": {
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "Debrecen Defense, KID; E67",
@@ -9268,7 +9269,7 @@
             "scid": "King's Indian: Fianchetto, Classical, 8.e4",
             "eco_js": "King's Indian, Fianchetto, Classical Variation, 8. e4",
             "chessGraph": "E68",
-            "chronos": "King's Indian: fianchetto, classical variation, 8.e4"
+            "kent-eco": "King's Indian: fianchetto, classical variation, 8.e4"
         },
         "isEcoRoot": true
     },
@@ -9363,7 +9364,7 @@
             "scid": "King's Indian: Fianchetto, Classical, 9.h3",
             "ct": "King's Indian Defense, Fianchetto Variation",
             "chessGraph": "E69",
-            "chronos": "King's Indian: fianchetto, classical main line"
+            "kent-eco": "King's Indian: fianchetto, classical main line"
         },
         "isEcoRoot": true
     },
@@ -9600,8 +9601,8 @@
         "aliases": {
             "scid": "King's Indian: Accelerated Averbakh System",
             "chessGraph": "Accelerated Averbakh Variation, KID",
-            "chronos": "King's Indian: accelerated Averbakh system",
-            "icsbot": "Accelerated Averbakh Variation, KID "
+            "icsbot": "Accelerated Averbakh Variation, KID ",
+            "kent-eco": "King's Indian: accelerated Averbakh system"
         }
     },
     "rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N5/PP2NPPP/R1BQKB1R b KQkq - 1 5": {
@@ -9612,7 +9613,7 @@
         "scid": "E70f",
         "aliases": {
             "scid": "King's Indian: Kramer",
-            "chronos": "King's Indian: Kramer system"
+            "kent-eco": "King's Indian: Kramer system"
         }
     },
     "rnbqk2r/ppppppbp/5np1/8/2PPP3/2N5/PP3PPP/R1BQKBNR b KQkq - 0 4": {
@@ -9624,8 +9625,8 @@
         "aliases": {
             "scid": "King's Indian: 4.e4",
             "chessGraph": "Normal Variation, KID; E70",
-            "chronos": "King's Indian: 4.e4",
-            "icsbot": "Normal Variation, KID; E70 "
+            "icsbot": "Normal Variation, KID; E70 ",
+            "kent-eco": "King's Indian: 4.e4"
         },
         "isEcoRoot": true
     },
@@ -9813,8 +9814,8 @@
         "aliases": {
             "scid": "King's Indian: Makagonov System",
             "chessGraph": "Makogonov Variation, KID; E71",
-            "chronos": "King's Indian: Makagonov system (5.h3)",
-            "icsbot": "Makogonov Variation, KID; E71 "
+            "icsbot": "Makogonov Variation, KID; E71 ",
+            "kent-eco": "King's Indian: Makagonov system (5.h3)"
         },
         "isEcoRoot": true
     },
@@ -9940,8 +9941,8 @@
             "scid": "King's Indian: 4.e4 d6 5.g3",
             "ct": "King's Indian Defense, Normal Variation",
             "chessGraph": "Deferred Fianchetto, KID; E72",
-            "chronos": "King's Indian with e4 & g3",
-            "icsbot": "Deferred Fianchetto, KID; E72 "
+            "icsbot": "Deferred Fianchetto, KID; E72 ",
+            "kent-eco": "King's Indian with e4 & g3"
         },
         "isEcoRoot": true
     },
@@ -9954,8 +9955,8 @@
         "aliases": {
             "scid": "King's Indian: Pomar System",
             "chessGraph": "Pomar System, KID",
-            "chronos": "King's Indian: Pomar system",
-            "icsbot": "Pomar System, KID "
+            "icsbot": "Pomar System, KID ",
+            "kent-eco": "King's Indian: Pomar system"
         }
     },
     "rnbq1rk1/ppp1ppbp/3p1np1/8/2PPP3/2N3P1/PP3P1P/R1BQKBNR w KQ - 1 6": {
@@ -10016,8 +10017,8 @@
         "aliases": {
             "scid": "King's Indian: Averbakh",
             "chessGraph": "Averbakh Variation, KID",
-            "chronos": "King's Indian: Averbakh system",
-            "icsbot": "Averbakh Variation, KID "
+            "icsbot": "Averbakh Variation, KID ",
+            "kent-eco": "King's Indian: Averbakh system"
         }
     },
     "rnbq1rk1/ppp1ppb1/3p1npp/6B1/2PPP3/2N5/PP2BPPP/R2QK1NR w KQ - 0 7": {
@@ -10098,7 +10099,7 @@
             "scid": "King's Indian: 5.Be2",
             "ct": "King's Indian Defense, Normal Variation",
             "chessGraph": "E73",
-            "chronos": "King's Indian: 5.Be2"
+            "kent-eco": "King's Indian: 5.Be2"
         },
         "isEcoRoot": true
     },
@@ -10111,8 +10112,8 @@
         "aliases": {
             "scid": "King's Indian: Semi-Averbakh System",
             "chessGraph": "Semi-Averbakh System, KID",
-            "chronos": "King's Indian: Semi-Averbakh system",
-            "icsbot": "Semi-Averbakh System, KID "
+            "icsbot": "Semi-Averbakh System, KID ",
+            "kent-eco": "King's Indian: Semi-Averbakh system"
         }
     },
     "rnbqk2r/pp2ppbp/3p1np1/2p5/2PPP3/2N5/PP2BPPP/R1BQK1NR w KQkq - 0 6": {
@@ -10300,8 +10301,8 @@
             "scid": "King's Indian: Averbakh, 6...c5",
             "ct": "King's Indian Defense, Averbakh Variation",
             "chessGraph": "Benoni Defense, KID; E74",
-            "chronos": "King's Indian: Averbakh, 6...c5",
-            "icsbot": "Benoni Defense, KID; E74 "
+            "icsbot": "Benoni Defense, KID; E74 ",
+            "kent-eco": "King's Indian: Averbakh, 6...c5"
         },
         "isEcoRoot": true
     },
@@ -10448,7 +10449,7 @@
         "aliases": {
             "scid": "King's Indian: Averbakh, 7.d5 e6",
             "eco_js": "King's Indian, Averbakh, Main Line",
-            "chronos": "King's Indian: Averbakh, main line"
+            "kent-eco": "King's Indian: Averbakh, main line"
         },
         "isEcoRoot": true
     },
@@ -10573,8 +10574,8 @@
         "aliases": {
             "scid": "King's Indian: Four Pawns Attack",
             "chessGraph": "Four Pawns Attack, KID; E76",
-            "chronos": "King's Indian: Four pawns attack",
-            "icsbot": "Four Pawns Attack, KID; E76 "
+            "icsbot": "Four Pawns Attack, KID; E76 ",
+            "kent-eco": "King's Indian: Four pawns attack"
         },
         "isEcoRoot": true
     },
@@ -10588,8 +10589,8 @@
             "scid": "King's Indian: Four Pawns Attack, 6.Nf3 c5 7.d5",
             "ct": "King's Indian Defense, Four Pawns Attack",
             "chessGraph": "Dynamic Attack, KID",
-            "chronos": "King's Indian: Four pawns attack, dynamic line",
-            "icsbot": "Dynamic Attack, KID "
+            "icsbot": "Dynamic Attack, KID ",
+            "kent-eco": "King's Indian: Four pawns attack, dynamic line"
         }
     },
     "r1bqk2r/ppp1ppbp/n2p1np1/8/2PPPP2/2N5/PP4PP/R1BQKBNR w KQkq - 1 6": {
@@ -10743,7 +10744,8 @@
         "name": "King's Indian Defense: Four Pawns Attack",
         "aliases": {
             "eco_js": "King's Indian Defense: Four Pawns Attack, 5. Be2 O-O 6. f4"
-        }
+        },
+        "isEcoRoot": true
     },
     "rnbq1rk1/pp3pbp/3p1np1/2ppP3/2P2P2/2N2N2/PP2B1PP/R1BQK2R b KQ - 0 9": {
         "src": "eco_tsv",
@@ -10755,8 +10757,8 @@
             "scid": "King's Indian: Four Pawns Attack, Florentine Gambit",
             "ct": "King's Indian Defense, Four Pawns Attack",
             "chessGraph": "Florentine Gambit, KID",
-            "chronos": "King's Indian: Four pawns attack, Florentine gambit",
-            "icsbot": "Florentine Gambit, KID "
+            "icsbot": "Florentine Gambit, KID ",
+            "kent-eco": "King's Indian: Four pawns attack, Florentine gambit"
         }
     },
     "rnbq1rk1/pp3pbp/3ppnp1/2pP4/2P1PP2/2N2N2/PP2B1PP/R1BQK2R b KQ - 1 8": {
@@ -10768,7 +10770,7 @@
         "aliases": {
             "scid": "King's Indian: Four Pawns Attack, 6.Be2 c5 7.d5 e6 8.Nf3",
             "ct": "King's Indian Defense, Four Pawns Attack",
-            "chronos": "King's Indian: Four pawns attack"
+            "kent-eco": "King's Indian: Four pawns attack"
         }
     },
     "r1bq1rk1/pp4bp/2nppnp1/2p5/2P1PPPP/2N5/PP2B3/R1BQK1NR b KQ - 0 10": {
@@ -10781,8 +10783,8 @@
             "scid": "King's Indian: Four Pawns Attack, Six Pawns line",
             "eco_js": "King's Indian, Six Pawns Attack",
             "chessGraph": "Six Pawns Attack, KID",
-            "chronos": "King's Indian: Six pawns attack",
-            "icsbot": "Six Pawns Attack, KID "
+            "icsbot": "Six Pawns Attack, KID ",
+            "kent-eco": "King's Indian: Six pawns attack"
         }
     },
     "rnbq1rk1/ppp1ppbp/3p1np1/8/2PPPP2/2N5/PP2B1PP/R1BQK1NR b KQ - 2 6": {
@@ -10791,7 +10793,6 @@
         "moves": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f4 O-O 6. Be2",
         "name": "King's Indian: Four Pawns Attack, 6.Be2",
         "scid": "E77",
-        "isEcoRoot": true,
         "aliases": {
             "ct": "King's Indian Defense, Four Pawns Attack",
             "chessGraph": "E77"
@@ -10828,8 +10829,8 @@
             "scid": "King's Indian: Four Pawns Attack, 7.Nf3",
             "ct": "King's Indian Defense, Four Pawns Attack",
             "chessGraph": "Fluid Attack, KID; E78",
-            "chronos": "King's Indian: Four pawns attack, with Be2 and Nf3",
-            "icsbot": "Fluid Attack, KID; E78 "
+            "icsbot": "Fluid Attack, KID; E78 ",
+            "kent-eco": "King's Indian: Four pawns attack, with Be2 and Nf3"
         },
         "isEcoRoot": true
     },
@@ -10864,8 +10865,8 @@
             "scid": "King's Indian: Four Pawns Attack, Main Line",
             "ct": "King's Indian Defense, Four Pawns Attack",
             "chessGraph": "Exchange Variation, Four Pawns Attack, KID; E79",
-            "chronos": "King's Indian: Four pawns attack, main line",
-            "icsbot": "Exchange Variation, Four Pawns Attack, KID; E79 "
+            "icsbot": "Exchange Variation, Four Pawns Attack, KID; E79 ",
+            "kent-eco": "King's Indian: Four pawns attack, main line"
         },
         "isEcoRoot": true
     },
@@ -10921,8 +10922,8 @@
             "scid": "King's Indian: Saemisch Variation",
             "eco_js": "King's Indian Defense: Saemisch Variation",
             "chessGraph": "Saemisch Variation, KID; E80",
-            "chronos": "King's Indian: Saemisch variation",
-            "icsbot": "Saemisch Variation, KID; E80 "
+            "icsbot": "Saemisch Variation, KID; E80 ",
+            "kent-eco": "King's Indian: Saemisch variation"
         },
         "isEcoRoot": true
     },
@@ -11056,8 +11057,8 @@
             "eco_js": "King's Indian Defense: Saemisch Variation, Byrne Defense",
             "ct": "King's Indian Defense, Saemisch Variation",
             "chessGraph": "Byrne Defense, KID",
-            "chronos": "King's Indian: Saemisch, Byrne variation",
-            "icsbot": "Byrne Defense, KID "
+            "icsbot": "Byrne Defense, KID ",
+            "kent-eco": "King's Indian: Saemisch, Byrne variation"
         }
     },
     "rnbq1rk1/ppp1ppbp/3p1np1/8/2PPP3/2N2P2/PP4PP/R1BQKBNR w KQ - 1 6": {
@@ -11071,8 +11072,8 @@
             "eco_js": "King's Indian Defense: Saemisch Variation, Normal Defense",
             "ct": "King's Indian Defense, Saemisch Variation",
             "chessGraph": "Normal Defesne, Sameisch Variation, KID; E81",
-            "chronos": "King's Indian: Saemisch, 5...O-O",
-            "icsbot": "Normal Defesne, Sameisch Variation, KID; E81 "
+            "icsbot": "Normal Defesne, Sameisch Variation, KID; E81 ",
+            "kent-eco": "King's Indian: Saemisch, 5...O-O"
         },
         "isEcoRoot": true
     },
@@ -11298,8 +11299,8 @@
             "eco_js": "King's Indian Defense: Saemisch Variation, Double Fianchetto",
             "ct": "King's Indian Defense, Saemisch Variation",
             "chessGraph": "Double Fianchetto, KID; E82",
-            "chronos": "King's Indian: Saemisch, double fianchetto variation",
-            "icsbot": "Double Fianchetto, KID; E82 "
+            "icsbot": "Double Fianchetto, KID; E82 ",
+            "kent-eco": "King's Indian: Saemisch, double fianchetto variation"
         },
         "isEcoRoot": true
     },
@@ -11405,8 +11406,8 @@
             "eco_js": "King's Indian Defense: Saemisch Variation, Panno Formation",
             "ct": "King's Indian Defense, Saemisch Variation",
             "chessGraph": "Panno Formation, KID",
-            "chronos": "King's Indian: Saemisch, Panno formation",
-            "icsbot": "Panno Formation, KID "
+            "icsbot": "Panno Formation, KID ",
+            "kent-eco": "King's Indian: Saemisch, Panno formation"
         }
     },
     "1rbq1rk1/ppp1ppbp/2np1np1/8/2PPP3/2N1BP2/PP2N1PP/R2QKB1R w KQ - 5 8": {
@@ -11419,8 +11420,8 @@
             "scid": "King's Indian: Saemisch, Ruban Variation",
             "eco_js": "King's Indian, Saemisch, Ruban Variation",
             "chessGraph": "Ruban Variation, KID",
-            "chronos": "King's Indian: Saemisch, Ruban variation",
-            "icsbot": "Ruban Variation, KID "
+            "icsbot": "Ruban Variation, KID ",
+            "kent-eco": "King's Indian: Saemisch, Ruban variation"
         }
     },
     "r1bq1rk1/ppp1ppbp/2np1np1/8/2PPP3/2N1BP2/PP4PP/R2QKBNR w KQ - 3 7": {
@@ -11434,8 +11435,8 @@
             "eco_js": "King's Indian Defense: Saemisch Variation, Yates Defense",
             "ct": "King's Indian Defense, Saemisch Variation",
             "chessGraph": "Yates Defense, KID; E83",
-            "chronos": "King's Indian: Saemisch, 6...Nc6",
-            "icsbot": "Yates Defense, KID; E83 "
+            "icsbot": "Yates Defense, KID; E83 ",
+            "kent-eco": "King's Indian: Saemisch, 6...Nc6"
         },
         "isEcoRoot": true
     },
@@ -11512,7 +11513,7 @@
             "scid": "King's Indian: Saemisch, Panno Main Line",
             "eco_js": "King's Indian, Saemisch, Panno Main Line",
             "chessGraph": "E84",
-            "chronos": "King's Indian: Saemisch, Panno main line"
+            "kent-eco": "King's Indian: Saemisch, Panno main line"
         },
         "isEcoRoot": true
     },
@@ -11632,8 +11633,8 @@
             "eco_js": "King's Indian Defense: Saemisch Variation, Orthodox Variation",
             "ct": "King's Indian Defense, Saemisch Variation",
             "chessGraph": "Orthodox Variation, KID; E85",
-            "chronos": "King's Indian: Saemisch, orthodox variation",
-            "icsbot": "Orthodox Variation, KID; E85 "
+            "icsbot": "Orthodox Variation, KID; E85 ",
+            "kent-eco": "King's Indian: Saemisch, orthodox variation"
         },
         "isEcoRoot": true
     },
@@ -11710,7 +11711,7 @@
             "scid": "King's Indian: Saemisch, Orthodox, 7.Nge2 c6",
             "eco_js": "King's Indian Defense: Saemisch Variation, 6. Be3 e5 7. Nge2 c6",
             "chessGraph": "E86",
-            "chronos": "King's Indian: Saemisch, orthodox, 7.Nge2 c6"
+            "kent-eco": "King's Indian: Saemisch, orthodox, 7.Nge2 c6"
         },
         "isEcoRoot": true
     },
@@ -11791,8 +11792,8 @@
             "eco_js": "King's Indian Defense: Saemisch Variation, Closed Variation",
             "ct": "King's Indian Defense, Saemisch Variation",
             "chessGraph": "Closed Variation, KID; E87",
-            "chronos": "King's Indian: Saemisch, orthodox, 7.d5",
-            "icsbot": "Closed Variation, KID; E87 "
+            "icsbot": "Closed Variation, KID; E87 ",
+            "kent-eco": "King's Indian: Saemisch, orthodox, 7.d5"
         },
         "isEcoRoot": true
     },
@@ -11803,7 +11804,7 @@
         "name": "King's Indian Defense: Sämisch Variation, Orthodox Variation, Bronstein Variation",
         "aliases": {
             "eco_js": "King's Indian, Saemisch, Orthodox, Bronstein Variation",
-            "chronos": "King's Indian: Saemisch, orthodox, Bronstein variation"
+            "kent-eco": "King's Indian: Saemisch, orthodox, Bronstein variation"
         }
     },
     "rnbq1rk1/1pp2pbp/3p1np1/p2Pp3/2P1P3/2N1BP2/PP4PP/R2QKBNR w KQ - 0 8": {
@@ -11976,7 +11977,7 @@
             "scid": "King's Indian: Saemisch, Orthodox Main Line",
             "eco_js": "King's Indian Defense: Saemisch Variation, Closed Variation, Main Line",
             "ct": "King's Indian Defense, Saemisch Variation",
-            "chronos": "King's Indian: Saemisch, orthodox main line"
+            "kent-eco": "King's Indian: Saemisch, orthodox main line"
         },
         "isEcoRoot": true
     },
@@ -12045,8 +12046,8 @@
         "aliases": {
             "scid": "King's Indian: Larsen Variation",
             "chessGraph": "Larsen Variation, KID",
-            "chronos": "King's Indian: Larsen variation",
-            "icsbot": "Larsen Variation, KID "
+            "icsbot": "Larsen Variation, KID ",
+            "kent-eco": "King's Indian: Larsen variation"
         }
     },
     "rnbqk2r/ppp1ppbp/3p1np1/8/2PPP3/2N2N2/PP3PPP/R1BQKB1R b KQkq - 1 5": {
@@ -12059,7 +12060,7 @@
             "scid": "King's Indian: 5.Nf3",
             "ct": "King's Indian Defense, Normal Variation",
             "chessGraph": "E90",
-            "chronos": "King's Indian: 5.Nf3"
+            "kent-eco": "King's Indian: 5.Nf3"
         },
         "isEcoRoot": true
     },
@@ -12072,8 +12073,8 @@
         "aliases": {
             "scid": "King's Indian: Zinnowitz Variation",
             "chessGraph": "Zinnowitz Variation, KID",
-            "chronos": "King's Indian: Zinnowitz variation",
-            "icsbot": "Zinnowitz Variation, KID "
+            "icsbot": "Zinnowitz Variation, KID ",
+            "kent-eco": "King's Indian: Zinnowitz variation"
         }
     },
     "rnbq1rk1/ppp1ppbp/3p1np1/6B1/2PPP3/2N2N2/PP3PPP/R2QKB1R b KQ - 2 6": {
@@ -12363,7 +12364,7 @@
         "scid": "E91l",
         "aliases": {
             "scid": "King's Indian: Kazakh Variation",
-            "chronos": "King's Indian: Kazakh variation"
+            "kent-eco": "King's Indian: Kazakh variation"
         }
     },
     "rnbq1rk1/ppp1ppbp/3p1np1/8/2PPP3/2N2N2/PP2BPPP/R1BQK2R b KQ - 3 6": {
@@ -12375,8 +12376,8 @@
         "aliases": {
             "scid": "King's Indian: 6.Be2",
             "chessGraph": "Orthodox Variation, KID; E91",
-            "chronos": "King's Indian: 6.Be2",
-            "icsbot": "Orthodox Variation, KID; E91 "
+            "icsbot": "Orthodox Variation, KID; E91 ",
+            "kent-eco": "King's Indian: 6.Be2"
         },
         "isEcoRoot": true
     },
@@ -12584,7 +12585,7 @@
         "scid": "E92b",
         "aliases": {
             "scid": "King's Indian: 6.Be2 e5 Queenswap",
-            "chronos": "King's Indian: Andersson variation"
+            "kent-eco": "King's Indian: Andersson variation"
         }
     },
     "rnbq1rk1/ppp2pbp/3p1np1/4p3/2PPP3/2N2N2/PP2BPPP/R1BQK2R w KQ - 0 7": {
@@ -12597,7 +12598,7 @@
             "scid": "King's Indian: 6.Be2 e5",
             "eco_js": "King's Indian Defense: Orthodox Variation, 5. Nf3 O-O 6. Be2 e5",
             "chessGraph": "E92",
-            "chronos": "King's Indian: classical variation"
+            "kent-eco": "King's Indian: classical variation"
         },
         "isEcoRoot": true
     },
@@ -12611,8 +12612,8 @@
             "scid": "King's Indian: Gligoric-Taimanov System",
             "ct": "King's Indian Defense, Orthodox Variation",
             "chessGraph": "Gligoric-Taimanov Variation, KID",
-            "chronos": "King's Indian: Gligoric-Taimanov system",
-            "icsbot": "Gligoric-Taimanov Variation, KID "
+            "icsbot": "Gligoric-Taimanov Variation, KID ",
+            "kent-eco": "King's Indian: Gligoric-Taimanov system"
         }
     },
     "rnbq1rk1/ppp2pbp/3p1np1/3Pp3/2P1P3/2N2N2/PP2BPPP/R1BQK2R b KQ - 0 7": {
@@ -12624,8 +12625,8 @@
         "aliases": {
             "scid": "King's Indian: Petrosian System",
             "chessGraph": "Petrosian Variation, KID",
-            "chronos": "King's Indian: Petrosian system",
-            "icsbot": "Petrosian Variation, KID "
+            "icsbot": "Petrosian Variation, KID ",
+            "kent-eco": "King's Indian: Petrosian system"
         }
     },
     "rnbq1rk1/1pp2pbp/3p1np1/p2Pp3/2P1P3/2N2N2/PP2BPPP/R1BQK2R w KQ - 0 8": {
@@ -12638,8 +12639,8 @@
             "scid": "King's Indian: Petrosian, Stein Variation",
             "ct": "King's Indian Defense, Petrosian Variation",
             "chessGraph": "Stein Defense, KID",
-            "chronos": "King's Indian: Petrosian system, Stein variation",
-            "icsbot": "Stein Defense, KID "
+            "icsbot": "Stein Defense, KID ",
+            "kent-eco": "King's Indian: Petrosian system, Stein variation"
         }
     },
     "rnbq1rk1/ppp2pbp/5np1/4p3/2P1P3/2N2N2/PP2BPPP/R1BQK2R w KQ - 0 8": {
@@ -12813,8 +12814,8 @@
             "scid": "King's Indian: Petrosian, Keres Variation",
             "ct": "King's Indian Defense, Petrosian Variation",
             "chessGraph": "Keres Variation, KID",
-            "chronos": "King's Indian: Petrosian system, Keres variation",
-            "icsbot": "Keres Variation, KID "
+            "icsbot": "Keres Variation, KID ",
+            "kent-eco": "King's Indian: Petrosian system, Keres variation"
         }
     },
     "r1bq1rk1/pppn1pbp/3p1np1/3Pp3/2P1P3/2N2N2/PP2BPPP/R1BQK2R w KQ - 1 8": {
@@ -12827,7 +12828,7 @@
             "scid": "King's Indian: Petrosian, Main Line",
             "ct": "King's Indian Defense, Petrosian Variation",
             "chessGraph": "E93",
-            "chronos": "King's Indian: Petrosian system, main line"
+            "kent-eco": "King's Indian: Petrosian system, main line"
         },
         "isEcoRoot": true
     },
@@ -12904,7 +12905,7 @@
             "scid": "King's Indian: 7.O-O",
             "eco_js": "King's Indian Defense: Orthodox Variation, 6. Be2 e5 7. O-O",
             "chessGraph": "E94",
-            "chronos": "King's Indian: orthodox variation"
+            "kent-eco": "King's Indian: orthodox variation"
         },
         "isEcoRoot": true
     },
@@ -12918,8 +12919,8 @@
             "scid": "King's Indian: Donner Variation",
             "ct": "King's Indian Defense, Orthodox Variation",
             "chessGraph": "Donner Variation, KID",
-            "chronos": "King's Indian: orthodox, Donner variation",
-            "icsbot": "Donner Variation, KID "
+            "icsbot": "Donner Variation, KID ",
+            "kent-eco": "King's Indian: orthodox, Donner variation"
         }
     },
     "r1bq1rk1/ppp2pbp/n2p1np1/4p3/2PPP3/2N2N2/PP2BPPP/R1BQ1RK1 w - - 2 8": {
@@ -13020,7 +13021,7 @@
         "scid": "E94p",
         "aliases": {
             "ct": "King's Indian Defense, Orthodox Variation",
-            "chronos": "King's Indian: orthodox, 7...Nbd7"
+            "kent-eco": "King's Indian: orthodox, 7...Nbd7"
         }
     },
     "r1bq1rk1/pppn1pbp/3p1np1/4p3/2PPP3/2N1BN2/PP2BPPP/R2Q1RK1 b - - 3 8": {
@@ -13194,7 +13195,7 @@
             "scid": "King's Indian: 7.O-O Nbd7 8.Re1",
             "eco_js": "King's Indian, Orthodox, 7... Nbd7 8. Re1",
             "chessGraph": "E95",
-            "chronos": "King's Indian: orthodox, 7...Nbd7, 8.Re1"
+            "kent-eco": "King's Indian: orthodox, 7...Nbd7, 8.Re1"
         },
         "isEcoRoot": true
     },
@@ -13299,7 +13300,7 @@
             "scid": "King's Indian: 7.O-O Nbd7, Old Main Line",
             "ct": "King's Indian Defense, Orthodox Variation",
             "chessGraph": "E96",
-            "chronos": "King's Indian: orthodox, 7...Nbd7, main line"
+            "kent-eco": "King's Indian: orthodox, 7...Nbd7, main line"
         },
         "isEcoRoot": true
     },
@@ -13362,8 +13363,8 @@
             "scid": "King's Indian: Mar del Plata",
             "ct": "King's Indian Defense, Orthodox Variation",
             "chessGraph": "Aronin-Taimanov Variation, KID; E97",
-            "chronos": "King's Indian: orthodox, Aronin-Taimanov variation (Yugoslav attack / Mar del Plata variation)",
-            "icsbot": "Aronin-Taimanov Variation, KID; E97 "
+            "icsbot": "Aronin-Taimanov Variation, KID; E97 ",
+            "kent-eco": "King's Indian: orthodox, Aronin-Taimanov variation (Yugoslav attack / Mar del Plata variation)"
         },
         "isEcoRoot": true
     },
@@ -13377,8 +13378,8 @@
             "scid": "King's Indian: Mar del Plata, Bayonet Attack",
             "ct": "King's Indian Defense, Orthodox Variation",
             "chessGraph": "Bayonet Attack, KID",
-            "chronos": "King's Indian: orthodox, Aronin-Taimanov, bayonet attack",
-            "icsbot": "Bayonet Attack, KID "
+            "icsbot": "Bayonet Attack, KID ",
+            "kent-eco": "King's Indian: orthodox, Aronin-Taimanov, bayonet attack"
         }
     },
     "r1bq1rk1/ppp1npbp/3p2p1/3Pp2n/1PP1P3/2N2N2/P3BPPP/R1BQR1K1 b - - 2 10": {
@@ -13709,7 +13710,7 @@
             "scid": "King's Indian: Mar del Plata, 9.Ne1",
             "ct": "King's Indian Defense, Orthodox Variation",
             "chessGraph": "E98",
-            "chronos": "King's Indian: orthodox, Aronin-Taimanov, 9.Ne1"
+            "kent-eco": "King's Indian: orthodox, Aronin-Taimanov, 9.Ne1"
         },
         "isEcoRoot": true
     },
@@ -13870,8 +13871,8 @@
             "scid": "King's Indian: Mar del Plata, Benko Attack",
             "ct": "King's Indian Defense, Orthodox Variation",
             "chessGraph": "Benko Variation, KID",
-            "chronos": "King's Indian: orthodox, Aronin-Taimanov, Benko attack",
-            "icsbot": "Benko Variation, KID "
+            "icsbot": "Benko Variation, KID ",
+            "kent-eco": "King's Indian: orthodox, Aronin-Taimanov, Benko attack"
         }
     },
     "r1bq1rk1/pppnn1bp/3p2p1/3Ppp2/2P1P3/2N2P2/PP2B1PP/R1BQNRK1 w - - 0 11": {
@@ -13883,7 +13884,7 @@
         "aliases": {
             "scid": "King's Indian: Mar del Plata, 10.f3 f5",
             "ct": "King's Indian Defense, Orthodox Variation",
-            "chronos": "King's Indian: orthodox, Aronin-Taimanov, main line"
+            "kent-eco": "King's Indian: orthodox, Aronin-Taimanov, main line"
         },
         "isEcoRoot": true
     },
@@ -14324,14 +14325,14 @@
         }
     },
     "2rqk2r/pb3ppp/1pnbp3/8/3PP3/P4N2/1BQ2PPP/3RKB1R w Kk - 3 13": {
-        "eco": "E12 ",
-        "name": "Murey Variation, QID ",
+        "eco": "E12",
+        "name": "Murey Variation, QID",
         "moves": "1.d4 Nf6 2.c4 e6 3.Nf3 b6 4.a3 Bb7 5.Nc3 d5 6.cxd5 Nxd5 7.Qc2 c5 8.e4 Nxc3 9.bxc3 Nc6 10.Bb2 cxd4 11.cxd4 Rc8 12.Rd1 Bd6 ",
         "src": "icsbot"
     },
     "r1b1k2r/ppp2pbp/n2p2p1/3Pp3/2n1P2Q/2N2P2/PP3K1P/R5NR w kq - 0 13": {
-        "eco": "E80 ",
-        "name": "Bronstein Variation, KID ",
+        "eco": "E80",
+        "name": "Bronstein Variation, KID",
         "moves": "1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 d6 5.f3 e5 6.d5 Nh5 7.Be3 Na6 8.Qd2 Qh4+ 9.g3 Nxg3 10.Qf2 Nxf1 11.Qxh4 Nxe3 12.Kf2 Nxc4 ",
         "src": "icsbot"
     }

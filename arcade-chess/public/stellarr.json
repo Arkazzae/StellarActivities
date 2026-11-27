@@ -3,7 +3,7 @@
   "id": "arcade-chess",
   "name": "Arcade Chess",
   "description": "Chess in your voice channel. Climb a ladder of eight bots straight out of video games, from a level-1 slime to the final boss, or play Stockfish at the strength you choose. Host a table or join one for a timed game while the others watch, earn Stellarr Elo, then review your games with Stockfish.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "icon": "icon.png",
   "cover": "cover.webp",
   "launchModes": ["voice", "personal"],

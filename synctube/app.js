@@ -33,7 +33,6 @@ let seeking;
 let tab = "queue";
 let openMenu = null;
 let cinema = false;
-let canRate = false;
 let stellarrLocale = navigator.language || "en";
 let languagePref = readLocal("synctube-language", "auto");
 let t = translator("en");
@@ -323,7 +322,7 @@ function mount(force = false) {
   ui.screen.hidden = !item;
   if (!item) return;
   player = createPlayer(item, ui.screen, {
-    youtube: session.media.youtube,
+    embed: session.media.embed,
     status: providerStatus,
     ended(duration) {
       const current = playback();
@@ -405,7 +404,7 @@ function renderStage() {
   const online = hostOnline();
   mount();
   ui.stage.classList.toggle("is-empty", !item);
-  ui.stage.classList.toggle("hosted", Boolean(session?.media?.youtube && item?.source === "youtube"));
+  ui.stage.classList.toggle("hosted", item?.source === "youtube" && globalThis.origin === "null");
   ui.welcome.hidden = Boolean(item) || state.history.length > 0;
   ui["welcome-text"].textContent = t("welcomeText");
   ui["ran-out"].hidden = Boolean(item) || state.history.length === 0;
@@ -465,7 +464,7 @@ function renderStage() {
   const skipLabel = role === "control" ? t("skipNext") : role ? t("skipNowLabel") : t("skipHost", nameOf(host));
   ui.skip.setAttribute("aria-label", skipLabel);
   ui.skip.title = skipLabel;
-  ui.rate.hidden = !canRate;
+  ui.rate.hidden = !item;
   ui.rate.disabled = !item || !ctl;
   ui.rate.value = String(state.playback.rate || 1);
   ui.cinema.setAttribute("aria-pressed", String(cinema));
@@ -474,6 +473,7 @@ function renderStage() {
   ui.fullscreen.setAttribute("aria-label", t("fullscreen"));
   ui.fullscreen.title = t("fullscreen");
   ui.fullscreen.disabled = !item;
+  ui.fullscreen.hidden = ui.stage.classList.contains("hosted");
 }
 
 function renderInfo() {
@@ -962,8 +962,7 @@ ui.sync.onclick = () => {
 };
 ui.fullscreen.onclick = async () => {
   try {
-    if (player?.fullscreen) player.fullscreen();
-    else if (document.fullscreenElement) await document.exitFullscreen();
+    if (document.fullscreenElement) await document.exitFullscreen();
     else await ui.stage.requestFullscreen();
   } catch {
     toast(t("fullscreenUnavailable"));
@@ -1100,7 +1099,6 @@ try {
   session = await connect({ initialState: emptyRoom() });
   if (!session.commands || !session.host || !session.media?.volume || !session.participants)
     throw new Error("sdkMissing");
-  canRate = !session.media.youtube;
   stellarrLocale = session.context.locale || stellarrLocale;
   const setDevice = device => { if (device) document.documentElement.dataset.device = device; };
   setDevice(session.context.device);

@@ -10,25 +10,25 @@
     "test:browser": "node scripts/browser-check.mjs",
     "test:screens": "node scripts/screens.mjs",
     "check": "pnpm test && pnpm build && pnpm sdk:validate",
-    "sdk:validate": "node scripts/stellarr.mjs validate --dir dist",
-    "sdk:dev": "node scripts/stellarr.mjs dev --dir dist",
-    "sdk:pack": "node scripts/stellarr.mjs pack --dir dist --out .stellarr-release"
+    "sdk:validate": "node ../scripts/stellarr.mjs validate --dir dist",
+    "sdk:dev": "node ../scripts/stellarr.mjs dev --dir dist",
+    "sdk:pack": "node ../scripts/stellarr.mjs pack --dir dist --out .stellarr-release"
   },
   "dependencies": {
-    "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
-    "@fontsource-variable/fredoka": "^5.3.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "@fontsource-variable/atkinson-hyperlegible-next": "5.3.0",
+    "@fontsource-variable/fredoka": "5.3.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@playwright/test": "1.62.1",
-    "@types/node": "^20.17.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.3.4",
-    "typescript": "~5.9.3",
-    "vite": "^6.0.1",
-    "vitest": "^4.1.0"
-  },
-  "packageManager": "pnpm@10.14.0"
+    "@playwright/test": "1.65.1",
+    "@types/node": "26.6.11",
+    "@types/react": "19.3.3",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.4.0",
+    "vitest": "5.1.2",
+    "@stellarr/sdk": "0.4.0"
+  }
 }

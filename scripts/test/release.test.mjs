@@ -1,7 +1,7 @@
 import { strict as assert } from "node:assert";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { cp, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -10,6 +10,8 @@ async function project(t) {
   const cwd = await mkdtemp(join(tmpdir(), "activity-catalog-test-"));
   t.after(() => rm(cwd, { recursive: true, force: true }));
   await cp(new URL("..", import.meta.url), join(cwd, "scripts"), { recursive: true });
+  await symlink(new URL("../../node_modules", import.meta.url), join(cwd, "node_modules"), "dir");
+  await writeFile(join(cwd, "LICENSE"), "Example");
   const catalog = { first: ["stellarr.json", "index.html", "icon.png"], second: ["stellarr.json", "index.html", "icon.png"] };
   await writeFile(join(cwd, "catalog.json"), JSON.stringify(catalog));
   const dir = join(cwd, "first");
@@ -34,10 +36,12 @@ test("a scoped tag packages one activity even when its sibling has no build", as
   node("package-release", "first");
   assert.deepEqual(await readdir(join(cwd, "dist")), ["first"]);
   const out = join(cwd, "dist/first");
-  assert.deepEqual((await readdir(out)).sort(), ["first.zip", "stellarr-release.json"]);
   const { activities } = JSON.parse(await readFile(join(out, "stellarr-release.json"), "utf8"));
-  const bytes = await readFile(join(out, "first.zip"));
-  assert.deepEqual(activities, [{ id: "first", name: "First", version: "2.0.0", asset: "first.zip",
+  const asset = activities[0].asset;
+  assert.match(asset, /^first-[0-9a-f]{16}\.zip$/);
+  assert.deepEqual((await readdir(out)).sort(), [asset, "stellarr-release.json"]);
+  const bytes = await readFile(join(out, asset));
+  assert.deepEqual(activities, [{ id: "first", name: "First", version: "2.0.0", asset,
     bytes: bytes.length, sha256: createHash("sha256").update(bytes).digest("hex") }]);
 });
 

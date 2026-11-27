@@ -12,9 +12,10 @@ if (!/^[a-z0-9-]{1,100}$/.test(id) || rest.length || !versionTag?.startsWith("v"
 
 const catalog = JSON.parse(await readFile("catalog.json", "utf8"));
 if (!Object.hasOwn(catalog, id)) throw new Error("Unknown activity: " + id);
-const manifest = JSON.parse(await readFile(id + "/stellarr.json", "utf8"));
+const path = id + (catalog[id].build === "dist" ? "/public/stellarr.json" : "/stellarr.json");
+const manifest = JSON.parse(await readFile(path, "utf8"));
 if (manifest.id !== id || manifest.version !== version) {
-  throw new Error("Tag must match the activity ID and version in " + id + "/stellarr.json.");
+  throw new Error("Tag must match the activity ID and version in " + path + ".");
 }
 
 const changelog = await readFile(id + "/CHANGELOG.md", "utf8");

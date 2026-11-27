@@ -9,7 +9,8 @@
 - **Icons:** Codex generated menu icons (`public/icons/nav/`) and puzzle icons and badges (`public/icons/puzzles/`). The cartoon icons for the 50 Chaos effects and the four categories are kept only as sources in `artwork/icons/`: Chaos now shows each card's own illustration and draws the categories as line sigils.
 - **Puzzle icons and badges:** 14 Codex icons (2026-11-27) in `public/icons/puzzles/` (160 px WebP; 512 px PNG sources in `artwork/icons/puzzles/`): rush, streak, rating, calendar, mate, fork, endgame, deck and six badges.
 - **Fonts:** Montserrat and Noto Sans, both SIL OFL 1.1, bundled from `@fontsource` (Latin and Latin Extended only).
-- **Not yet traced:** the move sound (`public/audio/chess-move.wav`, which came from Multiversal Chess via FlyChess) and the opening-name tables (`public/libraries/eco*.json`, carried over from FlyChess). Neither project records where they came from. Check their source and licence before a public release, the same way the pieces were replaced.
+- **Move sound:** the short percussive click in `public/audio/chess-move.wav` was synthesized for Arcade Chess using two damped tones and a short noise transient.
+- **Openings:** the five ECO files are from [JeffML/eco.json at 36cfd92](https://github.com/JeffML/eco.json/tree/36cfd9227f553dec1d39ee20fa0775eea8f8e165). The MIT notice ships in `public/licenses/eco.txt`.
 
 ## Brief for the generated set
 

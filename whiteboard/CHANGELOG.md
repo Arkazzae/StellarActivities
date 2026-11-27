@@ -2,7 +2,7 @@
 
 ## 0.1.0
 
-- Sketch together in a voice channel, or on a private board from **Friends → Activities → Launch for myself**.
+- Sketch together in a voice channel, or on a private board from **Add a server and more → Solo activities → Whiteboard**.
 - Draw hand-drawn rectangles, diamonds, ellipses, lines and arrows, freehand ink with stylus pressure, text and images. A laser pointer is visible to everyone.
 - Arrows attach to shapes and follow them. Shapes hold their own labels.
 - See other people's cursors, selections and in-progress drags live. Undo affects only your own changes.

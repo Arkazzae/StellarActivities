@@ -1,5 +1,9 @@
 # SyncTube changelog
 
+## 0.2.1
+
+- YouTube playback uses the Stellarr SDK 0.4 embed API. The shared speed control now works on the instance hostname as well as dedicated activity hosts.
+
 ## 0.2.0
 
 - Start shared watch parties in voice channels. SyncTube has been removed from the solo activity picker.
