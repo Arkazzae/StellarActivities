@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "assets": {
+    "royal_guard": {
+      "file": "royal_guard.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Ivory king protected by a violet tower shield."
+    },
+    "blink": {
+      "file": "blink.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Chess knight phasing through a violet portal."
+    },
+    "second_wind": {
+      "file": "second_wind.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn restored by a spiral of mint wind."
+    },
+    "pawn_surge": {
+      "file": "pawn_surge.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn lunging forward with magical afterimages."
+    },
+    "knight_forge": {
+      "file": "knight_forge.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Dark steel knight glowing on an arcane anvil."
+    },
+    "bishops_oath": {
+      "file": "bishops_oath.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Ivory bishop bound by a luminous vow ring."
+    },
+    "rook_foundry": {
+      "file": "rook_foundry.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Dark rook rising from an amber foundry."
+    },
+    "queens_gambit": {
+      "file": "queens_gambit.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Regal queen offering a small golden pawn."
+    },
+    "kings_grace": {
+      "file": "kings_grace.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Ivory king restored beneath a mint halo."
+    },
+    "echo_move": {
+      "file": "echo_move.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Knight leap repeated by spectral echoes."
+    },
+    "time_thief": {
+      "file": "time_thief.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Shadowed knight carrying a stolen clockwork gear."
+    },
+    "hourglass": {
+      "file": "hourglass.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Cracked hourglass filled with chess fragments."
+    },
+    "sanctuary": {
+      "file": "sanctuary.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn sheltered inside a luminous sanctuary."
+    },
+    "iron_pawns": {
+      "file": "iron_pawns.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Heavy iron pawn with a glowing core."
+    },
+    "thorn_mail": {
+      "file": "thorn_mail.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Chess knight wrapped in enchanted thorn armor."
+    },
+    "phoenix_piece": {
+      "file": "phoenix_piece.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn reborn within a blazing phoenix."
+    },
+    "necromancy": {
+      "file": "necromancy.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Broken bishop reassembled by a spectral hand."
+    },
+    "blood_price": {
+      "file": "blood_price.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn offering a glowing drop to a balance."
+    },
+    "bounty_hunter": {
+      "file": "bounty_hunter.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Hooded knight marked by an amber target."
+    },
+    "momentum": {
+      "file": "momentum.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Rook surging forward through violet energy."
+    },
+    "mirror_shield": {
+      "file": "mirror_shield.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Mirrored rook shield reflecting magical force."
+    },
+    "gravity_well": {
+      "file": "gravity_well.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Violet singularity bending a chessboard inward."
+    },
+    "frozen_file": {
+      "file": "frozen_file.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Rook sealed inside a frozen chessboard file."
+    },
+    "cursed_square": {
+      "file": "cursed_square.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Dark chess square split by a violet curse."
+    },
+    "safe_passage": {
+      "file": "safe_passage.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn crossing a protected bridge of light."
+    },
+    "last_stand": {
+      "file": "last_stand.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Lone king standing among fallen pieces."
+    },
+    "underdog": {
+      "file": "underdog.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Small pawn casting a vast crowned shadow."
+    },
+    "chain_reaction": {
+      "file": "chain_reaction.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Chess pieces falling in an arcane chain reaction."
+    },
+    "tactical_reset": {
+      "file": "tactical_reset.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Chess formation rewinding inside a violet mechanism."
+    },
+    "chaos_swap": {
+      "file": "chaos_swap.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Rook and knight exchanging through an infinity portal."
+    },
+    "piece_storm": {
+      "file": "piece_storm.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Chess pieces twisting inside a violet storm."
+    },
+    "promotion_rush": {
+      "file": "promotion_rush.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn ascending rapidly into a radiant queen."
+    },
+    "royal_decree": {
+      "file": "royal_decree.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Royal scroll sealed with a cracked crown."
+    },
+    "scavenger": {
+      "file": "scavenger.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Black knight collecting a luminous chess shard."
+    },
+    "arcane_reserve": {
+      "file": "arcane_reserve.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn-shaped vial holding violet magic."
+    },
+    "forked_fate": {
+      "file": "forked_fate.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Knight choosing between two luminous paths."
+    },
+    "gamblers_coin": {
+      "file": "gamblers_coin.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Spinning coin bearing a king and cracked crown."
+    },
+    "void_tax": {
+      "file": "void_tax.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn paying a glowing fragment into the void."
+    },
+    "marching_orders": {
+      "file": "marching_orders.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Pawn standard planted on a branching battle map."
+    },
+    "crown_of_chance": {
+      "file": "crown_of_chance.png",
+      "width": 768,
+      "height": 512,
+      "alt": "Cracked crown hovering above a violet chance crystal."
+    },
+    "card_back": {
+      "file": "card_back.png",
+      "width": 512,
+      "height": 768,
+      "alt": "Cracked crown above a branching tree of fate."
+    }
+  }
+}

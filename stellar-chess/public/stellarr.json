@@ -1,0 +1,11 @@
+{
+  "protocol": 1,
+  "id": "stellar-chess",
+  "name": "Stellar Chess",
+  "description": "Chess in your voice channel. Climb a ladder of eight bots with their own personalities, from a seven-year-old who just learned the moves to a retired master, or play Stockfish at the strength you choose. Challenge anyone in the channel to a timed game while the others watch, then review it with Stockfish.",
+  "version": "0.1.0",
+  "icon": "icon.png",
+  "cover": "cover.webp",
+  "launchModes": ["voice", "personal"],
+  "authority": "host"
+}

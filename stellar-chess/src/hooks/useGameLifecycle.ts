@@ -1,0 +1,72 @@
+/**
+ * Game-wide effects: detecting the end of the game and keyboard navigation
+ * through the move list.
+ */
+
+import { useEffect, useRef } from "react";
+import { useGameStore } from "@/state/game";
+import { isFlagged, isUnlimited } from "@/engine/clock";
+import { finishGame } from "@/game/session";
+import { presetGoal, puzzleVerdict } from "@/engine/positions";
+
+export function useGameLifecycle(): void {
+  const fen = useGameStore((s) => s.fen);
+  const phase = useGameStore((s) => s.phase);
+  const clock = useGameStore((s) => s.clock);
+  const myColor = useGameStore((s) => s.myColor);
+  const result = useGameStore((s) => s.result);
+  const warned = useRef(false);
+
+  useEffect(() => {
+    const state = useGameStore.getState();
+    const { chess } = state;
+    // An online game ends when the room's host says so (see online/sync); a puzzle drill judges its own moves.
+    if (phase !== "playing" || state.online || state.drill) return;
+    if (chess.isCheckmate()) finishGame({ winner: chess.turn() === "w" ? "b" : "w", reason: "checkmate" });
+    else if (chess.isStalemate()) finishGame({ winner: null, reason: "stalemate" });
+    else if (chess.isInsufficientMaterial()) finishGame({ winner: null, reason: "insufficient" });
+    else if (chess.isThreefoldRepetition()) finishGame({ winner: null, reason: "threefold" });
+    else if (chess.isDrawByFiftyMoves()) finishGame({ winner: null, reason: "fifty_moves" });
+  }, [fen, phase]);
+
+  // A test from the Positions tab is judged after every move, and stops once decided.
+  useEffect(() => {
+    const { solver, verdict, startFen, chess, setVerdict } = useGameStore.getState();
+    const goal = presetGoal(startFen);
+    if (phase === "lobby" || !solver || verdict || !goal) return;
+    const decided = puzzleVerdict(goal, startFen, chess, result);
+    if (decided) setVerdict(decided);
+  }, [fen, phase, result]);
+
+  useEffect(() => {
+    const { timeControl, online, drill } = useGameStore.getState();
+    if (phase !== "playing" || isUnlimited(timeControl) || online || drill) return;
+    if (isFlagged(clock, "w")) finishGame({ winner: "b", reason: "timeout" });
+    else if (isFlagged(clock, "b")) finishGame({ winner: "w", reason: "timeout" });
+  }, [clock, phase, myColor]);
+
+  useEffect(() => {
+    if (phase === "lobby") warned.current = false;
+  }, [phase]);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable || target.getAttribute("role") === "slider")) return;
+      // A Chaos draft or a card waiting for its square has the keys (the draft browses its cards with the arrows).
+      const { chaos } = useGameStore.getState();
+      if (chaos.draft || chaos.pendingChoice) return;
+      const { moves, viewPly, setViewPly } = useGameStore.getState();
+      const current = viewPly ?? moves.length;
+      if (event.key === "ArrowLeft") setViewPly(current - 1);
+      else if (event.key === "ArrowRight") setViewPly(current + 1);
+      else if (event.key === "Home") setViewPly(0);
+      else if (event.key === "End") setViewPly(null);
+      else if (event.key === "f" && !event.ctrlKey && !event.metaKey) useGameStore.getState().flipBoard();
+      else return;
+      event.preventDefault();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+}

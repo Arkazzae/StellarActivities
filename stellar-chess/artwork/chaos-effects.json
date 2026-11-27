@@ -1,0 +1,652 @@
+[
+  {
+    "id": "royal_guard",
+    "name": {
+      "en": "Royal Guard",
+      "pl": "Królewska straż"
+    },
+    "description": {
+      "en": "King moves summon a loyal pawn, favoring the square left behind.",
+      "pl": "Ruch króla przyzywa lojalnego pionka, najlepiej na opuszczone pole."
+    },
+    "category": "battle",
+    "rarity": "rare"
+  },
+  {
+    "id": "blink",
+    "name": {
+      "en": "Blink",
+      "pl": "Mignięcie"
+    },
+    "description": {
+      "en": "Choose one of your strongest non-royal pieces and teleport it to an open square.",
+      "pl": "Wybierz jedną z najsilniejszych figur poza królem i przenieś ją na wolne pole."
+    },
+    "category": "arcane",
+    "rarity": "common"
+  },
+  {
+    "id": "second_wind",
+    "name": {
+      "en": "Second Wind",
+      "pl": "Drugi oddech"
+    },
+    "description": {
+      "en": "Restore your strongest missing starting piece; if none is missing, gain 20 seconds.",
+      "pl": "Przywróć najsilniejszą brakującą figurę startową; jeśli nic nie brakuje, zyskaj 20 sekund."
+    },
+    "category": "fate",
+    "rarity": "rare"
+  },
+  {
+    "id": "pawn_surge",
+    "name": {
+      "en": "Pawn Surge",
+      "pl": "Pionowy zryw"
+    },
+    "description": {
+      "en": "Pawn moves grant 4 seconds for your next 4 turns.",
+      "pl": "Ruchy pionkami dają 4 sekundy przez następne 4 tury."
+    },
+    "category": "time",
+    "rarity": "common"
+  },
+  {
+    "id": "knight_forge",
+    "name": {
+      "en": "Knight Forge",
+      "pl": "Kuźnia skoczka"
+    },
+    "description": {
+      "en": "Choose one of your pawns and transform it into a knight.",
+      "pl": "Wybierz jednego ze swoich pionków i przemień go w skoczka."
+    },
+    "category": "arcane",
+    "rarity": "common"
+  },
+  {
+    "id": "bishops_oath",
+    "name": {
+      "en": "Bishop's Oath",
+      "pl": "Przysięga gońca"
+    },
+    "description": {
+      "en": "Bishop captures restore one pawn to your ranks.",
+      "pl": "Bicie gońcem przywraca jednego pionka."
+    },
+    "category": "fate",
+    "rarity": "rare"
+  },
+  {
+    "id": "rook_foundry",
+    "name": {
+      "en": "Rook Foundry",
+      "pl": "Wieżowa odlewnia"
+    },
+    "description": {
+      "en": "Rook captures forge a new pawn on your home line.",
+      "pl": "Bicie wieżą tworzy nowego pionka na twojej linii startowej."
+    },
+    "category": "battle",
+    "rarity": "rare"
+  },
+  {
+    "id": "queens_gambit",
+    "name": {
+      "en": "Queen's Gambit",
+      "pl": "Gambit hetmana"
+    },
+    "description": {
+      "en": "Sacrifice a pawn to restore your queen, or gain 25 seconds.",
+      "pl": "Poświęć pionka, aby przywrócić hetmana, albo zyskaj 25 sekund."
+    },
+    "category": "fate",
+    "rarity": "legendary"
+  },
+  {
+    "id": "kings_grace",
+    "name": {
+      "en": "King's Grace",
+      "pl": "Łaska króla"
+    },
+    "description": {
+      "en": "King moves grant 10 seconds for your next 3 turns.",
+      "pl": "Ruchy królem dają 10 sekund przez następne 3 tury."
+    },
+    "category": "time",
+    "rarity": "common"
+  },
+  {
+    "id": "echo_move",
+    "name": {
+      "en": "Echo Move",
+      "pl": "Echo ruchu"
+    },
+    "description": {
+      "en": "Within 4 turns, your first quiet move summons a pawn, favoring its origin square.",
+      "pl": "W ciągu 4 tur pierwszy ruch bez bicia przyzywa pionka, najlepiej na polu startowym ruchu."
+    },
+    "category": "arcane",
+    "rarity": "rare"
+  },
+  {
+    "id": "time_thief",
+    "name": {
+      "en": "Time Thief",
+      "pl": "Złodziej czasu"
+    },
+    "description": {
+      "en": "Every capture steals 6 seconds from your opponent.",
+      "pl": "Każde bicie kradnie przeciwnikowi 6 sekund."
+    },
+    "category": "time",
+    "rarity": "rare"
+  },
+  {
+    "id": "hourglass",
+    "name": {
+      "en": "Shattered Hourglass",
+      "pl": "Rozbita klepsydra"
+    },
+    "description": {
+      "en": "Gain 30 seconds immediately.",
+      "pl": "Natychmiast zyskaj 30 sekund."
+    },
+    "category": "time",
+    "rarity": "common"
+  },
+  {
+    "id": "sanctuary",
+    "name": {
+      "en": "Sanctuary",
+      "pl": "Sanktuarium"
+    },
+    "description": {
+      "en": "When you lose a piece, gain 12 seconds for the next 4 turns.",
+      "pl": "Gdy tracisz figurę, zyskujesz 12 sekund przez następne 4 tury."
+    },
+    "category": "fate",
+    "rarity": "common"
+  },
+  {
+    "id": "iron_pawns",
+    "name": {
+      "en": "Iron Pawns",
+      "pl": "Żelazne pionki"
+    },
+    "description": {
+      "en": "Captured pawns return to an open home square for 4 turns.",
+      "pl": "Zbite pionki wracają na wolne pole startowe przez 4 tury."
+    },
+    "category": "battle",
+    "rarity": "rare"
+  },
+  {
+    "id": "thorn_mail",
+    "name": {
+      "en": "Thorn Mail",
+      "pl": "Kolczasta zbroja"
+    },
+    "description": {
+      "en": "For 3 turns, a non-royal capturer of your piece becomes a pawn.",
+      "pl": "Przez 3 tury figura bijąca twoją figurę zmienia się w pionka."
+    },
+    "category": "battle",
+    "rarity": "legendary"
+  },
+  {
+    "id": "phoenix_piece",
+    "name": {
+      "en": "Phoenix Piece",
+      "pl": "Feniksowa figura"
+    },
+    "description": {
+      "en": "Your next captured knight, bishop, or rook returns once.",
+      "pl": "Następny zbity skoczek, goniec lub wieża wraca jeden raz."
+    },
+    "category": "fate",
+    "rarity": "legendary"
+  },
+  {
+    "id": "necromancy",
+    "name": {
+      "en": "Necromancy",
+      "pl": "Nekromancja"
+    },
+    "description": {
+      "en": "Every third capture raises a pawn for your side.",
+      "pl": "Co trzecie bicie wskrzesza pionka po twojej stronie."
+    },
+    "category": "arcane",
+    "rarity": "rare"
+  },
+  {
+    "id": "blood_price",
+    "name": {
+      "en": "Blood Price",
+      "pl": "Cena krwi"
+    },
+    "description": {
+      "en": "Sacrifice one pawn and gain 45 seconds.",
+      "pl": "Poświęć jednego pionka i zyskaj 45 sekund."
+    },
+    "category": "time",
+    "rarity": "rare"
+  },
+  {
+    "id": "bounty_hunter",
+    "name": {
+      "en": "Bounty Hunter",
+      "pl": "Łowca nagród"
+    },
+    "description": {
+      "en": "Capturing a rook or queen grants 20 seconds.",
+      "pl": "Bicie wieży lub hetmana daje 20 sekund."
+    },
+    "category": "time",
+    "rarity": "common"
+  },
+  {
+    "id": "momentum",
+    "name": {
+      "en": "Momentum",
+      "pl": "Rozpęd"
+    },
+    "description": {
+      "en": "Quiet moves grant increasingly more time for 4 turns.",
+      "pl": "Ruchy bez bicia dają coraz więcej czasu przez 4 tury."
+    },
+    "category": "time",
+    "rarity": "common"
+  },
+  {
+    "id": "mirror_shield",
+    "name": {
+      "en": "Mirror Shield",
+      "pl": "Lustrzana tarcza"
+    },
+    "description": {
+      "en": "The next piece you lose is restored once.",
+      "pl": "Następna utracona figura zostaje raz przywrócona."
+    },
+    "category": "arcane",
+    "rarity": "legendary"
+  },
+  {
+    "id": "gravity_well",
+    "name": {
+      "en": "Gravity Well",
+      "pl": "Studnia grawitacji"
+    },
+    "description": {
+      "en": "Choose one of your strongest non-royal pieces and move it onto an open central square.",
+      "pl": "Wybierz jedną z najsilniejszych figur poza królem i przenieś ją na wolne pole centralne."
+    },
+    "category": "arcane",
+    "rarity": "common"
+  },
+  {
+    "id": "frozen_file",
+    "name": {
+      "en": "Frozen File",
+      "pl": "Zamrożona linia"
+    },
+    "description": {
+      "en": "Enemy pieces ending a move on a marked file lose 8 seconds for 4 turns.",
+      "pl": "Figury przeciwnika kończące ruch na oznaczonej linii tracą 8 sekund przez 4 tury."
+    },
+    "category": "time",
+    "rarity": "rare"
+  },
+  {
+    "id": "cursed_square",
+    "name": {
+      "en": "Cursed Square",
+      "pl": "Przeklęte pole"
+    },
+    "description": {
+      "en": "A marked central square turns enemy non-royal visitors into pawns for 4 turns.",
+      "pl": "Oznaczone pole centralne zmienia wrogie figury poza królem w pionki przez 4 tury."
+    },
+    "category": "arcane",
+    "rarity": "legendary"
+  },
+  {
+    "id": "safe_passage",
+    "name": {
+      "en": "Safe Passage",
+      "pl": "Bezpieczne przejście"
+    },
+    "description": {
+      "en": "Pawn captures grant 8 seconds for your next 4 turns.",
+      "pl": "Bicia pionkami dają 8 sekund przez następne 4 tury."
+    },
+    "category": "time",
+    "rarity": "common"
+  },
+  {
+    "id": "last_stand",
+    "name": {
+      "en": "Last Stand",
+      "pl": "Ostatni bastion"
+    },
+    "description": {
+      "en": "Once, restore a rook when two or fewer friendly pieces remain beside your king.",
+      "pl": "Raz przywróć wieżę, gdy poza królem zostaną najwyżej dwie figury."
+    },
+    "category": "battle",
+    "rarity": "legendary"
+  },
+  {
+    "id": "underdog",
+    "name": {
+      "en": "Underdog",
+      "pl": "Niepokorny"
+    },
+    "description": {
+      "en": "Moves made while far behind in material grant 12 seconds.",
+      "pl": "Ruchy wykonywane przy dużej stracie materialnej dają 12 sekund."
+    },
+    "category": "time",
+    "rarity": "rare"
+  },
+  {
+    "id": "chain_reaction",
+    "name": {
+      "en": "Chain Reaction",
+      "pl": "Reakcja łańcuchowa"
+    },
+    "description": {
+      "en": "For 3 turns, your non-royal capturer copies the captured piece's type.",
+      "pl": "Przez 3 tury figura bijąca poza królem przejmuje typ zbitej figury."
+    },
+    "category": "arcane",
+    "rarity": "legendary"
+  },
+  {
+    "id": "tactical_reset",
+    "name": {
+      "en": "Tactical Reset",
+      "pl": "Taktyczny reset"
+    },
+    "description": {
+      "en": "Swap the positions of two friendly non-royal pieces.",
+      "pl": "Zamień miejscami dwie własne figury poza królem."
+    },
+    "category": "battle",
+    "rarity": "common"
+  },
+  {
+    "id": "chaos_swap",
+    "name": {
+      "en": "Chaos Swap",
+      "pl": "Chaotyczna zamiana"
+    },
+    "description": {
+      "en": "Swap one of your pieces with an enemy non-royal piece.",
+      "pl": "Zamień jedną własną figurę z figurą przeciwnika poza królami."
+    },
+    "category": "arcane",
+    "rarity": "legendary"
+  },
+  {
+    "id": "piece_storm",
+    "name": {
+      "en": "Piece Storm",
+      "pl": "Burza figur"
+    },
+    "description": {
+      "en": "Rotate every knight, bishop, rook, and queen through occupied officer squares.",
+      "pl": "Przesuń skoczki, gońce, wieże i hetmany między polami zajmowanymi przez figury oficerskie."
+    },
+    "category": "arcane",
+    "rarity": "legendary"
+  },
+  {
+    "id": "promotion_rush",
+    "name": {
+      "en": "Promotion Rush",
+      "pl": "Wyścig promocji"
+    },
+    "description": {
+      "en": "Pawns reaching the sixth rank become knights immediately.",
+      "pl": "Pionki docierające do szóstej linii natychmiast stają się skoczkami."
+    },
+    "category": "battle",
+    "rarity": "rare"
+  },
+  {
+    "id": "royal_decree",
+    "name": {
+      "en": "Royal Decree",
+      "pl": "Królewski dekret"
+    },
+    "description": {
+      "en": "Non-royal pieces finishing beside your king grant 6 seconds for 4 turns.",
+      "pl": "Figury poza królem kończące ruch obok monarchy dają 6 sekund przez 4 tury."
+    },
+    "category": "time",
+    "rarity": "common"
+  },
+  {
+    "id": "scavenger",
+    "name": {
+      "en": "Scavenger",
+      "pl": "Padlinożerca"
+    },
+    "description": {
+      "en": "Every second pawn capture restores a missing minor piece.",
+      "pl": "Co drugie zbicie pionka przywraca brakującą lekką figurę."
+    },
+    "category": "fate",
+    "rarity": "rare"
+  },
+  {
+    "id": "arcane_reserve",
+    "name": {
+      "en": "Arcane Reserve",
+      "pl": "Magiczna rezerwa"
+    },
+    "description": {
+      "en": "Restore a missing knight or bishop, or gain 15 seconds.",
+      "pl": "Przywróć skoczka lub gońca, albo zyskaj 15 sekund."
+    },
+    "category": "arcane",
+    "rarity": "common"
+  },
+  {
+    "id": "forked_fate",
+    "name": {
+      "en": "Forked Fate",
+      "pl": "Rozwidlenie losu"
+    },
+    "description": {
+      "en": "Knight captures summon a pawn, favoring the knight's origin square.",
+      "pl": "Bicie skoczkiem przyzywa pionka, najlepiej na polu, z którego ruszył."
+    },
+    "category": "fate",
+    "rarity": "rare"
+  },
+  {
+    "id": "gamblers_coin",
+    "name": {
+      "en": "Gambler's Coin",
+      "pl": "Moneta hazardzisty"
+    },
+    "description": {
+      "en": "Each of your next 4 moves wins or loses 8 seconds.",
+      "pl": "Każdy z następnych 4 ruchów daje albo odbiera 8 sekund."
+    },
+    "category": "fate",
+    "rarity": "common"
+  },
+  {
+    "id": "void_tax",
+    "name": {
+      "en": "Void Tax",
+      "pl": "Podatek pustki"
+    },
+    "description": {
+      "en": "Enemy quiet moves cost them 5 seconds for 4 turns.",
+      "pl": "Ruchy przeciwnika bez bicia kosztują go 5 sekund przez 4 tury."
+    },
+    "category": "time",
+    "rarity": "rare"
+  },
+  {
+    "id": "marching_orders",
+    "name": {
+      "en": "Marching Orders",
+      "pl": "Rozkaz wymarszu"
+    },
+    "description": {
+      "en": "For 3 turns, pawn moves leave a new pawn on their origin square.",
+      "pl": "Przez 3 tury ruch pionkiem pozostawia nowego pionka na polu startowym."
+    },
+    "category": "battle",
+    "rarity": "legendary"
+  },
+  {
+    "id": "crown_of_chance",
+    "name": {
+      "en": "Crown of Chance",
+      "pl": "Korona przypadku"
+    },
+    "description": {
+      "en": "Receive one hidden boon: time, a pawn, or a forged knight.",
+      "pl": "Otrzymaj ukryty dar: czas, pionka albo wykutego skoczka."
+    },
+    "category": "fate",
+    "rarity": "rare"
+  },
+  {
+    "id": "pawn_bloom",
+    "name": {
+      "en": "Pawn Bloom",
+      "pl": "Rozkwit pionów"
+    },
+    "description": {
+      "en": "Summon up to two pawns on open squares in your half of the board.",
+      "pl": "Przyzwij do dwóch pionków na wolnych polach swojej połowy planszy."
+    },
+    "category": "arcane",
+    "rarity": "common"
+  },
+  {
+    "id": "bishop_forge",
+    "name": {
+      "en": "Bishop Forge",
+      "pl": "Kuźnia gońca"
+    },
+    "description": {
+      "en": "Choose one of your pawns and transform it into a bishop.",
+      "pl": "Wybierz jednego ze swoich pionków i przemień go w gońca."
+    },
+    "category": "arcane",
+    "rarity": "common"
+  },
+  {
+    "id": "rook_forge",
+    "name": {
+      "en": "Rook Forge",
+      "pl": "Kuźnia wieży"
+    },
+    "description": {
+      "en": "Choose one of your pawns and transform it into a rook.",
+      "pl": "Wybierz jednego ze swoich pionków i przemień go w wieżę."
+    },
+    "category": "battle",
+    "rarity": "rare"
+  },
+  {
+    "id": "royal_ascension",
+    "name": {
+      "en": "Royal Ascension",
+      "pl": "Królewskie wyniesienie"
+    },
+    "description": {
+      "en": "For 4 turns, a pawn or minor piece ending beside your king is upgraded.",
+      "pl": "Przez 4 tury pionek lub lekka figura kończąca ruch obok króla zostaje ulepszona."
+    },
+    "category": "fate",
+    "rarity": "rare"
+  },
+  {
+    "id": "soul_harvest",
+    "name": {
+      "en": "Soul Harvest",
+      "pl": "Żniwa dusz"
+    },
+    "description": {
+      "en": "Every second capture restores your strongest missing starting piece.",
+      "pl": "Co drugie bicie przywraca twoją najsilniejszą brakującą figurę startową."
+    },
+    "category": "fate",
+    "rarity": "legendary"
+  },
+  {
+    "id": "queens_echo",
+    "name": {
+      "en": "Queen's Echo",
+      "pl": "Echo hetmana"
+    },
+    "description": {
+      "en": "Queen captures summon a pawn, favoring the queen's origin square.",
+      "pl": "Bicie hetmanem przyzywa pionka, najlepiej na polu, z którego ruszył."
+    },
+    "category": "arcane",
+    "rarity": "rare"
+  },
+  {
+    "id": "battle_hardened",
+    "name": {
+      "en": "Battle Hardened",
+      "pl": "Zahartowani w boju"
+    },
+    "description": {
+      "en": "For 4 turns, a knight or bishop that captures is forged into a rook.",
+      "pl": "Przez 4 tury skoczek lub goniec po biciu zostaje przekuty w wieżę."
+    },
+    "category": "battle",
+    "rarity": "rare"
+  },
+  {
+    "id": "wild_growth",
+    "name": {
+      "en": "Wild Growth",
+      "pl": "Dziki rozrost"
+    },
+    "description": {
+      "en": "For 4 turns, each quiet move has a 50% chance to sprout a pawn behind it.",
+      "pl": "Przez 4 tury każdy ruch bez bicia ma 50% szansy wyhodować pionka na opuszczonym polu."
+    },
+    "category": "arcane",
+    "rarity": "common"
+  },
+  {
+    "id": "pawn_legacy",
+    "name": {
+      "en": "Pawn Legacy",
+      "pl": "Dziedzictwo pionów"
+    },
+    "description": {
+      "en": "Pawn captures leave a new pawn on their origin square.",
+      "pl": "Bicie pionkiem pozostawia nowego pionka na polu, z którego pionek ruszył."
+    },
+    "category": "battle",
+    "rarity": "rare"
+  },
+  {
+    "id": "prismatic_army",
+    "name": {
+      "en": "Prismatic Army",
+      "pl": "Pryzmatyczna armia"
+    },
+    "description": {
+      "en": "Cycle your knights into bishops, bishops into rooks, and rooks into knights.",
+      "pl": "Przemień swoje skoczki w gońce, gońce w wieże, a wieże w skoczki."
+    },
+    "category": "arcane",
+    "rarity": "legendary"
+  }
+]
