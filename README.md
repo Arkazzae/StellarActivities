@@ -1,8 +1,8 @@
 # Stellarr Activities
 
-![Stellarr Activities: SyncTube and Whiteboard](docs/hero.webp)
+![Stellarr Activities: SyncTube, Whiteboard, Arcade Chess, Doodle Drift and Gif Me a Break](docs/hero.webp)
 
-Activities run inside Stellarr voice channels. Some also work solo, such as Whiteboard for private sketches. Paste this repository URL into Cockpit once, pick an activity, and everyone in the channel can jump in with zero setup.
+Multiplayer apps and party games that run directly inside a Stellarr voice channel, with solo modes for private boards, chess training and flipbooks. Paste this repository URL into Cockpit once, install the activities you want, and jump in with zero setup.
 
 ---
 
@@ -44,19 +44,54 @@ Everyone in the voice channel draws on the same infinite canvas at the same time
 
 ---
 
-## Games
+## [Arcade Chess](arcade-chess/): Pixel-art bots, channel tables and puzzles
 
-| Activity | Where to play | What to do |
-| --- | --- | --- |
-| [Arcade Chess](arcade-chess/) | Voice or solo | Play a timed match, challenge a bot, solve puzzles or export your game as PGN. |
-| [Doodle Drift](doodle-drift/) | Voice or solo | Pass drawings and captions around the room or make a solo flipbook. |
-| [Gif Me a Break](gif-me-a-break/) | Voice | Answer a prompt with a GIF and vote on the submissions. The instance must have GIPHY configured. |
+[![Arcade Chess live demo](docs/arcade-chess/demo.webp)](arcade-chess/)
+
+Host timed chess tables in your voice channel while friends watch. You can also play solo against eight pixel-art video-game rivals and Stockfish.
+
+- **Eight game-inspired bots:** battle from `Glut` (`250`) and `Turbo` (`700`) up to `Mordax` (`2200`), or set Stockfish between levels `0` and `20`.
+- **Multi-table voice room:** run several matches at once in one channel, with live spectating, rematches and **Stellarr Elo** saved to your account.
+- **190 puzzles and Puzzle Rush:** solve the daily tactic, race the three-minute Puzzle Rush clock, practice checkmate themes, or drill endgames against Stockfish.
+- **Post-game Stockfish review:** step through finished games, track win rates by color and ECO opening, copy PGN, and pick from three piece sets and six board palettes.
+
+**[See the full Arcade Chess tour and screenshots →](arcade-chess/)**
+
+---
+
+## [Doodle Drift](doodle-drift/): Telephone drawing across 22 modes
+
+[![Doodle Drift live demo](docs/doodle-drift/demo.webp)](doodle-drift/)
+
+Everyone starts an album and passes sentences, drawings and captions around the channel (up to 14 players, plus solo modes). At the end, the host walks the room through every page.
+
+- **22 party modes:** play **Classic chain**, roll round twists in **Mixed bag**, connect stars in **Constellation**, mirror strokes in **Kaleidoscope**, or paint one shared **Mosaic**.
+- **Animations and patchwork monsters:** draw onion-skin frame animations in **Flipbook** and **Relay animation**. Or split head, body and legs across three players in **Patchwork monster**.
+- **Live stamps and GIF export:** react with floating stamps as each album unfolds, then save your favourite chain or animation as a shareable GIF.
+
+**[See the full Doodle Drift tour and screenshots →](doodle-drift/)**
+
+---
+
+## [Gif Me a Break](gif-me-a-break/): Answer prompts with the sharpest GIF
+
+[![Gif Me a Break live demo](docs/gif-me-a-break/demo.webp)](gif-me-a-break/)
+
+A reaction-GIF party game for 3 to 8 players in a voice channel. English and Polish players read the game in their own language in the same room (requires GIPHY on the Stellarr instance).
+
+- **Four game modes:** **Classic** search, **Banned words** (blocks prompt words), rotating **Director** (`3 pts` judge's pick), and **Captions** (write a line for a shared GIF).
+- **Anonymous spotlight show:** submissions play one by one while everyone throws five die-cut reaction stickers (`haha`, `10/10`, `nieee`, `pff`, `brawo`) across the screen.
+- **Podium and match awards:** crowns the top three players with awards like **On a roll**, **Full house** and **Fastest finger**, plus a winning-meme reel.
+
+**[See the full Gif Me a Break tour and screenshots →](gif-me-a-break/)**
+
+---
 
 ## Add an activity to Stellarr
 
 1. Open **Cockpit → Activities** on your Stellarr instance and paste `https://github.com/Arkazzae/StellarrActivities`.
-2. Pick one of the five activities, check its version, download size and permissions, and select **Install and enable**.
-3. Start a shared activity from a voice channel. For a solo session, open **Add a server and more → Solo activities** at the bottom of the left rail and choose Whiteboard, Arcade Chess or Doodle Drift.
+2. Pick any of the five activities, review its version, download size and permissions, and select **Install and enable**.
+3. Start a shared session from a voice channel. For solo play, open **Add a server and more → Solo activities** in the left rail for **Whiteboard**, **Arcade Chess** or **Doodle Drift**.
 
 Each activity updates and uninstalls independently in your library.
 
