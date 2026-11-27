@@ -1,0 +1,14 @@
+{
+  "protocol": 1,
+  "id": "gif-me-a-break",
+  "name": "Gif Me a Break",
+  "description": "A GIF party game for your voice channel, in English and Polish. A topic drops, sometimes about someone in the channel, and everyone finds the GIF that fits it best. Then the memes are shown one by one while you throw stickers, and you vote for the best. Four modes: Classic, Banned words, Director and Captions. 3 to 8 players.",
+  "version": "0.2.0",
+  "icon": "icon.png",
+  "cover": "cover.webp",
+  "devices": ["desktop", "tablet", "phone"],
+  "launchModes": ["voice"],
+  "authority": "host",
+  "seats": 8,
+  "permissions": ["media.gifs"]
+}
