@@ -1,0 +1,10 @@
+{
+  "protocol": 1,
+  "id": "terminal-breach",
+  "name": "Terminal Breach",
+  "description": "Type commands before the trace catches you. Chase a solo high score or pass one keyboard between two players in Duel and Relay.",
+  "version": "1.0.0",
+  "launchModes": ["personal"],
+  "icon": "assets/icon.png",
+  "cover": "assets/cover.webp"
+}

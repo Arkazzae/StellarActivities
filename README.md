@@ -93,6 +93,12 @@ One of the king’s four advisors is a traitor. Vote on decrees, keep the kingdo
 
 ---
 
+## [Terminal Breach](terminal-breach/)
+
+Type commands against the clock on a flickering CRT. Chase your best score in three solo modes, race a friend through the same sequence in Duel, or pass the keyboard every three commands in Relay. The source includes instructions for playing locally with the Stellarr SDK.
+
+---
+
 ## Add an activity to Stellarr
 
 1. Open **Cockpit → Activities** on your Stellarr instance and paste `https://github.com/Arkazzae/StellarrActivities`.
